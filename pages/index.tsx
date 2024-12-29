@@ -20,16 +20,26 @@ export default function Home() {
           onClick={() => {
             setScene((scene + 1) % 2);
           }}
-          style={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "3rem",
-            color: "white",
-          }}
+          className="arrow"
         >
           →
         </p>
       </main>
+      <style jsx>{`
+        .arrow {
+          width: 2.5rem;
+          background-color: white;
+          text-align: center;
+          line-height: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          border: 1px solid white;
+          position: fixed;
+          bottom: 2rem;
+          right: 5vw;
+          color: black;
+        }
+      `}</style>
     </>
   );
 }
