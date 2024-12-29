@@ -27,8 +27,8 @@ export const SceneManager = ({ scene }: { scene: number }) => {
   }, [sceneState]);
   return (
     <>
-      {mountScene == 0 && <Carieer sceneState={sceneState} />}
-      {mountScene == 1 && <Profile sceneState={sceneState} />}
+      {mountScene == 0 && <Profile sceneState={sceneState} />}
+      {mountScene == 1 && <Carieer sceneState={sceneState} />}
     </>
   );
 };
