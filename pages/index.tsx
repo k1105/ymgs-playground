@@ -18,7 +18,7 @@ export default function Home() {
         <SceneManager scene={scene} />
         <p
           onClick={() => {
-            setScene((scene + 1) % 2);
+            setScene((scene + 1) % 3);
           }}
           className="arrow"
         >

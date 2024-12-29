@@ -36,8 +36,10 @@ export const Profile = ({
         <div className="text-container">
           <FadeInElement from={10} to={0.6} animationState={animationState}>
             <div>
-              <h1>morita asuka</h1>
-              <h3 style={{ marginBottom: "1rem" }}>森田 明日香</h3>
+              <h1 style={{ fontWeight: "400" }}>morita asuka</h1>
+              <h3 style={{ marginBottom: "1rem", fontWeight: "400" }}>
+                森田 明日香
+              </h3>
             </div>
           </FadeInElement>
 
