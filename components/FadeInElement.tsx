@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { Noto_Sans_JP } from "next/font/google";
+
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const FadeInElement = ({
   children,
@@ -50,7 +53,7 @@ export const FadeInElement = ({
 
   return (
     <>
-      <div className="effect">{children}</div>
+      <div className={`effect ${notoSansJP.className}`}>{children}</div>
       {/* SVG フィルター定義（stdDeviation を動的に変化させる） */}
       <svg width="0" height="0" style={{ position: "absolute" }}>
         <filter id="myInkFilter">

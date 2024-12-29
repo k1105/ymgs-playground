@@ -1,12 +1,6 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
-import { FadeInElement } from "@/components/FadeInElement";
-import { Profile } from "@/components/scene/Profile";
-import { Carieer } from "@/components/scene/Carieer";
 import { useState } from "react";
 import { SceneManager } from "@/components/SceneManager";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   // ぼかし強度 (stdDeviation) を state 管理する
