@@ -106,7 +106,8 @@ export const Profile = ({
         @media screen and (max-width: 600px) {
           .container {
             width: 90vw;
-            margin-top: 15rem;
+            margin-top: 5rem;
+            margin-bottom: 10rem;
             flex-direction: column;
             gap: 3rem;
           }

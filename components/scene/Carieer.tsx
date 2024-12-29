@@ -19,7 +19,7 @@ export const Carieer = ({
     <>
       <FadeInElement from={10} to={0.6} animationState={animationState}>
         <div className="container">
-          <h2>Grants and Awards</h2>
+          <h2 style={{ marginBottom: "3rem" }}>Grants and Awards</h2>
           <div className="carrier-container">
             <div className="carrier-item">
               <p className="year">2019</p>
@@ -102,6 +102,20 @@ export const Carieer = ({
         @media screen and (max-width: 600px) {
           .profile-container,
           .carrier-container {
+            width: auto;
+          }
+
+          .container {
+            width: 90vw;
+            margin-top: 5rem;
+            margin-bottom: 10rem;
+            flex-direction: column;
+            gap: 1rem;
+          }
+
+          .carrier-item {
+            flex-direction: column;
+            gap: 0.5rem;
             width: auto;
           }
         }
