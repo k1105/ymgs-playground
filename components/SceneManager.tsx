@@ -135,7 +135,7 @@ export const SceneManager = () => {
       // 下スワイプ -> diff > 0
       // 上スワイプ -> diff < 0
 
-      setTransitionProgress(diff);
+      if (diff !== 0) setTransitionProgress(diff);
       setLastWheelTime(performance.now());
     };
 
