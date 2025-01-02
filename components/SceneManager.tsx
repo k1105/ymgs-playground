@@ -131,7 +131,7 @@ export const SceneManager = () => {
 
       // 指を離したときの座標
       const endY = e.changedTouches[0].clientY;
-      const diff = (endY - touchStartYRef.current) / 100;
+      const diff = endY - touchStartYRef.current;
       // 下スワイプ -> diff > 0
       // 上スワイプ -> diff < 0
 
