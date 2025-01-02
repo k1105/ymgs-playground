@@ -138,7 +138,7 @@ export const SceneManager = () => {
       // 上スワイプ -> diff < 0
 
       if (diff !== 0)
-        setTransitionProgress(Math.max(-110, Math.min(100, diff)));
+        setTransitionProgress(Math.max(-110, Math.min(110, diff)));
       setLastWheelTime(performance.now());
     };
 
