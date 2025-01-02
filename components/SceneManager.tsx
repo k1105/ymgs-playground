@@ -25,24 +25,6 @@ export const SceneManager = () => {
   // ▼ 「イージングアニメーション中かどうか」フラグ
   const [isEasing, setIsEasing] = useState(false);
 
-  useEffect(() => {
-    // wheel イベント
-    const handleWheel = (e: WheelEvent) => {
-      // オートトランジション中やイージング中は無視
-      if (isAutoTransition || isEasing) return;
-
-      setTransitionProgress((prev) =>
-        Math.max(-110, Math.min(110, prev + e.deltaY))
-      );
-      setLastWheelTime(performance.now());
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [isAutoTransition, isEasing]);
-
   // ▼ transitionProgress 監視
   useEffect(() => {
     // (A) 閾値を超えたらシーンを切り替え
@@ -121,6 +103,19 @@ export const SceneManager = () => {
   };
 
   useEffect(() => {
+    // wheel イベント
+    const handleWheel = (e: WheelEvent) => {
+      // オートトランジション中やイージング中は無視
+      if (isAutoTransition || isEasing) return;
+
+      setTransitionProgress((prev) =>
+        Math.max(-110, Math.min(110, prev + e.deltaY))
+      );
+      setLastWheelTime(performance.now());
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
     // (2) スマホ向け: touchstart / touchend
     const handleTouchStart = (e: TouchEvent) => {
       // 1本目の指の Y座標を記録
@@ -156,7 +151,7 @@ export const SceneManager = () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
-      // window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("wheel", handleWheel);
     };
   }, [isAutoTransition, isEasing]);
 
