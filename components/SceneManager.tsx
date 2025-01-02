@@ -75,6 +75,10 @@ export const SceneManager = () => {
     }
   }, [transitionProgress]);
 
+  useEffect(() => {
+    if (!isTouching) setLastWheelTime(performance.now());
+  }, [isTouching]);
+
   // ▼ シーン切り替え時などに呼ぶリセット処理
   const resetTransition = () => {
     setIsAutoTransition(true);
