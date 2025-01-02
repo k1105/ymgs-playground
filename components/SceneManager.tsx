@@ -166,7 +166,7 @@ export const SceneManager = () => {
           );
         })}
       </div>
-      <div
+      {/* <div
         style={{
           color: "white",
           position: "fixed",
@@ -180,7 +180,7 @@ export const SceneManager = () => {
         <p>isEasing: {String(isEasing)}</p>
         <p>isTouching: {String(isTouching)}</p>
         <p>lastWheelTime: {Math.floor(lastWheelTime * 100) / 100}</p>
-      </div>
+      </div> */}
 
       {sceneList[sceneIndex] === "profile" && (
         <Profile transitionProgress={transitionProgress} />
