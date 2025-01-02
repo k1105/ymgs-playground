@@ -48,7 +48,7 @@ export const SceneManager = () => {
         const timer = setTimeout(() => {
           // 50ms 後に「まだ (今の値) と同じかどうか」を確認
           const elapsed = performance.now() - lastWheelTime;
-          if (elapsed >= 50) {
+          if (elapsed >= 50 || isTouching) {
             // 50ms 以上変化なし → イージングスタート
             startEasingToZero();
           }
@@ -59,7 +59,7 @@ export const SceneManager = () => {
         };
       }
     }
-  }, [transitionProgress]);
+  }, [transitionProgress, isTouching]);
 
   useEffect(() => {
     if (!isTouching) setLastWheelTime(performance.now());
@@ -139,7 +139,6 @@ export const SceneManager = () => {
 
     const handleTouchEnd = (e: TouchEvent) => {
       setIsTouching(false);
-      startEasingToZero();
     };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
