@@ -50,11 +50,13 @@ export const SceneManager = () => {
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
         // 次のシーンへ
-        setSceneIndex((prev) => (prev + 1) % 3);
+        setSceneIndex((prev) => (prev + 1) % sceneList.length);
         resetTransition();
       } else if (transitionProgress < -threshold) {
         // 前のシーンへ
-        setSceneIndex((prev) => (prev + 3 - 1) % 3);
+        setSceneIndex(
+          (prev) => (prev + sceneList.length - 1) % sceneList.length
+        );
         resetTransition();
       } else {
         // (B) -100 ～ 100 の範囲内なら、50ms 後にイージング開始するかチェック
