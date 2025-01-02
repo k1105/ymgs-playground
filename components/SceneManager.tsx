@@ -4,10 +4,43 @@ import { Carrier } from "./scene/Carrier";
 
 export const SceneManager = ({ scene }: { scene: number }) => {
   const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
-  const [mountScene, setMountScene] = useState<number>(scene);
-  const [sceneState, setSceneState] = useState<
-    "mounting" | "unmounting" | "mounted" | "unmounted" | undefined
-  >();
+  const [mountScene, setMountScene] = useState<number>(0);
+  const isAutoTransitionRef = useRef<boolean>(false);
+
+  const [transitionProgress, setTransitionProgress] = useState<number>(1); //-100 - 100
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (isAutoTransitionRef.current) return;
+      setTransitionProgress((prev) => prev + e.deltaY);
+    };
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
+  // ▼ scrollAccum の絶対値が一定以上になったらシーン切り替え
+  useEffect(() => {
+    const threshold = 100; // 適宜調整
+    if (Math.abs(transitionProgress) > threshold) {
+      // たとえば 下スクロール: scene++
+      if (transitionProgress > 0) {
+        // scene を増やす
+        setMountScene((prev) => (prev + 1) % 3);
+      } else {
+        setMountScene((prev) => (prev + 3 - 1) % 3);
+      }
+
+      // 累積リセット
+      isAutoTransitionRef.current = true;
+      setTimeout(() => {
+        isAutoTransitionRef.current = false;
+      }, 1000);
+      setTransitionProgress(0);
+    }
+  }, [transitionProgress]);
 
   const grantsAwards: { year: number; items: string[] }[] = [
     { year: 2019, items: ["ISCA 2019 , デジタルコンテンツ部門 , 最優秀賞"] },
@@ -65,36 +98,31 @@ export const SceneManager = ({ scene }: { scene: number }) => {
       ],
     },
   ];
-  useEffect(() => {
-    if (isInitialLoad) {
-      setIsInitialLoad(false);
-    } else {
-      setSceneState("unmounting");
-      setTimeout(() => {
-        setSceneState("unmounted");
-      }, 1000);
-    }
-  }, [scene]);
 
-  useEffect(() => {
-    if (sceneState == "unmounted") {
-      //子コンポーネントのunmountが完了したら
-      setMountScene(scene); //新しいシーンに遷移
-    }
-  }, [sceneState]);
   return (
     <>
-      {mountScene == 0 && <Profile sceneState={sceneState} />}
+      <div
+        style={{
+          color: "white",
+          position: "fixed",
+          top: "10px",
+          right: "30px",
+        }}
+      >
+        <p>{mountScene}</p>
+        <p>{transitionProgress}</p>
+      </div>
+      {mountScene == 0 && <Profile transitionProgress={transitionProgress} />}
       {mountScene == 1 && (
         <Carrier
-          sceneState={sceneState}
+          transitionProgress={transitionProgress}
           items={grantsAwards}
           title="Grants and Awards"
         />
       )}
       {mountScene == 2 && (
         <Carrier
-          sceneState={sceneState}
+          transitionProgress={transitionProgress}
           items={soloExhibitions}
           title="Solo Exhibitions"
         />

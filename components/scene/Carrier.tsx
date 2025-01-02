@@ -2,26 +2,21 @@ import { FadeInElement } from "../FadeInElement";
 import { useEffect, useState } from "react";
 
 export const Carrier = ({
-  sceneState,
+  transitionProgress,
   title,
   items,
 }: {
+  transitionProgress: number;
   title: string;
-  sceneState: "mounting" | "unmounting" | "mounted" | "unmounted" | undefined;
   items: { year: number; items: string[] }[];
 }) => {
   const [animationState, setAnimationState] = useState<
     "fadein" | "fadeout" | "stop"
   >("stop");
 
-  useEffect(() => {
-    if (sceneState == "unmounting") {
-      setAnimationState("fadeout");
-    }
-  }, [sceneState]);
   return (
     <>
-      <FadeInElement from={10} to={0.6} animationState={animationState}>
+      <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
         <div className="container">
           <h2 style={{ marginBottom: "3rem" }}>{title}</h2>
           <div className="carrier-container">

@@ -7,31 +7,21 @@ export const FadeInElement = ({
   children,
   from = 10,
   to = 0.6,
-  animationState,
+  blurIntensity,
 }: {
   children: React.ReactNode;
   from: number;
   to: number;
-  animationState: "stop" | "fadein" | "fadeout";
+  blurIntensity: number;
 }) => {
-  // ぼかし強度 (stdDeviation) を state 管理する
-  const [blurIntensity, setBlurIntensity] = useState<number>(from);
-
   useEffect(() => {
-    animateBlurTo(blurIntensity, to, 1000);
+    animateBlurTo(from, to, 1000);
   }, []);
-
-  useEffect(() => {
-    if (animationState == "fadeout") {
-      animateBlurTo(blurIntensity, from, 1000);
-    }
-  }, [animationState]);
-
   // アニメーション用関数
   const animateBlurTo = (
     startValue: number,
     endValue: number,
-    duration = 3000
+    duration = 1000
   ) => {
     const startTime = performance.now();
 
@@ -41,7 +31,6 @@ export const FadeInElement = ({
 
       // 補間した値
       const current = startValue + (endValue - startValue) * progress;
-      setBlurIntensity(current);
 
       if (progress < 1) {
         requestAnimationFrame(animate);
@@ -60,7 +49,7 @@ export const FadeInElement = ({
           {/* ガウシアンぼかし (blurIntensity を指定) */}
           <feGaussianBlur
             in="SourceGraphic"
-            stdDeviation={blurIntensity}
+            stdDeviation={(Math.abs(blurIntensity) / 100) * (from - to) + to}
             result="blurred"
           />
 

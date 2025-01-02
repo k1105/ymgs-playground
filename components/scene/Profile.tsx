@@ -2,21 +2,15 @@ import { useState, useEffect } from "react";
 import { FadeInElement } from "../FadeInElement";
 
 export const Profile = ({
-  sceneState,
+  transitionProgress,
 }: {
-  sceneState: "mounting" | "unmounting" | "mounted" | "unmounted" | undefined;
+  transitionProgress: number;
 }) => {
   const [animationState, setAnimationState] = useState<
     "fadein" | "fadeout" | "stop"
   >("stop");
 
   const [isImageActive, setIsImageActive] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (sceneState == "unmounting") {
-      setAnimationState("fadeout");
-    }
-  }, [sceneState]);
 
   useEffect(() => {
     setIsImageActive(true);
@@ -34,7 +28,7 @@ export const Profile = ({
           <img src="/img/ham.png" className="profile-image" />
         </div>
         <div className="text-container">
-          <FadeInElement from={10} to={0.6} animationState={animationState}>
+          <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
             <div>
               <h1 style={{ fontWeight: "400" }}>morita asuka</h1>
               <h3 style={{ marginBottom: "1rem", fontWeight: "400" }}>
@@ -43,7 +37,7 @@ export const Profile = ({
             </div>
           </FadeInElement>
 
-          <FadeInElement from={5} to={0.6} animationState={animationState}>
+          <FadeInElement from={5} to={0.6} blurIntensity={transitionProgress}>
             <>
               <div className="profile-container">
                 <p
@@ -75,7 +69,7 @@ export const Profile = ({
               </div>
             </>
           </FadeInElement>
-          <FadeInElement from={10} to={0.6} animationState={animationState}>
+          <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
             <>
               <h3 style={{ marginBottom: "1rem" }}>経歴</h3>
               <div className="carrier-container">
