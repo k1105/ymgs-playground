@@ -37,7 +37,7 @@ export const Carrier = ({
       <style jsx>{`
         .container {
           width: 80vw;
-          margin: 23rem auto 0;
+          margin: 18rem auto 0;
           display: flex;
           justify-content: space-between;
         }

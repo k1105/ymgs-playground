@@ -102,7 +102,7 @@ export const Profile = ({
       </div>
       <style jsx>{`
         .container {
-          margin-top: 15rem;
+          margin-top: 10rem;
         }
         .text-container {
           width: 80vw;

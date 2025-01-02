@@ -137,7 +137,8 @@ export const SceneManager = () => {
       // 下スワイプ -> diff > 0
       // 上スワイプ -> diff < 0
 
-      if (diff !== 0) setTransitionProgress(diff);
+      if (diff !== 0)
+        setTransitionProgress(Math.max(-110, Math.min(100, diff)));
       setLastWheelTime(performance.now());
     };
 
@@ -162,6 +163,16 @@ export const SceneManager = () => {
   return (
     <>
       {/* デバッグ表示 */}
+      <div className="state-list">
+        {sceneList.map((_, i) => {
+          return (
+            <div
+              key={`list-icon-${i}`}
+              className={`list-icon ${sceneIndex == i && "active"}`}
+            />
+          );
+        })}
+      </div>
       <div
         style={{
           color: "white",
@@ -171,7 +182,6 @@ export const SceneManager = () => {
           textAlign: "right",
         }}
       >
-        <p>Scene: {sceneList[sceneIndex]}</p>
         <p>transitionProgress: {transitionProgress.toFixed(2)}</p>
         <p>isAutoTransition: {String(isAutoTransition)}</p>
         <p>isEasing: {String(isEasing)}</p>
@@ -196,6 +206,27 @@ export const SceneManager = () => {
           title="Solo Exhibitions"
         />
       )}
+      <style jsx>{`
+        .state-list {
+          position: fixed;
+          top: 50vh;
+          left: 1rem;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .list-icon {
+          width: 0.5rem;
+          height: 0.5rem;
+          border: 1px solid white;
+          border-radius: 50%;
+        }
+
+        .list-icon.active {
+          background: white;
+        }
+      `}</style>
     </>
   );
 };
