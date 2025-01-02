@@ -181,8 +181,8 @@ export const SceneManager = ({ scene }: { scene: number }) => {
       if (isAutoTransition || isEasing) return;
 
       // 指を離したときの座標
-      const endY = e.changedTouches[0].clientY;
-      const diff = endY - touchStartYRef.current;
+      const endY = e.changedTouches[0].clientY / 30;
+      const diff = touchStartYRef.current - endY;
       // 下スワイプ -> diff > 0
       // 上スワイプ -> diff < 0
 
