@@ -4,7 +4,8 @@ import { Carrier } from "./scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 
 export const SceneManager = () => {
-  const [mountScene, setMountScene] = useState<number>(0);
+  const [sceneIndex, setSceneIndex] = useState<number>(0);
+  const sceneList = ["profile", "grants-awards", "solo-exhibitions"];
 
   // オートトランジション（シーン切り替え中）フラグ
   const [isAutoTransition, setIsAutoTransition] = useState<boolean>(false);
@@ -47,11 +48,11 @@ export const SceneManager = () => {
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
         // 次のシーンへ
-        setMountScene((prev) => (prev + 1) % 3);
+        setSceneIndex((prev) => (prev + 1) % 3);
         resetTransition();
       } else if (transitionProgress < -threshold) {
         // 前のシーンへ
-        setMountScene((prev) => (prev + 3 - 1) % 3);
+        setSceneIndex((prev) => (prev + 3 - 1) % 3);
         resetTransition();
       } else {
         // (B) -100 ～ 100 の範囲内なら、50ms 後にイージング開始するかチェック
@@ -168,21 +169,24 @@ export const SceneManager = () => {
           right: "30px",
         }}
       >
-        <p>Scene: {mountScene}</p>
+        <p>Scene: {sceneList[sceneIndex]}</p>
         <p>transitionProgress: {transitionProgress.toFixed(2)}</p>
         <p>isAutoTransition: {String(isAutoTransition)}</p>
         <p>isEasing: {String(isEasing)}</p>
+        <p>isTouching: {String(isTouching)}</p>
       </div>
 
-      {mountScene === 0 && <Profile transitionProgress={transitionProgress} />}
-      {mountScene === 1 && (
+      {sceneList[sceneIndex] === "profile" && (
+        <Profile transitionProgress={transitionProgress} />
+      )}
+      {sceneList[sceneIndex] === "grants-awards" && (
         <Carrier
           transitionProgress={transitionProgress}
           items={grantsAwards}
           title="Grants and Awards"
         />
       )}
-      {mountScene === 2 && (
+      {sceneList[sceneIndex] === "solo-exhibitions" && (
         <Carrier
           transitionProgress={transitionProgress}
           items={soloExhibitions}

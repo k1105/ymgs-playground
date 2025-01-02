@@ -6,7 +6,7 @@ const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 export const InkFilter = ({
   children,
   from = 3,
-  to = 0.6,
+  to = 0.3,
   blurIntensity,
 }: {
   children: React.ReactNode;
@@ -14,31 +14,28 @@ export const InkFilter = ({
   to?: number;
   blurIntensity: number; // -100 ~ 100
 }) => {
-  useEffect(() => {
-    animateBlurTo(from, to, 1000);
-  }, []);
   // アニメーション用関数
-  const animateBlurTo = (
-    startValue: number,
-    endValue: number,
-    duration = 1000
-  ) => {
-    const startTime = performance.now();
+  // const animateBlurTo = (
+  //   startValue: number,
+  //   endValue: number,
+  //   duration = 1000
+  // ) => {
+  //   const startTime = performance.now();
 
-    const animate = (time: number) => {
-      const elapsed = time - startTime;
-      const progress = Math.min(elapsed / duration, 1); // 0～1 の範囲
+  //   const animate = (time: number) => {
+  //     const elapsed = time - startTime;
+  //     const progress = Math.min(elapsed / duration, 1); // 0～1 の範囲
 
-      // 補間した値
-      const current = startValue + (endValue - startValue) * progress;
+  //     // 補間した値
+  //     const current = startValue + (endValue - startValue) * progress;
 
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
+  //     if (progress < 1) {
+  //       requestAnimationFrame(animate);
+  //     }
+  //   };
 
-    requestAnimationFrame(animate);
-  };
+  //   requestAnimationFrame(animate);
+  // };
 
   return (
     <>
