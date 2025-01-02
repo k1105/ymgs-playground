@@ -141,6 +141,7 @@ export const SceneManager = () => {
 
     const handleTouchEnd = (e: TouchEvent) => {
       setIsTouching(false);
+      startEasingToZero();
     };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
