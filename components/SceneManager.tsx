@@ -50,7 +50,7 @@ export const SceneManager = () => {
           const elapsed = performance.now() - lastWheelTime;
           if (elapsed >= 50 || isTouching) {
             // 50ms 以上変化なし → イージングスタート
-            startEasingToZero();
+            startEasingToZero({});
           }
         }, 50);
 
@@ -68,19 +68,18 @@ export const SceneManager = () => {
   // ▼ シーン切り替え時などに呼ぶリセット処理
   const resetTransition = () => {
     setIsAutoTransition(true);
-    startEasingToZero();
+    startEasingToZero({ duration: 300 });
     setTimeout(() => {
       setIsAutoTransition(false);
-    }, 1000); // 1秒後に再度スクロール受付可
+    }, 500); // 1秒後に再度スクロール受付可
   };
 
   // ▼ イージングアニメーションを開始する
-  const startEasingToZero = () => {
+  const startEasingToZero = ({ duration = 200 }: { duration?: number }) => {
     setIsEasing(true);
 
     const startValue = transitionProgress;
     const endValue = 0;
-    const duration = 200; // 200ms かけてイージング
 
     const startTime = performance.now();
 
