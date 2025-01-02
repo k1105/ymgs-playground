@@ -204,11 +204,13 @@ export const SceneManager = ({ scene }: { scene: number }) => {
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
     // window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
       // window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [isAutoTransition, isEasing]);
