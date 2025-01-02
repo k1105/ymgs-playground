@@ -31,7 +31,9 @@ export const SceneManager = () => {
       // オートトランジション中やイージング中は無視
       if (isAutoTransition || isEasing) return;
 
-      setTransitionProgress((prev) => prev + e.deltaY);
+      setTransitionProgress((prev) =>
+        Math.max(-110, Math.min(110, prev + e.deltaY))
+      );
       setLastWheelTime(performance.now());
     };
 
@@ -140,14 +142,6 @@ export const SceneManager = () => {
     const handleTouchEnd = (e: TouchEvent) => {
       setIsTouching(false);
     };
-
-    // 必要に応じて touchmove でリアルタイム更新も可
-    // const handleTouchMove = (e: TouchEvent) => {
-    //   if (isAutoTransition || isEasing) return;
-    //   const currentY = e.touches[0].clientY;
-    //   const diff = currentY - touchStartYRef.current;
-    //   // ここで setTransitionProgress(...) すると「指を動かすごと」に更新される
-    // };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
