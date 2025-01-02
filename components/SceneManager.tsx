@@ -64,6 +64,7 @@ export const SceneManager = ({ scene }: { scene: number }) => {
 
   // オートトランジション（シーン切り替え中）フラグ
   const [isAutoTransition, setIsAutoTransition] = useState<boolean>(false);
+  const [isTouching, setIsTouching] = useState<boolean>(false);
 
   // transitionProgress : -∞～+∞
   //  * -100以下 → 前のシーンへ
@@ -110,7 +111,7 @@ export const SceneManager = ({ scene }: { scene: number }) => {
     } else {
       // (B) -100 ～ 100 の範囲内なら、50ms 後にイージング開始するかチェック
       // まず現在の時刻を記録 (最終更新時刻はすでに setされている)
-      if (!isAutoTransition) {
+      if (!isAutoTransition && !isTouching) {
         // すでにオートトランジション中でないなら
         const timer = setTimeout(() => {
           // 50ms 後に「まだ (今の値) と同じかどうか」を確認
@@ -173,6 +174,7 @@ export const SceneManager = ({ scene }: { scene: number }) => {
     const handleTouchStart = (e: TouchEvent) => {
       // 1本目の指の Y座標を記録
       touchStartYRef.current = e.touches[0].clientY;
+      setIsTouching(true);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -186,6 +188,10 @@ export const SceneManager = ({ scene }: { scene: number }) => {
 
       setTransitionProgress((prev) => prev + diff);
       lastWheelTimeRef.current = performance.now();
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      setIsTouching(false);
     };
 
     // 必要に応じて touchmove でリアルタイム更新も可
