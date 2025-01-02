@@ -165,6 +165,7 @@ export const SceneManager = () => {
           position: "fixed",
           top: "10px",
           right: "30px",
+          textAlign: "right",
         }}
       >
         <p>Scene: {sceneList[sceneIndex]}</p>
@@ -172,6 +173,7 @@ export const SceneManager = () => {
         <p>isAutoTransition: {String(isAutoTransition)}</p>
         <p>isEasing: {String(isEasing)}</p>
         <p>isTouching: {String(isTouching)}</p>
+        <p>lastWheelTime: {Math.floor(lastWheelTime * 100) / 100}</p>
       </div>
 
       {sceneList[sceneIndex] === "profile" && (
