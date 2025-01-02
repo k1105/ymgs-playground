@@ -1,4 +1,4 @@
-import { FadeInElement } from "../FadeInElement";
+import { InkFilter } from "../InkFilter";
 import { useEffect, useState } from "react";
 
 export const Carrier = ({
@@ -10,13 +10,9 @@ export const Carrier = ({
   title: string;
   items: { year: number; items: string[] }[];
 }) => {
-  const [animationState, setAnimationState] = useState<
-    "fadein" | "fadeout" | "stop"
-  >("stop");
-
   return (
     <>
-      <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
+      <InkFilter blurIntensity={transitionProgress}>
         <div className="container">
           <h2 style={{ marginBottom: "3rem" }}>{title}</h2>
           <div className="carrier-container">
@@ -37,7 +33,7 @@ export const Carrier = ({
             </div>
           </div>
         </div>
-      </FadeInElement>
+      </InkFilter>
       <style jsx>{`
         .container {
           width: 80vw;

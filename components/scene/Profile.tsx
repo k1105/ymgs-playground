@@ -1,43 +1,41 @@
 import { useState, useEffect } from "react";
-import { FadeInElement } from "../FadeInElement";
+import { InkFilter } from "../InkFilter";
+import { OpacityFilter } from "../OpacityFilter";
 
 export const Profile = ({
   transitionProgress,
 }: {
   transitionProgress: number;
 }) => {
-  const [animationState, setAnimationState] = useState<
-    "fadein" | "fadeout" | "stop"
-  >("stop");
-
   const [isImageActive, setIsImageActive] = useState<boolean>(false);
 
   useEffect(() => {
     setIsImageActive(true);
   }, []);
 
-  useEffect(() => {
-    if (animationState == "fadeout") {
-      setIsImageActive(false);
-    }
-  }, [animationState]);
   return (
     <>
       <div className="container">
-        <div className={`profile-image-wrapper ${isImageActive && "active"}`}>
-          <img src="/img/ham.png" className="profile-image" />
-        </div>
+        <OpacityFilter
+          transitionProgress={transitionProgress}
+          style={{ mixBlendMode: "screen" }}
+        >
+          <div className={`profile-image-wrapper`}>
+            <img src="/img/ham.png" className="profile-image" />
+          </div>
+        </OpacityFilter>
+
         <div className="text-container">
-          <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
+          <InkFilter blurIntensity={transitionProgress}>
             <div>
               <h1 style={{ fontWeight: "400" }}>morita asuka</h1>
               <h3 style={{ marginBottom: "1rem", fontWeight: "400" }}>
                 森田 明日香
               </h3>
             </div>
-          </FadeInElement>
+          </InkFilter>
 
-          <FadeInElement from={5} to={0.6} blurIntensity={transitionProgress}>
+          <InkFilter blurIntensity={transitionProgress}>
             <>
               <div className="profile-container">
                 <p
@@ -68,8 +66,8 @@ export const Profile = ({
                 </p>
               </div>
             </>
-          </FadeInElement>
-          <FadeInElement from={10} to={0.6} blurIntensity={transitionProgress}>
+          </InkFilter>
+          <InkFilter blurIntensity={transitionProgress}>
             <>
               <h3 style={{ marginBottom: "1rem" }}>経歴</h3>
               <div className="carrier-container">
@@ -99,7 +97,7 @@ export const Profile = ({
                 </div>
               </div>
             </>
-          </FadeInElement>
+          </InkFilter>
         </div>
       </div>
       <style jsx>{`
@@ -127,9 +125,7 @@ export const Profile = ({
           width: 13rem;
           text-align: center;
           margin: 0 10vw 3rem;
-          mix-blend-mode: screen;
           transition: all 1s ease;
-          opacity: 0;
         }
 
         .profile-image {

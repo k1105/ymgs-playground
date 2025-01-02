@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Noto_Sans_JP } from "next/font/google";
 
 const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
-export const FadeInElement = ({
+export const InkFilter = ({
   children,
-  from = 10,
+  from = 3,
   to = 0.6,
   blurIntensity,
 }: {
   children: React.ReactNode;
-  from: number;
-  to: number;
-  blurIntensity: number;
+  from?: number;
+  to?: number;
+  blurIntensity: number; // -100 ~ 100
 }) => {
   useEffect(() => {
     animateBlurTo(from, to, 1000);
@@ -42,7 +42,10 @@ export const FadeInElement = ({
 
   return (
     <>
-      <div className={`effect ${notoSansJP.className}`}>{children}</div>
+      <div className="component-wrapper">
+        <div className={`effect ${notoSansJP.className}`}>{children}</div>
+      </div>
+
       {/* SVG フィルター定義（stdDeviation を動的に変化させる） */}
       <svg width="0" height="0" style={{ position: "absolute" }}>
         <filter id="myInkFilter">
@@ -79,18 +82,11 @@ export const FadeInElement = ({
       </svg>
 
       <style jsx>{`
-        main {
-          margin: 3rem;
-        }
-
-        .image-container {
-          img {
-            width: 100%;
-          }
+        .component-wrapper {
+          mix-blend-mode: screen;
         }
 
         .effect {
-          mix-blend-mode: screen;
           filter: url(#myInkFilter);
           font-size: 1rem;
           color: white;

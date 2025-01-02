@@ -1,10 +1,8 @@
 import Head from "next/head";
-import { useState } from "react";
 import { SceneManager } from "@/components/SceneManager";
 
 export default function Home() {
   // ぼかし強度 (stdDeviation) を state 管理する
-  const [scene, setScene] = useState<number>(0);
 
   return (
     <>
@@ -15,15 +13,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <SceneManager scene={scene} />
-        <p
-          onClick={() => {
-            setScene((scene + 1) % 3);
-          }}
-          className="arrow"
-        >
-          →
-        </p>
+        <SceneManager />
       </main>
       <style jsx>{`
         .arrow {
