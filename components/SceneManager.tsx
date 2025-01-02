@@ -175,7 +175,7 @@ export const SceneManager = ({ scene }: { scene: number }) => {
       touchStartYRef.current = e.touches[0].clientY;
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
+    const handleTouchMove = (e: TouchEvent) => {
       if (isAutoTransition || isEasing) return;
 
       // 指を離したときの座標
@@ -197,12 +197,12 @@ export const SceneManager = ({ scene }: { scene: number }) => {
     // };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     // window.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchmove", handleTouchMove);
       // window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [isAutoTransition, isEasing]);
