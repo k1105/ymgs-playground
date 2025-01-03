@@ -28,7 +28,7 @@ export const SceneManager = () => {
   // ▼ transitionProgress 監視
   useEffect(() => {
     // (A) 閾値を超えたらシーンを切り替え
-    const threshold = 100;
+    const threshold = 80;
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
         // 次のシーンへ
@@ -68,7 +68,7 @@ export const SceneManager = () => {
   // ▼ シーン切り替え時などに呼ぶリセット処理
   const resetTransition = () => {
     setIsAutoTransition(true);
-    startEasingToZero({ duration: 300 });
+    startEasingToZero({ duration: 400 });
     setTimeout(() => {
       setIsAutoTransition(false);
     }, 500); // 1秒後に再度スクロール受付可
@@ -131,8 +131,7 @@ export const SceneManager = () => {
       // 下スワイプ -> diff > 0
       // 上スワイプ -> diff < 0
 
-      if (diff !== 0)
-        setTransitionProgress(Math.max(-110, Math.min(110, diff)));
+      setTransitionProgress(Math.max(-110, Math.min(110, -diff)));
       setLastWheelTime(performance.now());
     };
 
