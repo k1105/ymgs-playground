@@ -49,8 +49,8 @@ export default function Home() {
               items={soloExhibitions}
               title="Solo Exhibitions"
             />,
-            <FullPageSingleImage />,
-            <FullPageMultiImage />,
+            <FullPageSingleImage key="image-single" />,
+            <FullPageMultiImage key="image-multi" />,
           ]}
         />
       </FontTester>
