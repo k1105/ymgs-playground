@@ -31,9 +31,7 @@ export const FullPageText = ({
     setLineHeight(
       convertCssUnitToPx(window.innerWidth > 600 ? "3rem" : "2.5rem")
     );
-    setFontSize(
-      convertCssUnitToPx(window.innerWidth > 600 ? "1rem" : "0.9rem")
-    );
+    setFontSize(convertCssUnitToPx("1rem"));
   }, []);
 
   useEffect(() => {
