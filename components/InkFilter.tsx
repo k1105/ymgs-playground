@@ -67,7 +67,7 @@ export const InkFilter = ({
           />
 
           {/* 二値化: discrete + tableValues="0 1" */}
-          <feComponentTransfer in="gray" result="thresholded">
+          <feComponentTransfer in="blurred" result="thresholded">
             <feFuncR type="discrete" tableValues="0 1" />
             <feFuncG type="discrete" tableValues="0 1" />
             <feFuncB type="discrete" tableValues="0 1" />
