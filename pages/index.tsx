@@ -9,11 +9,11 @@ import {
   Zen_Old_Mincho,
 } from "next/font/google";
 const hinaMincho = Hina_Mincho({ weight: "400", subsets: ["latin"] });
-const notoSerif = Noto_Serif_JP({ subsets: ["latin"] });
-const bizUdMincho = BIZ_UDMincho({ weight: "400", subsets: ["latin"] });
-const zenOldMincho = Zen_Old_Mincho({ weight: "400", subsets: ["latin"] });
+const notoSerif = Noto_Serif_JP({ weight: "500", subsets: ["latin"] });
+const bizUdMincho = BIZ_UDMincho({ weight: "700", subsets: ["latin"] });
+const zenOldMincho = Zen_Old_Mincho({ weight: "700", subsets: ["latin"] });
 const shipporiMincho = Shippori_Mincho_B1({
-  weight: "400",
+  weight: "500",
   subsets: ["latin"],
 });
 
