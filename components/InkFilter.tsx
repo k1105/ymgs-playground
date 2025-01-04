@@ -1,8 +1,3 @@
-import { useState, useEffect, useRef } from "react";
-import { Noto_Sans_JP } from "next/font/google";
-
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
-
 export const InkFilter = ({
   children,
   from = 3,
@@ -40,7 +35,7 @@ export const InkFilter = ({
   return (
     <>
       <div className="component-wrapper">
-        <div className={`effect ${notoSansJP.className}`}>{children}</div>
+        <div className="effect">{children}</div>
       </div>
 
       {/* SVG フィルター定義（stdDeviation を動的に変化させる） */}
@@ -67,12 +62,14 @@ export const InkFilter = ({
           />
 
           {/* 二値化: discrete + tableValues="0 1" */}
-          <feComponentTransfer in="blurred" result="thresholded">
+          <feComponentTransfer in="inkEffect" result="thresholded">
             <feFuncR type="discrete" tableValues="0 1" />
             <feFuncG type="discrete" tableValues="0 1" />
             <feFuncB type="discrete" tableValues="0 1" />
             <feFuncA type="identity" />
           </feComponentTransfer>
+
+          {/* <feComposite in="inkEffect" in2="inkEffect" operator="over" /> */}
 
           <feComposite in="thresholded" in2="thresholded" operator="over" />
         </filter>

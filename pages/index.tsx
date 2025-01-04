@@ -1,8 +1,33 @@
 import Head from "next/head";
 import { SceneManager } from "@/components/SceneManager";
+import { useState, useEffect } from "react";
+import {
+  BIZ_UDMincho,
+  Hina_Mincho,
+  Noto_Serif_JP,
+  Shippori_Mincho_B1,
+  Zen_Old_Mincho,
+} from "next/font/google";
+const hinaMincho = Hina_Mincho({ weight: "400", subsets: ["latin"] });
+const notoSerif = Noto_Serif_JP({ subsets: ["latin"] });
+const bizUdMincho = BIZ_UDMincho({ weight: "400", subsets: ["latin"] });
+const zenOldMincho = Zen_Old_Mincho({ weight: "400", subsets: ["latin"] });
+const shipporiMincho = Shippori_Mincho_B1({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   // ぼかし強度 (stdDeviation) を state 管理する
+  const fontsClass = [
+    { class: hinaMincho.className, name: "hina-mincho" },
+    { class: notoSerif.className, name: "noto-serif" },
+    { class: bizUdMincho.className, name: "biz-ud-mincho" },
+    { class: zenOldMincho.className, name: "zen-old-mincho" },
+    { class: shipporiMincho.className, name: "shippori-mincho" },
+  ];
+
+  const [font, setFont] = useState<number>(0);
 
   return (
     <>
@@ -12,24 +37,27 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main>
+      <div
+        style={{
+          position: "fixed",
+          top: "2rem",
+          right: "2rem",
+          zIndex: "99",
+          textAlign: "right",
+        }}
+      >
+        <button
+          onClick={() => setFont((prev) => (prev + 1) % fontsClass.length)}
+        >
+          書体を変更
+        </button>
+        <p style={{ color: "white" }}>書体： {fontsClass[font].name}</p>
+      </div>
+
+      <main className={fontsClass[font].class}>
         <SceneManager />
       </main>
-      <style jsx>{`
-        .arrow {
-          width: 2.5rem;
-          background-color: white;
-          text-align: center;
-          line-height: 2.5rem;
-          height: 2.5rem;
-          border-radius: 50%;
-          border: 1px solid white;
-          position: fixed;
-          bottom: 2rem;
-          right: 5vw;
-          color: black;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </>
   );
 }
