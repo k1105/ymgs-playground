@@ -4,85 +4,9 @@ import { Carrier } from "@/components/scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 import { SceneManager } from "@/components/SceneManager";
 import { useState } from "react";
-import {
-  BIZ_UDMincho,
-  Hina_Mincho,
-  Noto_Serif_JP,
-  Shippori_Mincho_B1,
-  Zen_Old_Mincho,
-  Radley,
-  Crimson_Text,
-  EB_Garamond,
-  Sorts_Mill_Goudy,
-  Goudy_Bookletter_1911,
-  Castoro,
-} from "next/font/google";
 import { FontTester } from "@/components/FontTester";
-
-// 日本語フォントの定義
-const hinaMincho = Hina_Mincho({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-hinaMincho",
-});
-const notoSerif = Noto_Serif_JP({
-  weight: "500",
-  subsets: ["latin"],
-  variable: "--font-notoSerif",
-});
-const bizUdMincho = BIZ_UDMincho({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-bizUdMincho",
-});
-const zenOldMincho = Zen_Old_Mincho({
-  weight: "700",
-  subsets: ["latin"],
-  variable: "--font-zenOldMincho",
-});
-const shipporiMincho = Shippori_Mincho_B1({
-  weight: "500",
-  subsets: ["latin"],
-  variable: "--font-shipporiMincho",
-});
-
-const crismonText = Crimson_Text({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-crimsonText",
-});
-
-const EBGaramond = EB_Garamond({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-EBGaramond",
-});
-
-const sortsMillGoudy = Sorts_Mill_Goudy({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-sortsMillGoudy",
-});
-
-// 欧文フォントの定義
-const radley = Radley({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-radley",
-});
-
-const goudyBookletter1911 = Goudy_Bookletter_1911({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-goudyBookletter1911",
-});
-
-const castoro = Castoro({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-castoro",
-});
-
+import { FullPageSingleImage } from "@/components/FullPageSingleImage";
+import { FullPageMultiImage } from "@/components/FullPageMultiImage";
 export default function Home() {
   // 書体リスト
   const jaFonts = [
@@ -125,6 +49,8 @@ export default function Home() {
               items={soloExhibitions}
               title="Solo Exhibitions"
             />,
+            <FullPageSingleImage />,
+            <FullPageMultiImage />,
           ]}
         />
       </FontTester>
