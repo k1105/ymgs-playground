@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
 import { InkFilter } from "../InkFilter";
 import { OpacityFilter } from "../OpacityFilter";
 
 export const Profile = ({
-  transitionProgress,
+  transitionProgress = 0,
 }: {
-  transitionProgress: number;
+  transitionProgress?: number;
 }) => {
-  const [isImageActive, setIsImageActive] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsImageActive(true);
-  }, []);
-
   return (
     <>
       <div className="container">

@@ -44,8 +44,6 @@ export function convertCssUnitToPx(cssValue: number | string): number {
     );
     return rootFontSize * numericVal;
   } else {
-    // 未対応 or 単位指定なし など
-    // 今回は px として扱う or エラーにする etc.
     console.warn(
       `Unsupported or missing unit in value: "${cssValue}". Assuming px.`
     );

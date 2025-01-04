@@ -1,12 +1,11 @@
 import { InkFilter } from "../InkFilter";
-import { useEffect, useState } from "react";
 
 export const Carrier = ({
-  transitionProgress,
+  transitionProgress = 0,
   title,
   items,
 }: {
-  transitionProgress: number;
+  transitionProgress?: number;
   title: string;
   items: { year: number; items: string[] }[];
 }) => {

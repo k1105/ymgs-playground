@@ -82,7 +82,6 @@ export const InkFilter = ({
 
         .effect {
           filter: url(#myInkFilter);
-          font-size: 1rem;
           color: white;
           background: #333;
           transition: all ease 1s;

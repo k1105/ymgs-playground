@@ -4,22 +4,7 @@ import { useEffect, useState } from "react";
 import { paginateByBinarySearch } from "@/components/paginateText";
 
 export default function LinePager() {
-  const sampleText = `しかし、先ほどの禁則処理も関連しますが、cssのplain textであればそのあたり、よしなに改行できますよね。もとをただせば、問題になっていたのは一行に含めるテキストを厳格に一行区切りで配列に含めていたためだと考えられます。そこで、今のように一行区切りの配列を作るのではなく、「改行」「空行」「要素高さに収まらなかったテキストの切れ目」で一つの要素とするような配列を作ることで、cssによるスタイリングの恩恵を受けたいと思います。ただこの場合、現状のロジックのように行単位で積み上げていって判定するとなると、禁則を適用した上での「要素高さに収まらなかったテキストの切れ目」をうまく判別できませんよね。そこで、改行や空行も含めたplain textを引数に、バイナリサーチによって１ページに収まるテキストの切れ目を見つけるロジックを構築できないでしょうか。
-
-  単語途中の切れ目を回避するには、大きく3パターン:
-
-単語単位でレイアウト（1単語まるごと入らない場合は何らかの強制処理）
-単語が長すぎる場合はハイフンを挿入して分割
-バイナリサーチ後に “単語境界まで後退” する（バックトラック）
-もっと厳密にやるなら、辞書ベースのハイフネーションも検討し、禁則処理と組み合わせる必要があります。
-
-CSSだけで overflow-wrap: break-word 等を使うと、単語途中で中割れすることがありますが、今回のように「ページ単位でテキストを区切る」という場面では、JavaScript側で意図的に単語境界を優先するロジックを入れるしかありません。
-
-いずれの手段をとるにしても、「単語をどう見なすか」「長すぎる単語への対処」が根本の課題となります。
-最もシンプルなのは、バイナリサーチ結果でまずfitCount を得たら、
-① 単語境界を探して後退する
-② 後退しすぎたら、丸ごと次ページへ送る or 強制ハイフン
-のような混合アプローチがおすすめです。
+  const sampleText = `She is engaged in activities to reveal the slightest differences, which are so subtle that they cannot be seen, through various methods centering on visual expression. Her past works include “Lag,” in which she captured the individual differences in sausage based on the difference in the popping sound made during heating, and “Observing Variation: in sliced loin Hams,” in which she focused on the production process of sliced loin ham and composed the differences into an animated expression. Currently, she is conducting expressive research on the theme of what kind of objects and what kind of methods can be used to visualize such objects that remind us of “incidents” lurking behind them when differences are visualized. ◽️
 `;
   const [pages, setPages] = useState<string[]>([]);
   const [boxSize, setBoxSize] = useState<{ w: number; h: number }>({
@@ -29,17 +14,20 @@ CSSだけで overflow-wrap: break-word 等を使うと、単語途中で中割�
   const [fontSize, setFontSize] = useState<number>(0);
   const [lineHeight, setLineHeight] = useState<number>(0);
 
+  const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
+
   // ここでページ分割ロジックを一度だけ実行
   useEffect(() => {
     setBoxSize({
-      w: convertCssUnitToPx("20rem"),
-      h: convertCssUnitToPx("20rem"),
+      w: convertCssUnitToPx(window.innerWidth < 600 ? "90vw" : "40vw"),
+      h: convertCssUnitToPx("30rem"),
     });
-    setFontSize(convertCssUnitToPx("0.8rem"));
+    setFontSize(convertCssUnitToPx("0.9rem"));
     setLineHeight(convertCssUnitToPx("1.6rem"));
   }, []);
 
   useEffect(() => {
+    console.log("line height: " + lineHeight);
     if (document && boxSize.w > 0)
       setPages(
         paginateByBinarySearch(
@@ -50,17 +38,63 @@ CSSだけで overflow-wrap: break-word 等を使うと、単語途中で中割�
           fontSize
         )
       );
-  }, [boxSize]);
+  }, [boxSize, lineHeight]);
+
+  useEffect(() => {
+    console.log(pages);
+  }, [pages]);
 
   return (
     <div style={{ color: "white" }}>
-      <TextPager
-        pages={pages}
-        width={boxSize.w}
-        height={boxSize.h}
-        fontSize={fontSize}
-        lineHeight={2}
-      />
+      <div
+        style={{
+          margin: "2rem 0",
+          display: "flex",
+          gap: "1rem",
+          width: "15rem",
+          justifyContent: "space-between",
+        }}
+      >
+        <button
+          className="button"
+          onClick={() => {
+            setCurrentPageIndex(
+              (prev) => (prev + pages.length - 1) % pages.length
+            );
+          }}
+        >
+          前へ
+        </button>
+        <button
+          className="button"
+          onClick={() => {
+            setCurrentPageIndex((prev) => (prev + 1) % pages.length);
+          }}
+        >
+          次へ
+        </button>
+      </div>
+
+      <div style={{ position: "absolute", bottom: "2rem", left: "5vw" }}>
+        <h1 style={{ marginBottom: "2rem" }}>Profile:</h1>
+        <TextPager
+          text={pages[currentPageIndex]}
+          pageIndex={currentPageIndex}
+          width={boxSize.w}
+          height={boxSize.h}
+          fontSize={fontSize}
+          lineHeight={lineHeight}
+        />
+        <p style={{ textAlign: "right", fontSize: "0.8rem" }}>
+          {currentPageIndex + 1} / {pages.length}
+        </p>
+      </div>
+
+      <style jsx>{`
+        .button {
+          width: 8rem;
+        }
+      `}</style>
     </div>
   );
 }

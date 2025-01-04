@@ -1,21 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { Profile } from "./scene/Profile";
-import { Carrier } from "./scene/Carrier";
-import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
+import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
 
-export const SceneManager = () => {
+type SceneManagerProps = {
+  scenes: ReactElement<any>[]; // ここをReactNode[]でもOKだが、後述の注意あり
+};
+
+export const SceneManager = ({ scenes }: SceneManagerProps) => {
   const [sceneIndex, setSceneIndex] = useState<number>(0);
-  const sceneList = ["profile", "grants-awards", "solo-exhibitions"];
-
-  // オートトランジション（シーン切り替え中）フラグ
-  const [isAutoTransition, setIsAutoTransition] = useState<boolean>(false);
-  const [isTouching, setIsTouching] = useState<boolean>(false);
+  const [transitionProgress, setTransitionProgress] = useState<number>(0);
+  const [isEasing, setIsEasing] = useState(false);
+  const [isAutoTransition, setIsAutoTransition] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
 
   // transitionProgress : -∞～+∞
   //  * -100以下 → 前のシーンへ
   //  * +100以上 → 次のシーンへ
   //  * -100～100 の範囲内 → 50ms 変化が無ければイージングで 0 に戻す
-  const [transitionProgress, setTransitionProgress] = useState<number>(0);
 
   // ▼ 「最後に wheel で transitionProgress を更新した時刻」を保持
   const [lastWheelTime, setLastWheelTime] = useState<number>(0);
@@ -23,7 +22,6 @@ export const SceneManager = () => {
   const touchStartYRef = useRef<number>(0);
 
   // ▼ 「イージングアニメーション中かどうか」フラグ
-  const [isEasing, setIsEasing] = useState(false);
 
   // ▼ transitionProgress 監視
   useEffect(() => {
@@ -32,13 +30,11 @@ export const SceneManager = () => {
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
         // 次のシーンへ
-        setSceneIndex((prev) => (prev + 1) % sceneList.length);
+        setSceneIndex((prev) => (prev + 1) % scenes.length);
         resetTransition();
       } else if (transitionProgress < -threshold) {
         // 前のシーンへ
-        setSceneIndex(
-          (prev) => (prev + sceneList.length - 1) % sceneList.length
-        );
+        setSceneIndex((prev) => (prev + scenes.length - 1) % scenes.length);
         resetTransition();
       } else {
         // (B) -100 ～ 100 の範囲内なら、50ms 後にイージング開始するかチェック
@@ -64,42 +60,6 @@ export const SceneManager = () => {
   useEffect(() => {
     if (!isTouching) setLastWheelTime(performance.now());
   }, [isTouching]);
-
-  // ▼ シーン切り替え時などに呼ぶリセット処理
-  const resetTransition = () => {
-    setIsAutoTransition(true);
-    startEasingToZero({ duration: 400 });
-    setTimeout(() => {
-      setIsAutoTransition(false);
-    }, 500); // 1秒後に再度スクロール受付可
-  };
-
-  // ▼ イージングアニメーションを開始する
-  const startEasingToZero = ({ duration = 200 }: { duration?: number }) => {
-    setIsEasing(true);
-
-    const startValue = transitionProgress;
-    const endValue = 0;
-
-    const startTime = performance.now();
-
-    const animate = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1); // 0～1
-
-      const current = startValue + (endValue - startValue) * progress;
-      setTransitionProgress(current);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        // 完了
-        setIsEasing(false);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  };
 
   useEffect(() => {
     // wheel イベント
@@ -152,53 +112,75 @@ export const SceneManager = () => {
     };
   }, [isAutoTransition, isEasing]);
 
+  // ▼ シーン切り替え時などに呼ぶリセット処理
+  const resetTransition = () => {
+    setIsAutoTransition(true);
+    startEasingToZero({ duration: 400 });
+    setTimeout(() => {
+      setIsAutoTransition(false);
+    }, 500); // 1秒後に再度スクロール受付可
+  };
+
+  // ▼ イージングアニメーションを開始する
+  const startEasingToZero = ({ duration = 200 }: { duration?: number }) => {
+    setIsEasing(true);
+
+    const startValue = transitionProgress;
+    const endValue = 0;
+
+    const startTime = performance.now();
+
+    const animate = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1); // 0～1
+
+      const current = startValue + (endValue - startValue) * progress;
+      setTransitionProgress(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        // 完了
+        setIsEasing(false);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
   return (
     <>
-      {/* デバッグ表示 */}
-      <div className="state-list">
-        {sceneList.map((_, i) => {
-          return (
-            <div
-              key={`list-icon-${i}`}
-              className={`list-icon ${sceneIndex == i && "active"}`}
-            />
-          );
-        })}
-      </div>
-      {/* <div
-        style={{
-          color: "white",
-          position: "fixed",
-          top: "10px",
-          right: "30px",
-          textAlign: "right",
-        }}
-      >
-        <p>transitionProgress: {transitionProgress.toFixed(2)}</p>
-        <p>isAutoTransition: {String(isAutoTransition)}</p>
-        <p>isEasing: {String(isEasing)}</p>
-        <p>isTouching: {String(isTouching)}</p>
-        <p>lastWheelTime: {Math.floor(lastWheelTime * 100) / 100}</p>
+      {/* <div className="state-list">
+        {scenes.map((_, i) => (
+          <div
+            key={`list-icon-${i}`}
+            className={`list-icon ${sceneIndex === i ? "active" : ""}`}
+          />
+        ))}
       </div> */}
+      <div className="scene-status">
+        <p>
+          {sceneIndex + 1} / {scenes.length}
+        </p>
+      </div>
 
-      {sceneList[sceneIndex] === "profile" && (
-        <Profile transitionProgress={transitionProgress} />
-      )}
-      {sceneList[sceneIndex] === "grants-awards" && (
-        <Carrier
-          transitionProgress={transitionProgress}
-          items={grantsAwards}
-          title="Grants and Awards"
-        />
-      )}
-      {sceneList[sceneIndex] === "solo-exhibitions" && (
-        <Carrier
-          transitionProgress={transitionProgress}
-          items={soloExhibitions}
-          title="Solo Exhibitions"
-        />
-      )}
+      {/* いま表示すべきシーンだけ描画する */}
+      {scenes.map((scene, i) => {
+        if (i !== sceneIndex) return null;
+
+        // すでに scene が <Profile /> のようなJSXの場合、
+        // cloneElement で props を差し替える
+        return cloneElement(scene, { transitionProgress, key: `scene-${i}` });
+      })}
+
       <style jsx>{`
+        .scene-status {
+          font-size: 0.8rem;
+          color: white;
+          position: fixed;
+          bottom: 1.5rem;
+          right: 1.5rem;
+        }
+
         .state-list {
           position: fixed;
           top: 50vh;

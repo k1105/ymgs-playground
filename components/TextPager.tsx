@@ -1,7 +1,6 @@
-import { InkFilter } from "./InkFilter";
-
 interface TextPagerProps {
-  pages: string[];
+  text: string;
+  pageIndex: number;
   width: number;
   height: number;
   fontSize: number;
@@ -9,31 +8,28 @@ interface TextPagerProps {
 }
 
 export const TextPager: React.FC<TextPagerProps> = ({
-  pages,
+  text,
+  pageIndex,
   width,
   height,
   fontSize,
   lineHeight,
 }) => {
   return (
-    <div style={{ margin: "1rem", display: "flex", gap: "1rem" }}>
-      {pages.map((text, pageIndex) => (
-        <div
-          key={pageIndex}
-          style={{
-            width,
-            height,
-            fontSize,
-            lineHeight: lineHeight.toString(),
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            marginBottom: "1rem",
-            boxSizing: "border-box",
-          }}
-        >
-          {text}
-        </div>
-      ))}
+    <div
+      key={pageIndex}
+      style={{
+        width: width + "px",
+        height: height + "px",
+        fontSize: fontSize + "px",
+        lineHeight: lineHeight + "px",
+        whiteSpace: "pre-wrap",
+        wordBreak: "break-word",
+        marginBottom: "1rem",
+        boxSizing: "border-box",
+      }}
+    >
+      {text}
     </div>
   );
 };
