@@ -1,7 +1,7 @@
 export const InkFilter = ({
   children,
   from = 3,
-  to = 0.3,
+  to = 0,
   blurIntensity,
 }: {
   children: React.ReactNode;
