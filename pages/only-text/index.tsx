@@ -12,8 +12,9 @@ const OnlyText = () => {
       <FontTester>
         <SceneManager
           scenes={[
-            <TitlePage />,
+            <TitlePage key="title-page" />,
             <FullPageText
+              key="work-text"
               textJa={`ある日、きりもちを焼き忘れてしまい
 翌日まるで玉手箱を開けたかのように 
 カピカピになった姿で「きりもち」が発見された。
