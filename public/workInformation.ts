@@ -5,7 +5,7 @@ export const information: {
   workTitle: Text;
   description: Text;
   credit: Text;
-  content: (Image | Text)[];
+  content: Text[];
 } = {
   workTitle: { ja: "きりもちの所在", en: "Where is Kirimochi?" },
   description: { ja: "", en: "" },
@@ -25,7 +25,6 @@ export const information: {
     en: "",
   },
   content: [
-    { src: "", alt: "", width: "", height: "" },
     {
       ja: `ある日、きりもちを焼き忘れてしまい 
 翌日まるで玉手箱を開けたかのように 
