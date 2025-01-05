@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export const InkFilter = ({
   children,
   from = 3,
@@ -44,7 +46,11 @@ export const InkFilter = ({
           {/* ガウシアンぼかし (blurIntensity を指定) */}
           <feGaussianBlur
             in="SourceGraphic"
-            stdDeviation={(Math.abs(blurIntensity) / 100) * (from - to) + to}
+            stdDeviation={
+              (Math.abs(isNaN(blurIntensity) ? 0 : blurIntensity) / 100) *
+                (from - to) +
+              to
+            }
             result="blurred"
           />
 
@@ -84,7 +90,6 @@ export const InkFilter = ({
           filter: url(#myInkFilter);
           color: white;
           background: #333;
-          transition: all ease 1s;
         }
       `}</style>
     </>

@@ -17,6 +17,9 @@ export function paginateByBinarySearch(
   const pages: string[] = [];
   let restText = text;
 
+  console.log("width: " + width);
+  console.log("height: " + height);
+
   while (restText.length > 0) {
     // そのページに入る最大文字数を探す
     const fitCount = adjustToWordBoundary(

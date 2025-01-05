@@ -1,25 +1,28 @@
-import { ReactElement, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { convertCssUnitToPx } from "./convertCssUnitToPx";
 import { paginateByBinarySearch } from "./paginateText";
-import { SceneManager } from "./SceneManager";
 import { InkFilter } from "./InkFilter";
 
 export const FullPageText = ({
   textJa,
   textEn,
+  currentSegmentIndex = 0,
+  setSegmentsLength,
+  languageMode = "ja",
+  transitionProgress = 0,
 }: {
   textJa: string;
   textEn: string;
+  currentSegmentIndex?: number;
+  setSegmentsLength?: Dispatch<SetStateAction<number>>;
+  languageMode?: "ja" | "en";
+  transitionProgress?: number;
 }) => {
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [lineHeight, setLineHeight] = useState<number>(0);
   const [fontSize, setFontSize] = useState<number>(0);
-  const [jaPages, setJaPages] = useState<string[]>([]);
-  const [enPages, setEnPages] = useState<string[]>([]);
-  const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
-  const [jaNodes, setJaNodes] = useState<ReactElement<any>[]>([]);
-  const [enNodes, setEnNodes] = useState<ReactElement<any>[]>([]);
-  const [isJaMode, setIsJaMode] = useState<boolean>(true);
+  const [jaSegments, setJaSegments] = useState<string[]>([]);
+  const [enSegments, setEnSegments] = useState<string[]>([]);
 
   useEffect(() => {
     if (document)
@@ -28,77 +31,44 @@ export const FullPageText = ({
         h: convertCssUnitToPx("70vh"),
       });
 
-    setLineHeight(
-      convertCssUnitToPx(window.innerWidth > 600 ? "3rem" : "2.5rem")
-    );
+    setLineHeight(convertCssUnitToPx("2rem"));
     setFontSize(convertCssUnitToPx("1rem"));
   }, []);
 
   useEffect(() => {
+    console.log("size.w: " + size.w);
+    console.log("size.h: " + size.h);
     if (size.w > 0) {
-      setJaPages(
+      setJaSegments(
         paginateByBinarySearch(textJa, size.w, size.h, lineHeight, fontSize)
       );
-      setEnPages(
+      setEnSegments(
         paginateByBinarySearch(textEn, size.w, size.h, lineHeight, fontSize)
       );
     }
   }, [size]);
 
   useEffect(() => {
-    if (jaPages.length > 0) {
-      const nodes: ReactElement<any>[] = [];
-      jaPages.map((text, i) => {
-        nodes.push(
-          <TextContainer
-            text={text}
-            size={size}
-            lineHeight={lineHeight}
-            fontSize={fontSize}
-          />
-        );
-      });
-
-      setJaNodes(nodes);
+    if (setSegmentsLength !== undefined && jaSegments.length > 0) {
+      setSegmentsLength(
+        languageMode == "ja" ? jaSegments.length : enSegments.length
+      );
     }
-  }, [jaPages]);
-
-  useEffect(() => {
-    if (jaPages.length > 0) {
-      const nodes: ReactElement<any>[] = [];
-      enPages.map((text, i) => {
-        nodes.push(
-          <TextContainer
-            text={text}
-            size={size}
-            lineHeight={lineHeight}
-            fontSize={fontSize}
-          />
-        );
-      });
-
-      setEnNodes(nodes);
-    }
-  }, [enPages]);
+  }, [jaSegments, enSegments]);
 
   return (
     <>
-      <div className="language-switcher">
-        <a
-          onClick={() => setIsJaMode(true)}
-          className={`${isJaMode && "active"}`}
-        >
-          JP
-        </a>
-        <span> / </span>
-        <a
-          onClick={() => setIsJaMode(false)}
-          className={`${!isJaMode && "active"}`}
-        >
-          EN
-        </a>
-      </div>
-      <SceneManager scenes={isJaMode ? jaNodes : enNodes} />
+      <TextContainer
+        text={
+          languageMode == "ja"
+            ? jaSegments[currentSegmentIndex]
+            : enSegments[currentSegmentIndex]
+        }
+        size={size}
+        lineHeight={lineHeight}
+        fontSize={fontSize}
+        transitionProgress={transitionProgress}
+      />
       <style jsx>{`
         .language-switcher {
           position: fixed;
@@ -146,13 +116,14 @@ const TextContainer = ({
             height: ${size.h}px;
             margin: 0 auto;
             position: absolute;
-            left: 5vw;
+            left: 20vw;
             bottom: 10rem;
             line-height: ${lineHeight}px;
             font-size: ${fontSize}px;
             white-space: pre-wrap;
             word-break: break-word;
             box-sizing: border-box;
+            // overflow: hidden;
           }
 
           @media screen and (max-width: 600px) {

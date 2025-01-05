@@ -2,14 +2,17 @@ import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
 
 type SceneManagerProps = {
   scenes: ReactElement<any>[]; // ここをReactNode[]でもOKだが、後述の注意あり
+  languageMode: "ja" | "en";
 };
 
-export const SceneManager = ({ scenes }: SceneManagerProps) => {
+export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
   const [sceneIndex, setSceneIndex] = useState<number>(0);
   const [transitionProgress, setTransitionProgress] = useState<number>(0);
-  const [isEasing, setIsEasing] = useState(false);
-  const [isAutoTransition, setIsAutoTransition] = useState(false);
-  const [isTouching, setIsTouching] = useState(false);
+  const [isEasing, setIsEasing] = useState<boolean>(false);
+  const [isAutoTransition, setIsAutoTransition] = useState<boolean>(false);
+  const [isTouching, setIsTouching] = useState<boolean>(false);
+  const [currentSegmentIndex, setCurrentSegmentIndex] = useState<number>(0);
+  const [segmentsLength, setSegmentsLength] = useState<number>(0);
 
   // transitionProgress : -∞～+∞
   //  * -100以下 → 前のシーンへ
@@ -29,12 +32,25 @@ export const SceneManager = ({ scenes }: SceneManagerProps) => {
     const threshold = 80;
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
-        // 次のシーンへ
-        setSceneIndex((prev) => (prev + 1) % scenes.length);
+        console.log(currentSegmentIndex);
+        if (currentSegmentIndex >= segmentsLength - 1) {
+          // 次のシーンへ
+          setSceneIndex((prev) => (prev + 1) % scenes.length);
+          setCurrentSegmentIndex(0);
+          setSegmentsLength(0);
+        } else {
+          setCurrentSegmentIndex((prev) => prev + 1);
+        }
+
         resetTransition();
       } else if (transitionProgress < -threshold) {
-        // 前のシーンへ
-        setSceneIndex((prev) => (prev + scenes.length - 1) % scenes.length);
+        if (currentSegmentIndex < 0) {
+          // 前のシーンへ
+          setSceneIndex((prev) => (prev + scenes.length - 1) % scenes.length);
+        } else {
+          setCurrentSegmentIndex((prev) => prev - 1);
+        }
+
         resetTransition();
       } else {
         // (B) -100 ～ 100 の範囲内なら、50ms 後にイージング開始するかチェック
@@ -55,7 +71,7 @@ export const SceneManager = ({ scenes }: SceneManagerProps) => {
         };
       }
     }
-  }, [transitionProgress, isTouching]);
+  }, [transitionProgress, isTouching, currentSegmentIndex, segmentsLength]);
 
   useEffect(() => {
     if (!isTouching) setLastWheelTime(performance.now());
@@ -111,6 +127,10 @@ export const SceneManager = ({ scenes }: SceneManagerProps) => {
       window.removeEventListener("wheel", handleWheel);
     };
   }, [isAutoTransition, isEasing]);
+
+  useEffect(() => {
+    setCurrentSegmentIndex(0); //更新時に初期化
+  }, [languageMode]);
 
   // ▼ シーン切り替え時などに呼ぶリセット処理
   const resetTransition = () => {
@@ -169,12 +189,17 @@ export const SceneManager = ({ scenes }: SceneManagerProps) => {
 
         // すでに scene が <Profile /> のようなJSXの場合、
         // cloneElement で props を差し替える
-        return cloneElement(scene, { transitionProgress, key: `scene-${i}` });
+        return cloneElement(scene, {
+          transitionProgress,
+          currentSegmentIndex,
+          setSegmentsLength,
+          key: `scene-${i}`,
+        });
       })}
 
       <style jsx>{`
         .scene-status {
-          font-size: 0.8rem;
+          font-size: 1rem;
           color: white;
           position: fixed;
           bottom: 1.5rem;

@@ -3,31 +3,12 @@ import { Profile } from "@/components/scene/Profile";
 import { Carrier } from "@/components/scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 import { SceneManager } from "@/components/SceneManager";
-import { useState } from "react";
 import { FontTester } from "@/components/FontTester";
 import { FullPageSingleImage } from "@/components/FullPageSingleImage";
 import { FullPageMultiImage } from "@/components/FullPageMultiImage";
+import { useState } from "react";
 export default function Home() {
-  // 書体リスト
-  const jaFonts = [
-    { name: "Hina Mincho", variable: "--font-hinaMincho" },
-    { name: "Noto Serif JP", variable: "--font-notoSerif" },
-    { name: "BIZ UDMincho", variable: "--font-bizUdMincho" },
-    { name: "Zen Old Mincho", variable: "--font-zenOldMincho" },
-    { name: "Shippori Mincho B1", variable: "--font-shipporiMincho" },
-  ];
-
-  const enFonts = [
-    { name: "Radley", variable: "--font-radley" },
-    { name: "Crimson Text", variable: "--font-crimsonText" },
-    { name: "EB Garamond", variable: "--font-EBGaramond" },
-    { name: "Sorts Mill Goudy", variable: "--font-sortsMillGoudy" },
-    { name: "Goudy Bookletter 1911", variable: "--font-goudyBookletter1911" },
-  ];
-
-  const [jaIndex, setJaIndex] = useState<number>(0);
-  const [enIndex, setEnIndex] = useState<number>(0);
-
+  const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
   return (
     <>
       <Head>
@@ -52,6 +33,7 @@ export default function Home() {
             <FullPageSingleImage key="image-single" />,
             <FullPageMultiImage key="image-multi" />,
           ]}
+          languageMode={languageMode}
         />
       </FontTester>
     </>

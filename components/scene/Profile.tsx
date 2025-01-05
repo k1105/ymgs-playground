@@ -1,9 +1,12 @@
+import { SetStateAction } from "react";
 import { InkFilter } from "../InkFilter";
 import { OpacityFilter } from "../OpacityFilter";
 
 export const Profile = ({
   transitionProgress = 0,
+  setIsLastSegment,
 }: {
+  setIsLastSegment?: SetStateAction<boolean>;
   transitionProgress?: number;
 }) => {
   return (

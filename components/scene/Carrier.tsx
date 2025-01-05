@@ -1,11 +1,14 @@
+import { SetStateAction } from "react";
 import { InkFilter } from "../InkFilter";
 
 export const Carrier = ({
   transitionProgress = 0,
   title,
   items,
+  setIsLastSegment,
 }: {
   transitionProgress?: number;
+  setIsLastSegment?: SetStateAction<boolean>;
   title: string;
   items: { year: number; items: string[] }[];
 }) => {
