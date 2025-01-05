@@ -17,9 +17,6 @@ export function paginateByBinarySearch(
   const pages: string[] = [];
   let restText = text;
 
-  console.log("width: " + width);
-  console.log("height: " + height);
-
   while (restText.length > 0) {
     // そのページに入る最大文字数を探す
     const fitCount = adjustToWordBoundary(
@@ -60,6 +57,9 @@ function findFitCount(
   let high = restText.length;
   let best = 0;
 
+  console.log("width: " + width);
+  console.log("height: " + height);
+
   // 計測用コンテナを一時作成
   const measureContainer = document.createElement("div");
   measureContainer.style.position = "absolute";
@@ -81,12 +81,12 @@ function findFitCount(
     // mid文字までテスト
     const candidate = restText.slice(0, mid);
     measureContainer.textContent = candidate;
-    // console.log(candidate);
-    // console.log("scrollHeight: " + measureContainer.scrollHeight);
-    // console.log("clientHeight: " + measureContainer.clientHeight);
-    // console.log("scrollWidth: " + measureContainer.scrollWidth);
-    // console.log("clientWidth: " + measureContainer.clientWidth);
-    // console.log("height: " + height);
+    console.log(candidate);
+    console.log("scrollHeight: " + measureContainer.scrollHeight);
+    console.log("clientHeight: " + measureContainer.clientHeight);
+    console.log("scrollWidth: " + measureContainer.scrollWidth);
+    console.log("clientWidth: " + measureContainer.clientWidth);
+    console.log("height: " + height);
 
     // overflowしてるか判定
     // scrollHeight > clientHeight or scrollWidth > clientWidth

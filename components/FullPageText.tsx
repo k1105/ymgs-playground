@@ -105,9 +105,7 @@ const TextContainer = ({
   return (
     <>
       <div className="container">
-        <InkFilter blurIntensity={transitionProgress}>
-          <>{text}</>
-        </InkFilter>
+        <InkFilter blurIntensity={transitionProgress}>{text}</InkFilter>
       </div>
       <style jsx>
         {`
@@ -123,6 +121,7 @@ const TextContainer = ({
             white-space: pre-wrap;
             word-break: break-word;
             box-sizing: border-box;
+            line-break: strict;
             // overflow: hidden;
           }
 

@@ -44,9 +44,10 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
 
         resetTransition();
       } else if (transitionProgress < -threshold) {
-        if (currentSegmentIndex < 0) {
+        if (currentSegmentIndex <= 0) {
           // 前のシーンへ
           setSceneIndex((prev) => (prev + scenes.length - 1) % scenes.length);
+          setSegmentsLength(0);
         } else {
           setCurrentSegmentIndex((prev) => prev - 1);
         }
@@ -193,6 +194,7 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
           transitionProgress,
           currentSegmentIndex,
           setSegmentsLength,
+          languageMode,
           key: `scene-${i}`,
         });
       })}
