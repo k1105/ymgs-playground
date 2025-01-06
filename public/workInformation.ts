@@ -10,10 +10,7 @@ export const information: {
   workTitle: { ja: "きりもちの所在", en: "Where is Kirimochi?" },
   description: { ja: "", en: "" },
   credit: {
-    ja: `制作年
-2024年
-
-素材
+    ja: `素材
 切り餅
 
 クレジット
