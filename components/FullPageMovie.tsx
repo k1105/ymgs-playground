@@ -47,7 +47,7 @@ export const FullPageMovie = ({
         >
           <iframe
             ref={iframeRef}
-            src="https://player.vimeo.com/video/755421753?badge=0&autopause=0&player_id=0&app_id=58479&controls=0&autoplay=1&loop=1"
+            src="https://player.vimeo.com/video/755421753?badge=0&autopause=0&player_id=0&app_id=58479&controls=0&autoplay=1&loop=1&dnt=1"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
             className="video-frame"
             title="rhizome cycling"
