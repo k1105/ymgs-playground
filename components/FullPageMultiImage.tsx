@@ -5,20 +5,20 @@ export const FullPageMultiImage = ({
 }: {
   transitionProgress?: number;
 }) => {
-  const [loaded, setLoaded] = useState<boolean>(false);
+  const [loadedImageCount, setLoadedImageCount] = useState<number>(0);
   return (
     <>
-      <div className={`image-container ${loaded && "active"}`}>
+      <div className={`image-container ${loadedImageCount >= 2 && "active"}`}>
         <img
           src="/img/lag/lag1.jpg"
           onLoad={() => {
-            setLoaded(true);
+            setLoadedImageCount((prev) => prev + 1);
           }}
         />
         <img
           src="/img/lag/lag2.jpg"
           onLoad={() => {
-            setLoaded(true);
+            setLoadedImageCount((prev) => prev + 1);
           }}
         />
       </div>
