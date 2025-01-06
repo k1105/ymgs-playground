@@ -1,4 +1,6 @@
 import { FontTester } from "@/components/FontTester";
+import { FullPageMultiImage } from "@/components/FullPageMultiImage";
+import { FullPageSingleImage } from "@/components/FullPageSingleImage";
 import { FullPageText } from "@/components/FullPageText";
 import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
@@ -36,6 +38,8 @@ const OnlyText = () => {
               textJa={information.content[0].ja}
               textEn={information.content[0].en}
             />,
+            <FullPageMultiImage key="multi-image" />,
+            <FullPageSingleImage key="single-image" />,
           ]}
           languageMode={languageMode}
         />
