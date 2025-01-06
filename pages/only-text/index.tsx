@@ -1,4 +1,5 @@
 import { FontTester } from "@/components/FontTester";
+import { FullPageMovie } from "@/components/FullPageMovie";
 import { FullPageMultiImage } from "@/components/FullPageMultiImage";
 import { FullPageSingleImage } from "@/components/FullPageSingleImage";
 import { FullPageText } from "@/components/FullPageText";
@@ -40,6 +41,7 @@ const OnlyText = () => {
             />,
             <FullPageMultiImage key="multi-image" />,
             <FullPageSingleImage key="single-image" />,
+            <FullPageMovie key="movie" />,
           ]}
           languageMode={languageMode}
         />
