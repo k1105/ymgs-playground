@@ -81,12 +81,12 @@ function findFitCount(
     // mid文字までテスト
     const candidate = restText.slice(0, mid);
     measureContainer.textContent = candidate;
-    console.log(candidate);
-    console.log("scrollHeight: " + measureContainer.scrollHeight);
-    console.log("clientHeight: " + measureContainer.clientHeight);
-    console.log("scrollWidth: " + measureContainer.scrollWidth);
-    console.log("clientWidth: " + measureContainer.clientWidth);
-    console.log("height: " + height);
+    // console.log(candidate);
+    // console.log("scrollHeight: " + measureContainer.scrollHeight);
+    // console.log("clientHeight: " + measureContainer.clientHeight);
+    // console.log("scrollWidth: " + measureContainer.scrollWidth);
+    // console.log("clientWidth: " + measureContainer.clientWidth);
+    // console.log("height: " + height);
 
     // overflowしてるか判定
     // scrollHeight > clientHeight or scrollWidth > clientWidth
@@ -114,9 +114,11 @@ function adjustToWordBoundary(fullText: string, fitCount: number) {
   // → 単語途中で切れてる可能性が高いので後退
   let endChar = fullText[fitCount - 1];
   let nextChar = fullText[fitCount];
+  let secondnextChar = fullText[fitCount + 1];
 
   // 例: [a-zA-Z], or [\p{L}] (Unicode文字としての「文字」)
   const alphaRegex = /[a-zA-Z]/;
+  const KINSOKUHeadRegex = /[。、」]/;
 
   while (
     fitCount > 0 &&
@@ -126,8 +128,18 @@ function adjustToWordBoundary(fullText: string, fitCount: number) {
     fitCount--;
     endChar = fullText[fitCount - 1] || "";
     nextChar = fullText[fitCount] || "";
+    secondnextChar = fullText[fitCount + 1];
   }
 
+  while (
+    KINSOKUHeadRegex.test(nextChar) ||
+    KINSOKUHeadRegex.test(secondnextChar)
+  ) {
+    fitCount--;
+    endChar = fullText[fitCount - 1] || "";
+    nextChar = fullText[fitCount] || "";
+    secondnextChar = fullText[fitCount + 1];
+  }
   // ここで fitCount が単語の区切りっぽい場所まで後退したか
   // さらに " " (半角スペース) の手前まで後退するなどもあり
   // 例: while (fitCount > 0 && !/\s/.test(fullText[fitCount])) { fitCount--; }

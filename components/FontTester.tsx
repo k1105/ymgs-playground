@@ -1,4 +1,3 @@
-import { SceneManager } from "@/components/SceneManager";
 import { ReactNode, useState } from "react";
 import {
   BIZ_UDMincho,
