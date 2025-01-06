@@ -29,13 +29,14 @@ const TitlePage = ({
           <style jsx>{`
             .title-container {
               margin-left: 10vw;
-              height: 60vh;
-              margin-top: 40vh;
+              height: 70vh;
+              margin-top: 30vh;
               color: white;
               position: relative;
             }
 
             .credit {
+              width: 40vw;
               font-size: 0.8rem;
               position: absolute;
               bottom: 10vh;

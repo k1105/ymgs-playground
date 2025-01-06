@@ -31,7 +31,7 @@ export const FullPageText = ({
         h: convertCssUnitToPx("70vh"),
       });
 
-    setLineHeight(convertCssUnitToPx("2rem"));
+    setLineHeight(convertCssUnitToPx("3rem"));
     setFontSize(convertCssUnitToPx("1rem"));
   }, []);
 

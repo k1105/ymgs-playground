@@ -11,13 +11,13 @@ export const information: {
   description: { ja: "", en: "" },
   credit: {
     ja: `素材
-切り餅
+Canon IJ ScanGear / Lightroom Classic / Photoshop / Premiere Pro / After Effects / ウインナーソーセージ / 電子レンジ / モニター / スピーカー / ウーファー
 
 クレジット
-協力：山岸奏大
+協力:飛谷 謙介 ( 長崎県立大学准教授 )
 
 展示歴   
-古民家アートスペース「場七七」(2024年8月)
+秋田文化創造館 展示室 A 2 階(2022年2月)
 `,
     en: "",
   },
