@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
+import ReactPlayer from "react-player";
 
 export const FullPageMovie = ({
   transitionProgress = 0,
@@ -39,51 +40,28 @@ export const FullPageMovie = ({
 
   return (
     <>
-      <div className="video-container" onTouchStart={handleTouch}>
-        <div
-          className="video-wrapper"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <iframe
-            ref={iframeRef}
-            src="https://player.vimeo.com/video/755421753?badge=0&autopause=0&player_id=0&app_id=58479&controls=0&autoplay=1&loop=1&dnt=1"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-            className="video-frame"
-            title="rhizome cycling"
-          ></iframe>
-
-          <div
-            className={`video-controls ${
-              !(isHovered || showControls) && "hidden"
-            }`}
-          >
-            <button
-              onClick={() => {
-                if (iframeRef.current) {
-                  const player = new Player(iframeRef.current);
-                  isPlaying ? player.pause() : player.play();
-                }
-              }}
-              className="control-button"
-            >
-              {isPlaying ? "■" : "▶"}
-            </button>
-
-            <a
-              href="https://vimeo.com/755421753"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="control-link"
-            >
-              Vimeoで視聴
-            </a>
-          </div>
-          <p className="duration">
-            {duration !== 0 &&
-              `${Math.floor(duration / 60)} : ${duration % 60}`}
-          </p>
-        </div>
+      <div style={{ position: "relative", width: "50vw", height: "28.125vw" }}>
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=45QuCjxYq-s`}
+          width="100%"
+          height="100%"
+          style={{ position: "absolute", top: 0, left: 0 }}
+          playing={true} // 自動再生オフ
+          controls={false} // コントロールバー非表示
+          modestbranding={"true"} // ロゴを最小限に
+          rel={"false"} // 関連動画を非表示
+          config={{
+            youtube: {
+              playerVars: {
+                controls: 0, // コントロールバーを消す
+                modestbranding: true, // YouTube ロゴを最小化
+                rel: false, // 関連動画を非表示
+                fs: 0, // フルスクリーンボタンを無効化
+                playsinline: 1, // iOS でインライン再生
+              },
+            },
+          }}
+        />
       </div>
 
       <style jsx>{`
