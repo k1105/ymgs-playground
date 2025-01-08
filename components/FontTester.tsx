@@ -13,15 +13,15 @@ import {
   Castoro,
   Zen_Kaku_Gothic_New,
   Sawarabi_Gothic,
-  Kosugi,
-  M_PLUS_2,
+  // Kosugi,
+  // M_PLUS_2,
   Poppins,
   Nunito_Sans,
   Outfit,
   Montserrat_Alternates,
   Parkinsans,
   Ysabeau_SC,
-  Averia_Libre,
+  // Averia_Libre,
   Wix_Madefor_Text,
 } from "next/font/google";
 
@@ -61,16 +61,16 @@ const sawarabiGothic = Sawarabi_Gothic({
   subsets: ["latin"],
   variable: "--font-sawarabiGothic",
 });
-const kosugi = Kosugi({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-kosugi",
-});
-const mPlus2 = M_PLUS_2({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-mPlus2",
-});
+// const kosugi = Kosugi({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-kosugi",
+// });
+// const mPlus2 = M_PLUS_2({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-mPlus2",
+// });
 
 // 欧文フォントの定義
 const radley = Radley({
@@ -133,11 +133,11 @@ const ysabeauSC = Ysabeau_SC({
   subsets: ["latin"],
   variable: "--font-ysabeauSC",
 });
-const averiaLibre = Averia_Libre({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-averiaLibre",
-});
+// const averiaLibre = Averia_Libre({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-averiaLibre",
+// });
 const wixMadeforText = Wix_Madefor_Text({
   weight: "400",
   subsets: ["latin"],
@@ -153,8 +153,8 @@ const jaFonts = [
   { name: "Shippori Mincho B1", variable: "--font-shipporiMincho" },
   { name: "Zen Kaku Gothic New", variable: "--font-zenKakuGothicNew" },
   { name: "Sawarabi Gothic", variable: "--font-sawarabiGothic" },
-  { name: "Kosugi", variable: "--font-kosugi" },
-  { name: "M PLUS 2", variable: "--font-mPlus2" },
+  // { name: "Kosugi", variable: "--font-kosugi" },
+  // { name: "M PLUS 2", variable: "--font-mPlus2" },
 ];
 
 const enFonts = [
@@ -169,7 +169,7 @@ const enFonts = [
   { name: "Montserrat Alternates", variable: "--font-montserratAlternates" },
   { name: "Parkinsans", variable: "--font-parkinsans" },
   { name: "Ysabeau SC", variable: "--font-ysabeauSC" },
-  { name: "Averia Libre", variable: "--font-averiaLibre" },
+  // { name: "Averia Libre", variable: "--font-averiaLibre" },
   { name: "Wix Madefor Text", variable: "--font-wixMadeforText" },
 ];
 
@@ -205,7 +205,7 @@ export const FontTester = ({
   return (
     <>
       <main
-        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${kosugi.variable} ${mPlus2.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${montserratAlternates.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${averiaLibre.variable} ${wixMadeforText.variable}`}
+        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${montserratAlternates.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
         style={{
           fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
         }}
