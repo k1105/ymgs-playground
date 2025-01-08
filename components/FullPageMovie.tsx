@@ -109,6 +109,7 @@ export const FullPageMovie = ({
           height: 100%;
           display: block;
           border: none;
+          background: black;
         }
 
         .video-controls {
