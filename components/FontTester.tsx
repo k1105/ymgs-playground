@@ -42,7 +42,7 @@ const bizUdMincho = BIZ_UDMincho({
   variable: "--font-bizUdMincho",
 });
 const zenOldMincho = Zen_Old_Mincho({
-  weight: "700",
+  weight: "500",
   subsets: ["latin"],
   variable: "--font-zenOldMincho",
 });
