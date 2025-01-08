@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, RefObject, useEffect, useState } from "react";
 import {
   BIZ_UDMincho,
   Hina_Mincho,
@@ -173,38 +173,41 @@ const enFonts = [
   { name: "Wix Madefor Text", variable: "--font-wixMadeforText" },
 ];
 
-export const FontTester = ({ children }: { children: ReactNode }) => {
-  const [jaIndex, setJaIndex] = useState<number>(0);
-  const [enIndex, setEnIndex] = useState<number>(0);
+export const FontTester = ({
+  jaIndex,
+  enIndex,
+  jaFontRef,
+  enFontRef,
+  children,
+}: {
+  jaIndex: number;
+  enIndex: number;
+  jaFontRef: RefObject<HTMLParagraphElement | null>;
+  enFontRef: RefObject<HTMLParagraphElement | null>;
+  children: ReactNode;
+}) => {
+  const [jaDisplayIndex, setJaDisplayIndex] = useState<number>(0);
+  const [enDisplayIndex, setEnDisplayIndex] = useState<number>(0);
+  useEffect(() => {
+    setJaDisplayIndex(jaIndex % jaFonts.length);
+  }, [jaIndex]);
+
+  useEffect(() => {
+    jaFontRef.current!.innerText = jaFonts[jaDisplayIndex].name;
+  }, [jaDisplayIndex]);
+
+  useEffect(() => {
+    enFontRef.current!.innerText = enFonts[enDisplayIndex].name;
+  }, [enDisplayIndex]);
+  useEffect(() => {
+    setEnDisplayIndex(enIndex % enFonts.length);
+  }, [enIndex]);
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          top: "2rem",
-          right: "2rem",
-          zIndex: 99,
-          textAlign: "right",
-        }}
-      >
-        <button
-          onClick={() => setJaIndex((prev) => (prev + 1) % jaFonts.length)}
-        >
-          和文書体を変更
-        </button>
-        <button
-          onClick={() => setEnIndex((prev) => (prev + 1) % enFonts.length)}
-        >
-          欧文書体を変更
-        </button>
-        <p style={{ color: "white" }}>和文： {jaFonts[jaIndex].name}</p>
-        <p style={{ color: "white" }}>欧文： {enFonts[enIndex].name}</p>
-      </div>
-
       <main
         className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${kosugi.variable} ${mPlus2.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${montserratAlternates.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${averiaLibre.variable} ${wixMadeforText.variable}`}
         style={{
-          fontFamily: `var(${enFonts[enIndex].variable}), var(${jaFonts[jaIndex].variable}), sans-serif`,
+          fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
         }}
       >
         {children}

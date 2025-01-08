@@ -7,13 +7,14 @@ import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
 import { useState } from "react";
+import Layout from "../Layout";
 
 const OnlyText = () => {
   const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
 
   return (
     <>
-      <FontTester>
+      <Layout>
         <div className="language-switcher">
           <span
             onClick={() => {
@@ -45,7 +46,8 @@ const OnlyText = () => {
           ]}
           languageMode={languageMode}
         />
-      </FontTester>
+      </Layout>
+
       <style jsx>{`
         .language-switcher {
           position: fixed;
