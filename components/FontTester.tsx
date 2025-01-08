@@ -18,7 +18,7 @@ import {
   Poppins,
   Nunito_Sans,
   Outfit,
-  Montserrat_Alternates,
+  // Montserrat_Alternates,
   Parkinsans,
   Ysabeau_SC,
   // Averia_Libre,
@@ -118,11 +118,11 @@ const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
 });
-const montserratAlternates = Montserrat_Alternates({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-montserratAlternates",
-});
+// const montserratAlternates = Montserrat_Alternates({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-montserratAlternates",
+// });
 const parkinsans = Parkinsans({
   weight: "400",
   subsets: ["latin"],
@@ -205,7 +205,7 @@ export const FontTester = ({
   return (
     <>
       <main
-        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${montserratAlternates.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
+        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
         style={{
           fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
         }}
