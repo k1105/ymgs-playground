@@ -3,11 +3,7 @@ import { Profile } from "@/components/scene/Profile";
 import { Carrier } from "@/components/scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 import { SceneManager } from "@/components/SceneManager";
-import { FontTester } from "@/components/FontTester";
-import { FullPageSingleImage } from "@/components/FullPageSingleImage";
-import { FullPageMultiImage } from "@/components/FullPageMultiImage";
 import { useState } from "react";
-import { HambergerMenu } from "@/components/HambergerMenu";
 import Layout from "./Layout";
 export default function Home() {
   const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
@@ -32,8 +28,6 @@ export default function Home() {
               items={soloExhibitions}
               title="Solo Exhibitions"
             />,
-            <FullPageSingleImage key="image-single" />,
-            <FullPageMultiImage key="image-multi" />,
           ]}
           languageMode={languageMode}
         />
