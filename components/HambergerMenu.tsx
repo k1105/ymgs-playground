@@ -25,10 +25,12 @@ export const HambergerMenu = ({
         {isOpen ? "Hide" : "Show"}
       </p>
       <div className={`container ${isOpen && "active"}`}>
-        <div className="name-container">
-          <p className="ja">morita asuka</p>
-          <p className="en">森田 明日香</p>
-        </div>
+        <Link href={"/"} style={{ textDecoration: "none", color: "black" }}>
+          <div className="name-container">
+            <p className="ja">morita asuka</p>
+            <p className="en">森田 明日香</p>
+          </div>
+        </Link>
 
         <div className="work-list">
           <div className="work-title-container">
@@ -88,7 +90,9 @@ export const HambergerMenu = ({
               </button>
             </div>
           </div>
-          <h3 className="title">Color Theme</h3>
+          <h3 className="title">
+            <s>Color Theme</s>
+          </h3>
           <div className="color-tips-container">
             <div className="color-tip black" />
             <div className="color-tip white" />
