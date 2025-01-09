@@ -189,15 +189,20 @@ export const FontTester = ({
   const [jaDisplayIndex, setJaDisplayIndex] = useState<number>(0);
   const [enDisplayIndex, setEnDisplayIndex] = useState<number>(0);
   useEffect(() => {
+    jaFontRef.current!.innerText = `JP: ${jaFonts[0].name}`;
+    enFontRef.current!.innerText = `EN: ${enFonts[0].name}`;
+  }, []);
+
+  useEffect(() => {
     setJaDisplayIndex(jaIndex % jaFonts.length);
   }, [jaIndex]);
 
   useEffect(() => {
-    jaFontRef.current!.innerText = jaFonts[jaDisplayIndex].name;
+    jaFontRef.current!.innerText = `JP: ${jaFonts[jaDisplayIndex].name}`;
   }, [jaDisplayIndex]);
 
   useEffect(() => {
-    enFontRef.current!.innerText = enFonts[enDisplayIndex].name;
+    enFontRef.current!.innerText = `EN: ${enFonts[enDisplayIndex].name}`;
   }, [enDisplayIndex]);
   useEffect(() => {
     setEnDisplayIndex(enIndex % enFonts.length);

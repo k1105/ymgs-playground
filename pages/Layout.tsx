@@ -10,24 +10,18 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const enFontRef = useRef<HTMLParagraphElement>(null);
   return (
     <>
-      <div className="font-tester">
-        <button onClick={() => setJaIndex((prev) => prev + 1)}>
-          和文書体を変更
-        </button>
-        <button onClick={() => setEnIndex((prev) => prev + 1)}>
-          欧文書体を変更
-        </button>
-        <p ref={jaFontRef} />
-        <p ref={enFontRef} />
-      </div>
-
-      <HambergerMenu />
       <FontTester
         jaIndex={jaIndex}
         enIndex={enIndex}
         jaFontRef={jaFontRef}
         enFontRef={enFontRef}
       >
+        <HambergerMenu
+          setJaIndex={setJaIndex}
+          setEnIndex={setEnIndex}
+          jaFontRef={jaFontRef}
+          enFontRef={enFontRef}
+        />
         {children}
       </FontTester>
       <style jsx>{`
