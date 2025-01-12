@@ -3,7 +3,7 @@ import { Carrier } from "@/components/scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "../../components/Layout";
-export default function Home({ params }: { params: { locale: string } }) {
+export default function Home() {
   return (
     <>
       <Layout>
