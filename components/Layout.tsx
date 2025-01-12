@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef } from "react";
 import { useState } from "react";
-import { FontTester } from "@/components/FontTester";
+// import { FontTester } from "@/components/FontTester";
 import { HambergerMenu } from "@/components/HambergerMenu";
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -12,20 +12,20 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const enFontRef = useRef<HTMLParagraphElement>(null);
   return (
     <>
-      <FontTester
+      {/* <FontTester
         jaIndex={jaIndex}
         enIndex={enIndex}
         jaFontRef={jaFontRef}
         enFontRef={enFontRef}
-      >
-        <HambergerMenu
-          setJaIndex={setJaIndex}
-          setEnIndex={setEnIndex}
-          jaFontRef={jaFontRef}
-          enFontRef={enFontRef}
-        />
-        {children}
-      </FontTester>
+      > */}
+      <HambergerMenu
+        setJaIndex={setJaIndex}
+        setEnIndex={setEnIndex}
+        jaFontRef={jaFontRef}
+        enFontRef={enFontRef}
+      />
+      {children}
+      {/* </FontTester> */}
       <style jsx>{`
         .font-tester {
           color: white;
