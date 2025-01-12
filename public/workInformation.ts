@@ -10,13 +10,10 @@ export const information: {
   workTitle: { ja: "きりもちの所在", en: "Where is Kirimochi?" },
   description: { ja: "", en: "" },
   credit: {
-    ja: `素材
-Canon IJ ScanGear / Lightroom Classic / Photoshop / Premiere Pro / After Effects / ウインナーソーセージ / 電子レンジ / モニター / スピーカー / ウーファー
+    ja: `Canon IJ ScanGear / Lightroom Classic / Photoshop / Premiere Pro / After Effects / ウインナーソーセージ / 電子レンジ / モニター / スピーカー / ウーファー
 
-クレジット
 協力:飛谷 謙介 ( 長崎県立大学准教授 )
 
-展示歴   
 秋田文化創造館 展示室 A 2 階(2022年2月)
 `,
     en: "",
