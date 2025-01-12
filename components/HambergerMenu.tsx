@@ -2,6 +2,7 @@ import { SetStateAction, useState, Dispatch, RefObject } from "react";
 import { RoundAutorenew } from "./icones/RoundAutoRenew";
 import Link from "next/link";
 import styles from "./HambergerMenu.module.scss";
+import DynamicLink from "./DynamicLink";
 
 export const HambergerMenu = ({
   setJaIndex,
@@ -26,22 +27,25 @@ export const HambergerMenu = ({
         {isOpen ? "Hide" : "Show"}
       </p>
       <div className={`${styles.container} ${isOpen && styles.active}`}>
-        <Link href={"/"} style={{ textDecoration: "none", color: "black" }}>
+        <DynamicLink
+          href={`/`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
           <div className={styles.nameContainer}>
             <p className={styles.ja}>morita asuka</p>
             <p className={styles.en}>森田 明日香</p>
           </div>
-        </Link>
+        </DynamicLink>
 
         <div className={styles.workList}>
           <div className={styles.workTitleContainer}>
-            <Link
+            <DynamicLink
               href={"/only-text"}
               className={styles.link}
               style={{ textDecoration: "none", color: "black" }}
             >
               きりもちの所在<span className={styles.year}>(2024)</span>
-            </Link>
+            </DynamicLink>
           </div>
           <div className={styles.workTitleContainer}>
             <p>

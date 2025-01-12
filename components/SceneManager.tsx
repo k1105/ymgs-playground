@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
 
 type SceneManagerProps = {
   scenes: ReactElement<any>[]; // ここをReactNode[]でもOKだが、後述の注意あり
-  languageMode: "ja" | "en";
+  languageMode: string;
 };
 
 export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {

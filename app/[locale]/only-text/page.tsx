@@ -7,32 +7,17 @@ import { FullPageText } from "@/components/FullPageText";
 import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
-import { useState } from "react";
-import Layout from "../../components/Layout";
+import { useParams } from "next/navigation";
+import Layout from "../../../components/Layout";
 
 const OnlyText = () => {
-  const [languageMode, setlanguageMode] = useState<"ja" | "en">("ja");
-
+  const params = useParams();
+  const locale = Array.isArray(params.locale)
+    ? params.locale[0]
+    : params.locale || "ja";
   return (
     <>
       <Layout>
-        <div className="language-switcher">
-          <span
-            onClick={() => {
-              setlanguageMode("ja");
-            }}
-          >
-            JP
-          </span>{" "}
-          /{" "}
-          <span
-            onClick={() => {
-              setlanguageMode("en");
-            }}
-          >
-            EN
-          </span>
-        </div>
         <SceneManager
           scenes={[
             <TitlePage key="title-page" />,
@@ -45,7 +30,7 @@ const OnlyText = () => {
             <FullPageSingleImage key="single-image" />,
             <FullPageMovie key="movie" />,
           ]}
-          languageMode={languageMode}
+          languageMode={locale}
         />
       </Layout>
 

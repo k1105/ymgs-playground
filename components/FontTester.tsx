@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, RefObject, useEffect, useState } from "react";
 import {
   BIZ_UDMincho,
@@ -186,8 +188,13 @@ export const FontTester = ({
   enFontRef: RefObject<HTMLParagraphElement | null>;
   children: ReactNode;
 }) => {
-  const [jaDisplayIndex, setJaDisplayIndex] = useState<number>(0);
-  const [enDisplayIndex, setEnDisplayIndex] = useState<number>(0);
+  const [jaDisplayIndex, setJaDisplayIndex] = useState<number>(
+    () => jaIndex % jaFonts.length
+  );
+  const [enDisplayIndex, setEnDisplayIndex] = useState<number>(
+    () => enIndex % enFonts.length
+  );
+
   useEffect(() => {
     jaFontRef.current!.innerText = `JP: ${jaFonts[0].name}`;
     enFontRef.current!.innerText = `EN: ${enFonts[0].name}`;
@@ -210,10 +217,10 @@ export const FontTester = ({
   return (
     <>
       <main
-        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
-        style={{
-          fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
-        }}
+      // className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
+      // style={{
+      //   fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
+      // }}
       >
         {children}
       </main>
