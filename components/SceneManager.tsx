@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
 
 type SceneManagerProps = {

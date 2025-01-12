@@ -11,7 +11,7 @@ import { useState } from "react";
 import Layout from "../../components/Layout";
 
 const OnlyText = () => {
-  const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
+  const [languageMode, setlanguageMode] = useState<"ja" | "en">("ja");
 
   return (
     <>
@@ -19,7 +19,7 @@ const OnlyText = () => {
         <div className="language-switcher">
           <span
             onClick={() => {
-              setLanguageMode("ja");
+              setlanguageMode("ja");
             }}
           >
             JP
@@ -27,7 +27,7 @@ const OnlyText = () => {
           /{" "}
           <span
             onClick={() => {
-              setLanguageMode("en");
+              setlanguageMode("en");
             }}
           >
             EN

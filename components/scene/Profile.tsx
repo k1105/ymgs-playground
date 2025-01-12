@@ -1,27 +1,27 @@
-import { SetStateAction } from "react";
+"use client";
+
+import styles from "./Profile.module.css";
 import { InkFilter } from "../InkFilter";
 import { OpacityFilter } from "../OpacityFilter";
 
 export const Profile = ({
   transitionProgress = 0,
-  setIsLastSegment,
 }: {
-  setIsLastSegment?: SetStateAction<boolean>;
   transitionProgress?: number;
 }) => {
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <OpacityFilter
           transitionProgress={transitionProgress}
           style={{ mixBlendMode: "screen" }}
         >
-          <div className={`profile-image-wrapper`}>
-            <img src="/img/ham.png" className="profile-image" />
+          <div className={styles.profileImageWrapper}>
+            <img src="/img/ham.png" className={styles.profileImage} />
           </div>
         </OpacityFilter>
 
-        <div className="text-container">
+        <div className={styles.textContainer}>
           <InkFilter blurIntensity={transitionProgress}>
             <div>
               <h1 style={{ fontWeight: "400" }}>morita asuka</h1>
@@ -33,7 +33,7 @@ export const Profile = ({
 
           <InkFilter blurIntensity={transitionProgress}>
             <>
-              <div className="profile-container">
+              <div className={styles.profileContainer}>
                 <p
                   style={{
                     fontSize: "0.9rem",
@@ -66,26 +66,26 @@ export const Profile = ({
           <InkFilter blurIntensity={transitionProgress}>
             <>
               <h3 style={{ marginBottom: "1rem" }}>経歴</h3>
-              <div className="carrier-container">
-                <div className="carrier-item">
-                  <p className="year">2000</p>
+              <div className={styles.carrierContainer}>
+                <div className={styles.carrierItem}>
+                  <p className={styles.year}>2000</p>
                   <p>大阪府出身</p>
                 </div>
-                <div className="carrier-item">
-                  <p className="year">2018</p>
+                <div className={styles.carrierItem}>
+                  <p className={styles.year}>2018</p>
                   <p>大阪府立港南造形高等学校 漆芸専攻 卒業</p>
                 </div>
-                <div className="carrier-item">
+                <div className={styles.carrierItem}>
                   <p className="year">2022</p>
                   <p>秋田公立美術大学 美術学部 ビジュアルアーツ専攻 卒業</p>
                 </div>
-                <div className="carrier-item">
+                <div className={styles.carrierItem}>
                   <p className="year">2024</p>
                   <p>
                     情報科学芸術大学院大学メディア表現研究科 博士前期課程 卒業
                   </p>
                 </div>
-                <div className="carrier-item">
+                <div className={styles.carrierItem}>
                   <p className="year">2024-</p>
                   <p>
                     愛知淑徳大学創造表現学部メディアプロデュース専攻 助教 在職
@@ -96,69 +96,6 @@ export const Profile = ({
           </InkFilter>
         </div>
       </div>
-      <style jsx>{`
-        .container {
-          margin-top: 10rem;
-        }
-        .text-container {
-          width: 80vw;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-        }
-        .carrier-container {
-          width: 400px;
-        }
-        .carrier-item {
-          font-size: 0.9rem;
-          display: flex;
-          gap: 1rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .profile-image-wrapper {
-          height: 10rem;
-          width: 13rem;
-          text-align: center;
-          margin: 0 10vw 3rem;
-          transition: all 1s ease;
-        }
-
-        .profile-image {
-          height: 100%;
-        }
-
-        .profile-image-wrapper.active {
-          opacity: 1;
-        }
-
-        .profile-container {
-          width: 500px;
-        }
-
-        @media screen and (max-width: 600px) {
-          .profile-image-wrapper {
-            height: 7rem;
-            text-align: left;
-            margin: 0 5vw 2rem;
-          }
-          .text-container {
-            width: 90vw;
-            margin-bottom: 10rem;
-            flex-direction: column;
-            gap: 3rem;
-          }
-
-          .container {
-            margin-top: 5rem;
-          }
-
-          .profile-container,
-          .carrier-container {
-            width: auto;
-          }
-        }
-      `}</style>
     </>
   );
 };

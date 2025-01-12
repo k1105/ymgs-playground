@@ -1,3 +1,5 @@
+"use client";
+
 import { CSSProperties, useEffect, useRef } from "react";
 
 export const OpacityFilter = ({
