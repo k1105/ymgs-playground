@@ -1,10 +1,12 @@
+"use client";
+
 import Head from "next/head";
 import { Profile } from "@/components/scene/Profile";
 import { Carrier } from "@/components/scene/Carrier";
 import { grantsAwards, soloExhibitions } from "@/public/carrierContents";
 import { SceneManager } from "@/components/SceneManager";
 import { useState } from "react";
-import Layout from "./Layout";
+import Layout from "../components/Layout";
 export default function Home() {
   const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
   return (

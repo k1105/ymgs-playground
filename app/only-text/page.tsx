@@ -1,4 +1,5 @@
-import { FontTester } from "@/components/FontTester";
+"use client";
+
 import { FullPageMovie } from "@/components/FullPageMovie";
 import { FullPageMultiImage } from "@/components/FullPageMultiImage";
 import { FullPageSingleImage } from "@/components/FullPageSingleImage";
@@ -7,7 +8,7 @@ import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
 import { useState } from "react";
-import Layout from "../Layout";
+import Layout from "../../components/Layout";
 
 const OnlyText = () => {
   const [languageMode, setLanguageMode] = useState<"ja" | "en">("ja");
