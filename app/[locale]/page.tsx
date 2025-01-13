@@ -27,9 +27,8 @@ type MicroCMSResponse = {
   limit: number;
 };
 
-// 修正: async を削除
-export function generateStaticParams(): { locale: string }[] {
-  return [{ locale: "ja" }, { locale: "en" }];
+export async function generateStaticParams(): Promise<{ locale: string }[]> {
+  return Promise.resolve([{ locale: "ja" }, { locale: "en" }]);
 }
 
 async function getGrantsAndAwardsData(locale: string) {
@@ -60,8 +59,11 @@ function transformData(data: MicroCMSResponse, locale: string) {
   }));
 }
 
-// 修正: `params` の型を `{ locale: string }` に変更
-export default async function Home({ params }: { params: { locale: string } }) {
+export default async function Home({
+  params,
+}: {
+  params: Awaited<{ locale: string }>;
+}) {
   const locale = params.locale || "ja"; // デフォルトを "ja" に設定
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
