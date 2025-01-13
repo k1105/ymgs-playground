@@ -3,12 +3,6 @@ import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "@/components/Layout";
 
-type LocalePageProps = {
-  params: {
-    locale: string;
-  };
-};
-
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;
 
@@ -33,11 +27,42 @@ type MicroCMSResponse = {
   limit: number;
 };
 
-// ✅ `Promise` を返すように修正
+// ✅ `Promise` を明示的に返すことで Next.js 15 に適合
 export async function generateStaticParams(): Promise<
   Array<{ locale: string }>
 > {
   return [{ locale: "ja" }, { locale: "en" }];
+}
+
+// ✅ `params` を `Promise` 型に適合させる
+export default async function Home({
+  params,
+}: {
+  params: Awaited<Promise<{ locale: string }>>;
+}) {
+  const locale = params.locale || "ja"; // デフォルトを "ja" に設定
+  const grantsAwards = await getGrantsAndAwardsData(locale);
+
+  return (
+    <Layout>
+      <SceneManager
+        scenes={[
+          <Profile key="scene-profile" />,
+          <Carrier
+            key="scene-awards"
+            items={grantsAwards}
+            title="Grants and Awards"
+          />,
+          <Carrier
+            key="scene-exhibitions"
+            items={[]}
+            title="Solo Exhibitions"
+          />,
+        ]}
+        languageMode={locale}
+      />
+    </Layout>
+  );
 }
 
 async function getGrantsAndAwardsData(locale: string) {
@@ -66,31 +91,4 @@ function transformData(data: MicroCMSResponse, locale: string) {
     year: item.year,
     content: item[contentKey].map((c) => c.text),
   }));
-}
-
-// ✅ `PageProps` を使用し、`params` の型エラーを解消
-export default async function Home({ params }: LocalePageProps) {
-  const locale = params.locale || "ja"; // デフォルトを "ja" に設定
-  const grantsAwards = await getGrantsAndAwardsData(locale);
-
-  return (
-    <Layout>
-      <SceneManager
-        scenes={[
-          <Profile key="scene-profile" />,
-          <Carrier
-            key="scene-awards"
-            items={grantsAwards}
-            title="Grants and Awards"
-          />,
-          <Carrier
-            key="scene-exhibitions"
-            items={[]}
-            title="Solo Exhibitions"
-          />,
-        ]}
-        languageMode={locale}
-      />
-    </Layout>
-  );
 }
