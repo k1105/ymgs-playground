@@ -6,6 +6,8 @@ import Layout from "@/components/Layout";
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;
 
+type Props = { params: Promise<{ locale: string }> };
+
 if (!serviceDomain || !apiKey) {
   throw new Error(
     "Missing required environment variables: MICROCMS_SERVICE_DOMAIN or MICROCMS_API_KEY"
@@ -27,20 +29,14 @@ type MicroCMSResponse = {
   limit: number;
 };
 
-// ✅ `Promise` を明示的に返すことで Next.js 15 に適合
 export async function generateStaticParams(): Promise<
   Array<{ locale: string }>
 > {
   return [{ locale: "ja" }, { locale: "en" }];
 }
 
-// ✅ `params` を `Promise` 型に適合させる
-export default async function Home({
-  params,
-}: {
-  params: Awaited<Promise<{ locale: string }>>;
-}) {
-  const locale = params.locale || "ja"; // デフォルトを "ja" に設定
+export default async function Home({ params }: Props) {
+  const { locale } = await params; // デフォルトを "ja" に設定
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
   return (
