@@ -14,7 +14,13 @@ if (!serviceDomain || !apiKey) {
   );
 }
 
-type MicroCMSContent = {
+type BioContent = {
+  id: string;
+  bio_ja: string;
+  bio_en: string;
+};
+
+type CarrierContent = {
   id: string;
   year: number;
   group: string[];
@@ -22,11 +28,15 @@ type MicroCMSContent = {
   content_en: { fieldId: string; text: string }[];
 };
 
-type MicroCMSResponse = {
-  contents: MicroCMSContent[];
+type CarrierResponse = {
+  contents: CarrierContent[];
   totalCount: number;
   offset: number;
   limit: number;
+};
+
+type BioResponse = {
+  contents: BioContent[];
 };
 
 export async function generateStaticParams(): Promise<
@@ -37,13 +47,16 @@ export async function generateStaticParams(): Promise<
 
 export default async function Home({ params }: Props) {
   const { locale } = await params; // デフォルトを "ja" に設定
-  const grantsAwards = await getGrantsAndAwardsData(locale);
+  const bio = await getBio(locale);
+  console.log(bio);
+  const grantsAwards = await getCarrierData(locale, "grants_and_awards");
+  const soloExhibition = await getCarrierData(locale, "solo_exhibition");
 
   return (
     <Layout>
       <SceneManager
         scenes={[
-          <Profile key="scene-profile" />,
+          <Profile key="scene-profile" bio={bio[0].content} />,
           <Carrier
             key="scene-awards"
             items={grantsAwards}
@@ -51,7 +64,7 @@ export default async function Home({ params }: Props) {
           />,
           <Carrier
             key="scene-exhibitions"
-            items={[]}
+            items={soloExhibition}
             title="Solo Exhibitions"
           />,
         ]}
@@ -61,9 +74,9 @@ export default async function Home({ params }: Props) {
   );
 }
 
-async function getGrantsAndAwardsData(locale: string) {
+async function getBio(locale: string) {
   const response = await fetch(
-    `https://${serviceDomain}.microcms.io/api/v1/carrier?filters=group[contains]grants_and_awards`,
+    `https://${serviceDomain}.microcms.io/api/v1/bio`,
     {
       headers: { "X-MICROCMS-API-KEY": apiKey },
       next: { revalidate: false }, // SSG
@@ -71,20 +84,45 @@ async function getGrantsAndAwardsData(locale: string) {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch grants and awards data");
+    throw new Error(`Failed to fetch bio`);
   }
 
-  const data: MicroCMSResponse = await response.json();
+  const data: BioResponse = await response.json();
 
-  return transformData(data, locale);
+  return transformBioData(data, locale);
 }
 
-function transformData(data: MicroCMSResponse, locale: string) {
+async function getCarrierData(locale: string, group: string) {
+  const response = await fetch(
+    `https://${serviceDomain}.microcms.io/api/v1/carrier?filters=group[contains]${group}`,
+    {
+      headers: { "X-MICROCMS-API-KEY": apiKey },
+      next: { revalidate: false }, // SSG
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${group} data`);
+  }
+
+  const data: CarrierResponse = await response.json();
+
+  return transformCarrierData(data, locale);
+}
+
+function transformCarrierData(data: CarrierResponse, locale: string) {
   const contentKey = locale === "ja" ? "content_ja" : "content_en";
 
   return data.contents.map((item) => ({
     id: item.id,
     year: item.year,
     content: item[contentKey].map((c) => c.text),
+  }));
+}
+
+function transformBioData(data: BioResponse, locale: string) {
+  return data.contents.map((item) => ({
+    id: item.id,
+    content: locale === "ja" ? item.bio_ja : item.bio_en,
   }));
 }

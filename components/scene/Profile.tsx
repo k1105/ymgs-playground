@@ -5,8 +5,10 @@ import { InkFilter } from "../InkFilter";
 import { OpacityFilter } from "../OpacityFilter";
 
 export const Profile = ({
+  bio,
   transitionProgress = 0,
 }: {
+  bio: string;
   transitionProgress?: number;
 }) => {
   return (
@@ -41,24 +43,7 @@ export const Profile = ({
                     lineHeight: "1.8rem",
                   }}
                 >
-                  目に見えないほどの僅かな差異を、映像表現を中心としたさまざまな手法を通して顕在化する活動を行う。これまでに、ウインナーソーセージの個体差を加熱時の破裂音の違いから捉えた《Lag》、スライスロースハムの製造プロセスに着目して差異をアニメーション表現として構成した《Observing
-                  Variation: in sliced loin
-                  Hams》などがある。現在は、差異が可視化されることでその背後に潜む「事件」を彷彿とさせるような対象がなにか、そしてそれはどのような手法で可視化できるのかということをテーマに、表現研究を行っている。
-                </p>
-                <p style={{ fontSize: "0.9rem" }}>
-                  She is engaged in activities to reveal the slightest
-                  differences, which are so subtle that they cannot be seen,
-                  through various methods centering on visual expression. Her
-                  past works include “Lag,” in which she captured the individual
-                  differences in sausage based on the difference in the popping
-                  sound made during heating, and “Observing Variation: in sliced
-                  loin Hams,” in which she focused on the production process of
-                  sliced loin ham and composed the differences into an animated
-                  expression. Currently, she is conducting expressive research
-                  on the theme of what kind of objects and what kind of methods
-                  can be used to visualize such objects that remind us of
-                  “incidents” lurking behind them when differences are
-                  visualized.
+                  {bio}
                 </p>
               </div>
             </>
