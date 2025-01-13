@@ -3,6 +3,12 @@ import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "@/components/Layout";
 
+type LocalePageProps = {
+  params: {
+    locale: string;
+  };
+};
+
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;
 
@@ -27,8 +33,11 @@ type MicroCMSResponse = {
   limit: number;
 };
 
-export async function generateStaticParams(): Promise<{ locale: string }[]> {
-  return Promise.resolve([{ locale: "ja" }, { locale: "en" }]);
+// ✅ `Promise` を返すように修正
+export async function generateStaticParams(): Promise<
+  Array<{ locale: string }>
+> {
+  return [{ locale: "ja" }, { locale: "en" }];
 }
 
 async function getGrantsAndAwardsData(locale: string) {
@@ -59,11 +68,8 @@ function transformData(data: MicroCMSResponse, locale: string) {
   }));
 }
 
-export default async function Home({
-  params,
-}: {
-  params: Awaited<{ locale: string }>;
-}) {
+// ✅ `PageProps` を使用し、`params` の型エラーを解消
+export default async function Home({ params }: LocalePageProps) {
   const locale = params.locale || "ja"; // デフォルトを "ja" に設定
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
