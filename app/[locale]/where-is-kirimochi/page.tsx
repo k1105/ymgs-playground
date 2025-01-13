@@ -9,6 +9,7 @@ import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
 import { useParams } from "next/navigation";
 import Layout from "../../../components/Layout";
+import { Outline } from "@/components/Outline";
 
 const OnlyText = () => {
   const params = useParams();
@@ -29,6 +30,11 @@ const OnlyText = () => {
             <FullPageMultiImage key="multi-image" />,
             <FullPageSingleImage key="single-image" />,
             <FullPageMovie key="movie" />,
+            <Outline
+              key="outline"
+              textJa={information.outline.ja}
+              textEn={information.outline.en}
+            />,
           ]}
           languageMode={locale}
         />

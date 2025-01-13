@@ -48,7 +48,6 @@ export async function generateStaticParams(): Promise<
 export default async function Home({ params }: Props) {
   const { locale } = await params; // デフォルトを "ja" に設定
   const bio = await getBio(locale);
-  console.log(bio);
   const grantsAwards = await getCarrierData(locale, "grants_and_awards");
   const soloExhibition = await getCarrierData(locale, "solo_exhibition");
 

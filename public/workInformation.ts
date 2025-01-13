@@ -3,12 +3,18 @@ type Text = { ja: string; en: string };
 
 export const information: {
   workTitle: Text;
-  description: Text;
+  outline: Text;
   credit: Text;
   content: Text[];
 } = {
   workTitle: { ja: "きりもちの所在", en: "Where is Kirimochi?" },
-  description: { ja: "", en: "" },
+  outline: {
+    ja: `人々が日常的に繰り返す「歩く」という行為（=「歩容」）は、表面上、単調で均質なもののように見える。しかし、その何気ない行為には、誰もが密かに固有性を抱えている。歩容は、時代や様式の移ろいとともに形を変えていく。その背後に浮かび上がるわずかな動きの差異。そこには、目に留まらない小さな事件が息を潜めているのかもしれない。
+本作では、「歩容における差異」を抽出することに挑んだ。歩容は年齢や性別、性格、情動をも映し出し、個人の特定さえ可能なほど多面的な情報を有する。そのうち、あえて注目したのが“ゆらぎ”という、歩容における微妙な動きのズレである。これらのズレは、均一性を装う歩行フォームの裏で密やかに起こる「小さな事件」を私たちに示唆しており、モニター上に表示される文字列は、その“ゆらぎ”を翻訳した暗号文とも言える。日常のなかに埋もれた個々の秘密を、私は文字という形へ変換し、密やかに解読している。
+`,
+    en: `The walk that people repeat on a daily basis appears to be monotonous and homogeneous. However, everyone's casual act secretly has its own peculiarities. Gait changes its form with the passing of time and style. Slight differences in movement emerge in the background. There may be small incidents lurking in the background that do not catch the eye.
+In this work, we took on the challenge of extracting “differences in gait. Gait reflects age, gender, personality, and emotions, and has such multifaceted information that it is even possible to identify individuals. Of these, we ventured to focus on “fluctuations,” or subtle deviations in gait movement. These discrepancies suggest to us the “small incidents” that occur secretly behind the pretense of a uniform gait form, and the strings of text displayed on the monitor can be said to be a cipher text that translates the “fluctuations. The strings of letters displayed on the monitor can be said to be a cipher text that translates these “fluctuations.” I am secretly deciphering the individual secrets buried in our daily lives by translating them into the form of letters.`,
+  },
   credit: {
     ja: `Canon IJ ScanGear / Lightroom Classic / Photoshop / Premiere Pro / After Effects / ウインナーソーセージ / 電子レンジ / モニター / スピーカー / ウーファー
 

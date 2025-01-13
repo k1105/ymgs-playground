@@ -43,7 +43,7 @@ export const HambergerMenu = ({
         <div className={styles.workList}>
           <div className={styles.workTitleContainer}>
             <DynamicLink
-              href={"/only-text"}
+              href={"/where-is-kirimochi"}
               className={styles.link}
               style={{ textDecoration: "none", color: "black" }}
             >
