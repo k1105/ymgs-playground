@@ -32,16 +32,6 @@ const sawarabiGothic = localFont({
   src: "../public/fonts/Sawarabi_Gothic/SawarabiGothic-Regular.ttf",
   variable: "--font-sawarabiGothic",
 });
-// const kosugi = Kosugi({
-//   weight: "400",
-//   subsets: ["latin"],
-//   variable: "--font-kosugi",
-// });
-// const mPlus2 = M_PLUS_2({
-//   weight: "400",
-//   subsets: ["latin"],
-//   variable: "--font-mPlus2",
-// });
 
 // 欧文フォントの定義
 const radley = localFont({
@@ -80,11 +70,6 @@ const outfit = localFont({
   src: "../public/fonts/Outfit/Outfit-VariableFont_wght.ttf",
   variable: "--font-outfit",
 });
-// const montserratAlternates = Montserrat_Alternates({
-//   weight: "400",
-//   subsets: ["latin"],
-//   variable: "--font-montserratAlternates",
-// });
 const parkinsans = localFont({
   src: "../public/fonts/Parkinsans/Parkinsans-VariableFont_wght.ttf",
   variable: "--font-parkinsans",
@@ -93,11 +78,6 @@ const ysabeauSC = localFont({
   src: "../public/fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf",
   variable: "--font-ysabeauSC",
 });
-// const averiaLibre = Averia_Libre({
-//   weight: "400",
-//   subsets: ["latin"],
-//   variable: "--font-averiaLibre",
-// });
 const wixMadeforText = localFont({
   src: "../public/fonts/Wix_Madefor_Display/WixMadeforDisplay-VariableFont_wght.ttf",
   variable: "--font-wixMadeforText",
@@ -112,8 +92,6 @@ const jaFonts = [
   { name: "Shippori Mincho B1", variable: "--font-shipporiMincho" },
   { name: "Zen Kaku Gothic New", variable: "--font-zenKakuGothicNew" },
   { name: "Sawarabi Gothic", variable: "--font-sawarabiGothic" },
-  // { name: "Kosugi", variable: "--font-kosugi" },
-  // { name: "M PLUS 2", variable: "--font-mPlus2" },
 ];
 
 const enFonts = [

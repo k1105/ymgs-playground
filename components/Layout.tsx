@@ -26,11 +26,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
         />
         {children}
       </FontTester>
-      <style jsx>{`
-        .font-tester {
-          color: white;
-        }
-      `}</style>
     </>
   );
 };

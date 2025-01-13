@@ -102,10 +102,12 @@ export const HambergerMenu = ({
             <div className={`${styles.colorTip} ${styles.black}`} />
             <div className={`${styles.colorTip} ${styles.white}`} />
           </div>
+          <h3 className={styles.title}>Language</h3>
+          <p>
+            <span onClick={() => {}}>JA</span> | EN
+          </p>
         </div>
       </div>
-
-      <style jsx>{``}</style>
     </>
   );
 };

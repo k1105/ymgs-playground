@@ -33,15 +33,6 @@ const OnlyText = () => {
           languageMode={locale}
         />
       </Layout>
-
-      <style jsx>{`
-        .language-switcher {
-          position: fixed;
-          top: 1rem;
-          left: 1rem;
-          color: white;
-        }
-      `}</style>
     </>
   );
 };

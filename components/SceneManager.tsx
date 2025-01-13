@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
+import styles from "./SceneManager.module.scss";
 
 type SceneManagerProps = {
   scenes: ReactElement<any>[]; // ここをReactNode[]でもOKだが、後述の注意あり
@@ -172,15 +173,7 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
   };
   return (
     <>
-      {/* <div className="state-list">
-        {scenes.map((_, i) => (
-          <div
-            key={`list-icon-${i}`}
-            className={`list-icon ${sceneIndex === i ? "active" : ""}`}
-          />
-        ))}
-      </div> */}
-      <div className="scene-status">
+      <div className={styles.sceneStatus}>
         <p>
           {sceneIndex + 1} / {scenes.length}
         </p>
@@ -200,36 +193,6 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
           key: `scene-${i}`,
         });
       })}
-
-      <style jsx>{`
-        .scene-status {
-          font-size: 1rem;
-          color: white;
-          position: fixed;
-          bottom: 1.5rem;
-          right: 1.5rem;
-        }
-
-        .state-list {
-          position: fixed;
-          top: 50vh;
-          left: 1rem;
-          transform: translate(-50%, -50%);
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-        .list-icon {
-          width: 0.5rem;
-          height: 0.5rem;
-          border: 1px solid white;
-          border-radius: 50%;
-        }
-
-        .list-icon.active {
-          background: white;
-        }
-      `}</style>
     </>
   );
 };
