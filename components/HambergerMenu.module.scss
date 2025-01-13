@@ -19,6 +19,11 @@
   padding-left: 1rem;
 }
 
+.inlineContainer {
+  display: flex;
+  gap: 1rem;
+}
+
 .link {
   a {
     text-decoration: none;

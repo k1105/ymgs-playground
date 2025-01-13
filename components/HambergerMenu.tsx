@@ -98,39 +98,43 @@ export const HambergerMenu = ({
               </button>
             </div>
           </div>
-          <h3 className={styles.title}>
-            <s>Color Theme</s>
-          </h3>
-          <div className={styles.colorTipsContainer}>
-            <div className={`${styles.colorTip} ${styles.black}`} />
-            <div className={`${styles.colorTip} ${styles.white}`} />
+          <div className={styles.inlineContainer}>
+            <h3 className={styles.title}>
+              <s>Color Theme</s>
+            </h3>
+            <div className={styles.colorTipsContainer}>
+              <div className={`${styles.colorTip} ${styles.black}`} />
+              <div className={`${styles.colorTip} ${styles.white}`} />
+            </div>
           </div>
-          <h3 className={styles.title}>Language</h3>
-          <p>
-            {currentLocale == "ja" ? (
-              <s>JA</s>
-            ) : (
-              <span
-                onClick={() => {
-                  switchLocale(pathname);
-                }}
-              >
-                JA
-              </span>
-            )}{" "}
-            |{" "}
-            {currentLocale == "en" ? (
-              <s>EN</s>
-            ) : (
-              <span
-                onClick={() => {
-                  switchLocale(pathname);
-                }}
-              >
-                EN
-              </span>
-            )}
-          </p>
+          <div className={styles.inlineContainer}>
+            <h3 className={styles.title}>Language</h3>
+            <p>
+              {currentLocale == "ja" ? (
+                <s>JA</s>
+              ) : (
+                <span
+                  onClick={() => {
+                    switchLocale(pathname);
+                  }}
+                >
+                  JA
+                </span>
+              )}{" "}
+              |{" "}
+              {currentLocale == "en" ? (
+                <s>EN</s>
+              ) : (
+                <span
+                  onClick={() => {
+                    switchLocale(pathname);
+                  }}
+                >
+                  EN
+                </span>
+              )}
+            </p>
+          </div>
         </div>
       </div>
     </>
