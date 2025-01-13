@@ -32,7 +32,7 @@ export const Outline = ({
       });
 
     setLineHeight(convertCssUnitToPx("2rem"));
-    setFontSize(convertCssUnitToPx("1rem"));
+    setFontSize(convertCssUnitToPx("0.9rem"));
   }, []);
 
   useEffect(() => {
@@ -107,23 +107,26 @@ const TextContainer = ({
 }) => {
   return (
     <>
+      <h3 className="title" style={{ marginBottom: "3rem", color: "white" }}>
+        {languageMode == "ja" ? "作品概要" : "Outline"}
+      </h3>
       <div className="container">
-        <h3 style={{ marginBottom: "3rem", color: "white" }}>
-          {languageMode == "ja" ? "作品概要" : "Outline"}
-        </h3>
         <InkFilter blurIntensity={transitionProgress}>
           <p>{text}</p>
         </InkFilter>
       </div>
       <style jsx>
         {`
+          .title {
+            margin: 20vh 20vw;
+          }
           .container {
             width: ${size.w}px;
             height: ${size.h}px;
             margin: 0 auto;
             position: absolute;
             left: 20vw;
-            bottom: 10rem;
+            bottom: 0rem;
             line-height: ${lineHeight}px;
             font-size: ${fontSize}px;
             white-space: pre-wrap;
@@ -134,6 +137,9 @@ const TextContainer = ({
           }
 
           @media screen and (max-width: 600px) {
+            .title {
+              margin: 10vh 5vw;
+            }
             .container {
               left: 5vw;
               bottom: 3rem;
