@@ -27,6 +27,11 @@ type MicroCMSResponse = {
   limit: number;
 };
 
+// `params` に `{ locale: string }` を渡すための `generateStaticParams()`
+export async function generateStaticParams(): Promise<{ locale: string }[]> {
+  return [{ locale: "ja" }, { locale: "en" }];
+}
+
 async function getGrantsAndAwardsData(locale: string) {
   const response = await fetch(
     `https://${serviceDomain}.microcms.io/api/v1/carrier?filters=group[contains]grants_and_awards`,
@@ -55,11 +60,7 @@ function transformData(data: MicroCMSResponse, locale: string) {
   }));
 }
 
-export default async function Home({
-  params,
-}: {
-  params: Record<string, string>;
-}) {
+export default async function Home({ params }: { params: { locale: string } }) {
   const locale = params.locale || "ja"; // デフォルトを日本語に
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
