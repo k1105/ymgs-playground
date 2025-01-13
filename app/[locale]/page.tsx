@@ -27,8 +27,8 @@ type MicroCMSResponse = {
   limit: number;
 };
 
-// `params` に `{ locale: string }` を渡すための `generateStaticParams()`
-export async function generateStaticParams(): Promise<{ locale: string }[]> {
+// `generateStaticParams()` の型を修正
+export function generateStaticParams(): Array<{ locale: string }> {
   return [{ locale: "ja" }, { locale: "en" }];
 }
 
@@ -61,7 +61,7 @@ function transformData(data: MicroCMSResponse, locale: string) {
 }
 
 export default async function Home({ params }: { params: { locale: string } }) {
-  const locale = params.locale || "ja"; // デフォルトを日本語に
+  const locale = params?.locale || "ja"; // デフォルトを "ja" に設定
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
   return (
@@ -71,12 +71,12 @@ export default async function Home({ params }: { params: { locale: string } }) {
           <Profile key="scene-profile" />,
           <Carrier
             key="scene-awards"
-            items={grantsAwards} // APIから取得
+            items={grantsAwards}
             title="Grants and Awards"
           />,
           <Carrier
             key="scene-exhibitions"
-            items={[]} // soloExhibitions は後で追加
+            items={[]}
             title="Solo Exhibitions"
           />,
         ]}
