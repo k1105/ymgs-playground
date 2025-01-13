@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { Profile } from "@/components/scene/Profile";
 import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
@@ -56,7 +55,11 @@ function transformData(data: MicroCMSResponse, locale: string) {
   }));
 }
 
-export default async function Home({ params }: { params: { locale: string } }) {
+export default async function Home({
+  params,
+}: {
+  params: Record<string, string>;
+}) {
   const locale = params.locale || "ja"; // デフォルトを日本語に
   const grantsAwards = await getGrantsAndAwardsData(locale);
 
