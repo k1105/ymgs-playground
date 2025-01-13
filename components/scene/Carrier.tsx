@@ -10,7 +10,7 @@ export const Carrier = ({
 }: {
   transitionProgress?: number;
   title: string;
-  items: { year: number; items: string[] }[];
+  items: { year: number; content: string[] }[];
 }) => {
   return (
     <>
@@ -18,18 +18,16 @@ export const Carrier = ({
         <div className={styles.container}>
           <h2 style={{ marginBottom: "3rem" }}>{title}</h2>
           <div className={styles.carrierContainer}>
-            {items.map((elem, i) => {
-              return (
-                <div className={styles.carrierItem} key={`carrier-item-${i}`}>
-                  <p className={styles.year}>{elem.year}</p>
-                  <div className={styles.item}>
-                    {elem.items.map((item, itemId) => {
-                      return <p key={`item-${i}-${itemId}`}>{item}</p>;
-                    })}
-                  </div>
+            {items.map((elem, i) => (
+              <div className={styles.carrierItem} key={`carrier-item-${i}`}>
+                <p className={styles.year}>{elem.year}</p>
+                <div className={styles.item}>
+                  {elem.content.map((text, itemId) => (
+                    <p key={`item-${i}-${itemId}`}>{text}</p>
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </InkFilter>
