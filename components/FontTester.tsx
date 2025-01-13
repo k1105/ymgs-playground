@@ -1,66 +1,35 @@
 "use client";
 
 import { ReactNode, RefObject, useEffect, useState } from "react";
-import {
-  BIZ_UDMincho,
-  Hina_Mincho,
-  Noto_Serif_JP,
-  Shippori_Mincho_B1,
-  Zen_Old_Mincho,
-  Radley,
-  Crimson_Text,
-  EB_Garamond,
-  Sorts_Mill_Goudy,
-  Goudy_Bookletter_1911,
-  Castoro,
-  Zen_Kaku_Gothic_New,
-  Sawarabi_Gothic,
-  // Kosugi,
-  // M_PLUS_2,
-  Poppins,
-  Nunito_Sans,
-  Outfit,
-  // Montserrat_Alternates,
-  Parkinsans,
-  Ysabeau_SC,
-  // Averia_Libre,
-  Wix_Madefor_Text,
-} from "next/font/google";
+import localFont from "next/font/local";
 
 // 日本語フォントの定義
-const hinaMincho = Hina_Mincho({
-  weight: "400",
-  subsets: ["latin"],
+const hinaMincho = localFont({
+  src: "../public/fonts/Hina_Mincho/HinaMincho-Regular.ttf",
   variable: "--font-hinaMincho",
 });
-const notoSerif = Noto_Serif_JP({
-  weight: "500",
-  subsets: ["latin"],
+const notoSerif = localFont({
+  src: "../public/fonts/Noto_Serif_JP/NotoSerifJP-VariableFont_wght.ttf",
   variable: "--font-notoSerif",
 });
-const bizUdMincho = BIZ_UDMincho({
-  weight: "400",
-  subsets: ["latin"],
+const bizUdMincho = localFont({
+  src: "../public/fonts/BIZ_UDMincho/BIZUDMincho-Regular.ttf",
   variable: "--font-bizUdMincho",
 });
-const zenOldMincho = Zen_Old_Mincho({
-  weight: "500",
-  subsets: ["latin"],
+const zenOldMincho = localFont({
+  src: "../public/fonts/Zen_Old_Mincho/ZenOldMincho-Regular.ttf",
   variable: "--font-zenOldMincho",
 });
-const shipporiMincho = Shippori_Mincho_B1({
-  weight: "500",
-  subsets: ["latin"],
+const shipporiMincho = localFont({
+  src: "../public/fonts/Shippori_Mincho_B1/ShipporiMinchoB1-Regular.ttf",
   variable: "--font-shipporiMincho",
 });
-const zenKakuGothicNew = Zen_Kaku_Gothic_New({
-  weight: "400",
-  subsets: ["latin"],
+const zenKakuGothicNew = localFont({
+  src: "../public/fonts/Zen_Kaku_Gothic_New/ZenKakuGothicNew-Regular.ttf",
   variable: "--font-zenKakuGothicNew",
 });
-const sawarabiGothic = Sawarabi_Gothic({
-  weight: "400",
-  subsets: ["latin"],
+const sawarabiGothic = localFont({
+  src: "../public/fonts/Sawarabi_Gothic/SawarabiGothic-Regular.ttf",
   variable: "--font-sawarabiGothic",
 });
 // const kosugi = Kosugi({
@@ -75,49 +44,40 @@ const sawarabiGothic = Sawarabi_Gothic({
 // });
 
 // 欧文フォントの定義
-const radley = Radley({
-  weight: "400",
-  subsets: ["latin"],
+const radley = localFont({
+  src: "../public/fonts/Radley/Radley-Regular.ttf",
   variable: "--font-radley",
 });
-const crimsonText = Crimson_Text({
-  weight: "400",
-  subsets: ["latin"],
+const crimsonText = localFont({
+  src: "../public/fonts/Crimson_Text/CrimsonText-Regular.ttf",
   variable: "--font-crimsonText",
 });
-const ebGaramond = EB_Garamond({
-  weight: "400",
-  subsets: ["latin"],
+const ebGaramond = localFont({
+  src: "../public/fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf",
   variable: "--font-ebGaramond",
 });
-const sortsMillGoudy = Sorts_Mill_Goudy({
-  weight: "400",
-  subsets: ["latin"],
+const sortsMillGoudy = localFont({
+  src: "../public/fonts/Sorts_Mill_Goudy/SortsMillGoudy-Regular.ttf",
   variable: "--font-sortsMillGoudy",
 });
-const goudyBookletter1911 = Goudy_Bookletter_1911({
-  weight: "400",
-  subsets: ["latin"],
+const goudyBookletter1911 = localFont({
+  src: "../public/fonts/Goudy_Bookletter_1911/GoudyBookletter1911-Regular.ttf",
   variable: "--font-goudyBookletter1911",
 });
-const castoro = Castoro({
-  weight: "400",
-  subsets: ["latin"],
+const castoro = localFont({
+  src: "../public/fonts/Castoro/Castoro-Regular.ttf",
   variable: "--font-castoro",
 });
-const poppins = Poppins({
-  weight: "400",
-  subsets: ["latin"],
+const poppins = localFont({
+  src: "../public/fonts/Poppins/Poppins-Regular.ttf",
   variable: "--font-poppins",
 });
-const nunitoSans = Nunito_Sans({
-  weight: "400",
-  subsets: ["latin"],
+const nunitoSans = localFont({
+  src: "../public/fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf",
   variable: "--font-nunitoSans",
 });
-const outfit = Outfit({
-  weight: "400",
-  subsets: ["latin"],
+const outfit = localFont({
+  src: "../public/fonts/Outfit/Outfit-VariableFont_wght.ttf",
   variable: "--font-outfit",
 });
 // const montserratAlternates = Montserrat_Alternates({
@@ -125,14 +85,12 @@ const outfit = Outfit({
 //   subsets: ["latin"],
 //   variable: "--font-montserratAlternates",
 // });
-const parkinsans = Parkinsans({
-  weight: "400",
-  subsets: ["latin"],
+const parkinsans = localFont({
+  src: "../public/fonts/Parkinsans/Parkinsans-VariableFont_wght.ttf",
   variable: "--font-parkinsans",
 });
-const ysabeauSC = Ysabeau_SC({
-  weight: "400",
-  subsets: ["latin"],
+const ysabeauSC = localFont({
+  src: "../public/fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf",
   variable: "--font-ysabeauSC",
 });
 // const averiaLibre = Averia_Libre({
@@ -140,9 +98,8 @@ const ysabeauSC = Ysabeau_SC({
 //   subsets: ["latin"],
 //   variable: "--font-averiaLibre",
 // });
-const wixMadeforText = Wix_Madefor_Text({
-  weight: "400",
-  subsets: ["latin"],
+const wixMadeforText = localFont({
+  src: "../public/fonts/Wix_Madefor_Display/WixMadeforDisplay-VariableFont_wght.ttf",
   variable: "--font-wixMadeforText",
 });
 
@@ -217,10 +174,10 @@ export const FontTester = ({
   return (
     <>
       <main
-      // className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
-      // style={{
-      //   fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
-      // }}
+        className={`${hinaMincho.variable} ${notoSerif.variable} ${bizUdMincho.variable} ${zenOldMincho.variable} ${shipporiMincho.variable} ${radley.variable} ${crimsonText.variable} ${ebGaramond.variable} ${sortsMillGoudy.variable} ${goudyBookletter1911.variable} ${castoro.variable} ${zenKakuGothicNew.variable} ${sawarabiGothic.variable} ${poppins.variable} ${nunitoSans.variable} ${outfit.variable} ${parkinsans.variable} ${ysabeauSC.variable} ${wixMadeforText.variable}`}
+        style={{
+          fontFamily: `var(${enFonts[enDisplayIndex].variable}), var(${jaFonts[jaDisplayIndex].variable}), sans-serif`,
+        }}
       >
         {children}
       </main>
