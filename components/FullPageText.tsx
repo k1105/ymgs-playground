@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { convertCssUnitToPx } from "./convertCssUnitToPx";
-import { paginateByBinarySearch } from "./paginateText";
+import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
+import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
 
 export const FullPageText = ({

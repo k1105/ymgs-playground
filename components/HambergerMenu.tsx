@@ -1,6 +1,7 @@
 import { SetStateAction, useState, Dispatch, RefObject } from "react";
+import { usePathname } from "next/navigation";
+import { getCurrentLocale, switchLocale } from "@/lib/i18n";
 import { RoundAutorenew } from "./icones/RoundAutoRenew";
-import Link from "next/link";
 import styles from "./HambergerMenu.module.scss";
 import DynamicLink from "./DynamicLink";
 
@@ -16,6 +17,8 @@ export const HambergerMenu = ({
   enFontRef: RefObject<HTMLParagraphElement | null>;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+  const currentLocale = getCurrentLocale(pathname);
   return (
     <>
       <p
@@ -104,7 +107,29 @@ export const HambergerMenu = ({
           </div>
           <h3 className={styles.title}>Language</h3>
           <p>
-            <span onClick={() => {}}>JA</span> | EN
+            {currentLocale == "ja" ? (
+              <s>JA</s>
+            ) : (
+              <span
+                onClick={() => {
+                  switchLocale(pathname);
+                }}
+              >
+                JA
+              </span>
+            )}{" "}
+            |{" "}
+            {currentLocale == "en" ? (
+              <s>EN</s>
+            ) : (
+              <span
+                onClick={() => {
+                  switchLocale(pathname);
+                }}
+              >
+                EN
+              </span>
+            )}
           </p>
         </div>
       </div>
