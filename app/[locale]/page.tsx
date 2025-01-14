@@ -24,8 +24,7 @@ type CarrierContent = {
   id: string;
   year: number;
   group: string[];
-  content_ja: { fieldId: string; text: string }[];
-  content_en: { fieldId: string; text: string }[];
+  content: { fieldId: string; text_ja: string; text_en: string }[];
 };
 
 type CarrierResponse = {
@@ -110,12 +109,12 @@ async function getCarrierData(locale: string, group: string) {
 }
 
 function transformCarrierData(data: CarrierResponse, locale: string) {
-  const contentKey = locale === "ja" ? "content_ja" : "content_en";
+  const contentKey = locale === "ja" ? "text_ja" : "text_en";
 
   return data.contents.map((item) => ({
     id: item.id,
     year: item.year,
-    content: item[contentKey].map((c) => c.text),
+    content: item.content ? item.content.map((c) => c[contentKey]) : [],
   }));
 }
 
