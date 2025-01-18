@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
 import ReactPlayer from "react-player";

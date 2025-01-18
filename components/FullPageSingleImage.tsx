@@ -1,3 +1,5 @@
+"use client";
+
 export const FullPageSingleImage = ({
   transitionProgress = 0,
 }: {

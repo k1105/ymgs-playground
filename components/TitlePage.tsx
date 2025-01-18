@@ -1,31 +1,26 @@
+"use client";
+
 import styles from "./TitlePage.module.scss";
-import { information } from "@/public/workInformation";
 import { InkFilter } from "./InkFilter";
 
 const TitlePage = ({
   transitionProgress = 0,
-  languageMode = "ja",
+  title,
+  credit,
 }: {
   transitionProgress?: number;
-  languageMode?: "ja" | "en";
+  title: string;
+  credit: string;
 }) => {
   return (
     <>
       <InkFilter blurIntensity={transitionProgress}>
         <>
           <div className={styles.titleContainer}>
-            <h1>
-              {languageMode == "ja"
-                ? information.workTitle.ja
-                : information.workTitle.en}
-            </h1>
+            <h1>{title}</h1>
             <p className={styles.year}>(2024)</p>
 
-            <p className={styles.credit}>
-              {languageMode == "ja"
-                ? information.credit.ja
-                : information.credit.en}
-            </p>
+            <p className={styles.credit}>{credit}</p>
           </div>
         </>
       </InkFilter>

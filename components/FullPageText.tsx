@@ -1,3 +1,5 @@
+"use client";
+
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "../lib/paginateText";
@@ -8,14 +10,14 @@ export const FullPageText = ({
   textEn,
   currentSegmentIndex = 0,
   setSegmentsLength,
-  languageMode = "ja",
+  locale,
   transitionProgress = 0,
 }: {
   textJa: string;
   textEn: string;
   currentSegmentIndex?: number;
   setSegmentsLength?: Dispatch<SetStateAction<number>>;
-  languageMode?: "ja" | "en";
+  locale: string;
   transitionProgress?: number;
 }) => {
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
@@ -50,9 +52,7 @@ export const FullPageText = ({
 
   useEffect(() => {
     if (setSegmentsLength !== undefined && jaSegments.length > 0) {
-      setSegmentsLength(
-        languageMode == "ja" ? jaSegments.length : enSegments.length
-      );
+      setSegmentsLength(locale == "ja" ? jaSegments.length : enSegments.length);
     }
   }, [jaSegments, enSegments]);
 
@@ -60,7 +60,7 @@ export const FullPageText = ({
     <>
       <TextContainer
         text={
-          languageMode == "ja"
+          locale == "ja"
             ? jaSegments[currentSegmentIndex]
             : enSegments[currentSegmentIndex]
         }

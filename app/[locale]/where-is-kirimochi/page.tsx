@@ -21,11 +21,22 @@ const OnlyText = () => {
       <Layout>
         <SceneManager
           scenes={[
-            <TitlePage key="title-page" />,
+            <TitlePage
+              key="title-page"
+              title={
+                locale == "ja"
+                  ? information.workTitle.ja
+                  : information.workTitle.en
+              }
+              credit={
+                locale == "ja" ? information.credit.ja : information.credit.en
+              }
+            />,
             <FullPageText
               key="work-text"
               textJa={information.content[0].ja}
               textEn={information.content[0].en}
+              locale={locale}
             />,
             <FullPageMultiImage key="multi-image" />,
             <FullPageSingleImage key="single-image" />,
