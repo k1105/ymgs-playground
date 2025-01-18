@@ -10,6 +10,8 @@ import { Outline } from "@/components/Outline";
 import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
 
+type Props = { params: Promise<{ slug: string; locale: string }> };
+
 export async function generateStaticParams() {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
   const apiKey = process.env.MICROCMS_API_KEY!;
@@ -30,23 +32,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}): Promise<Metadata> {
-  const work = await fetchWorkBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params; // デフォルトを "ja" に設定
+  const work = await fetchWorkBySlug(slug);
   return {
-    title: work.title[`text_${params.locale}`],
-    description: work.outline[`content_${params.locale}`],
+    title: work.title[`text_${locale}`],
+    description: work.outline[`content_${locale}`],
   };
 }
 
-export default async function WorkPage({
-  params,
-}: {
-  params: Promise<{ slug: string; locale: string }>;
-}) {
+export default async function WorkPage({ params }: Props) {
   const { slug, locale } = await params; // デフォルトを "ja" に設定
   const work = await fetchWorkBySlug(slug);
 
