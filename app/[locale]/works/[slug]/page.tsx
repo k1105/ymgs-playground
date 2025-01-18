@@ -9,6 +9,7 @@ import { FullPageText } from "@/components/FullPageText";
 import { Outline } from "@/components/Outline";
 import TitlePage from "@/components/TitlePage";
 import { information } from "@/public/workInformation";
+import { ReactElement } from "react";
 
 type Props = { params: Promise<{ slug: string; locale: string }> };
 
@@ -44,6 +45,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WorkPage({ params }: Props) {
   const { slug, locale } = await params; // デフォルトを "ja" に設定
   const work = await fetchWorkBySlug(slug);
+  const scenes: ReactElement[] = [];
+
+  scenes.push(
+    <TitlePage
+      key="title-page"
+      title={work.title[`text_${locale}`]}
+      credit={work.credit[`content_${locale}`]}
+    />
+  );
+
+  scenes.push(
+    <FullPageText
+      key="work-text"
+      textJa={information.content[0].ja}
+      textEn={information.content[0].en}
+      locale={locale}
+    />,
+    <FullPageMultiImage key="multi-image" />,
+    <FullPageSingleImage key="single-image" />,
+    <FullPageMovie key="movie" />
+  );
+
+  if (work.outline.content_ja && work.outline.content_en) {
+    scenes.push(
+      <Outline
+        key="outline"
+        textJa={work.outline.content_ja}
+        textEn={work.outline.content_en}
+      />
+    );
+  }
 
   if (!work) {
     return <p>作品が見つかりませんでした。</p>;
@@ -52,30 +84,7 @@ export default async function WorkPage({ params }: Props) {
   return (
     <>
       <Layout>
-        <SceneManager
-          scenes={[
-            <TitlePage
-              key="title-page"
-              title={work.title[`text_${locale}`]}
-              credit={work.credit[`content_${locale}`]}
-            />,
-            <FullPageText
-              key="work-text"
-              textJa={information.content[0].ja}
-              textEn={information.content[0].en}
-              locale={locale}
-            />,
-            <FullPageMultiImage key="multi-image" />,
-            <FullPageSingleImage key="single-image" />,
-            <FullPageMovie key="movie" />,
-            <Outline
-              key="outline"
-              textJa={information.outline.ja}
-              textEn={information.outline.en}
-            />,
-          ]}
-          languageMode={locale}
-        />
+        <SceneManager scenes={scenes} languageMode={locale} />
       </Layout>
     </>
   );
