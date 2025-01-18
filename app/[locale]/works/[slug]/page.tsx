@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params; // デフォルトを "ja" に設定
   const work = await fetchWorkBySlug(slug);
   return {
-    title: work.title[`text_${locale}`],
+    title: `${work.title[`text_${locale}`]} | 森田 明日香`,
     description: work.outline[`content_${locale}`],
   };
 }
