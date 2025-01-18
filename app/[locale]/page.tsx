@@ -16,8 +16,8 @@ if (!serviceDomain || !apiKey) {
 
 type BioContent = {
   id: string;
-  bio_ja: string;
-  bio_en: string;
+  content_ja: string;
+  content_en: string;
 };
 
 type CarrierContent = {
@@ -35,7 +35,7 @@ type CarrierResponse = {
 };
 
 type BioResponse = {
-  contents: BioContent[];
+  content: BioContent;
 };
 
 export async function generateStaticParams(): Promise<
@@ -54,7 +54,7 @@ export default async function Home({ params }: Props) {
     <Layout>
       <SceneManager
         scenes={[
-          <Profile key="scene-profile" bio={bio[0].content} />,
+          <Profile key="scene-profile" bio={bio.content} />,
           <Carrier
             key="scene-awards"
             items={grantsAwards}
@@ -119,8 +119,9 @@ function transformCarrierData(data: CarrierResponse, locale: string) {
 }
 
 function transformBioData(data: BioResponse, locale: string) {
-  return data.contents.map((item) => ({
-    id: item.id,
-    content: locale === "ja" ? item.bio_ja : item.bio_en,
-  }));
+  return {
+    id: data.content.id,
+    content:
+      locale === "ja" ? data.content.content_ja : data.content.content_en,
+  };
 }
