@@ -54,7 +54,7 @@ export default async function Home({ params }: Props) {
     <Layout>
       <SceneManager
         scenes={[
-          <Profile key="scene-profile" bio={bio.content} />,
+          <Profile key="scene-profile" bio={bio.content} locale={locale} />,
           <Carrier
             key="scene-awards"
             items={grantsAwards}

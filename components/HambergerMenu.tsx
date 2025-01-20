@@ -4,6 +4,7 @@ import { getCurrentLocale, switchLocale } from "@/lib/i18n";
 import { RoundAutorenew } from "./icones/RoundAutoRenew";
 import styles from "./HambergerMenu.module.scss";
 import DynamicLink from "./DynamicLink";
+import { ListBulleted } from "./icones/ListBulleted";
 
 export const HambergerMenu = ({
   setJaIndex,
@@ -21,25 +22,29 @@ export const HambergerMenu = ({
   const currentLocale = getCurrentLocale(pathname);
   return (
     <>
-      <p
-        className={styles.toggleButton}
-        onClick={() => {
-          setIsOpen((prev) => !prev);
-        }}
-      >
-        {isOpen ? "Hide" : "Show"}
-      </p>
-      <div className={`${styles.container} ${isOpen && styles.active}`}>
+      <div className={styles.headerContainer}>
         <DynamicLink
           href={`/`}
           style={{ textDecoration: "none", color: "black" }}
         >
-          <div className={styles.nameContainer}>
+          <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
             <p className={styles.ja}>morita asuka</p>
-            <p className={styles.en}>森田 明日香</p>
           </div>
         </DynamicLink>
+        <p
+          className={`${styles.toggleButton} ${isOpen && styles.open}`}
+          onClick={() => {
+            setIsOpen((prev) => !prev);
+          }}
+        >
+          <ListBulleted style={{ width: "1.5rem", height: "1.5rem" }} />
+          <span className={styles.smallCaption}>
+            {isOpen ? "きえる" : "でる"}
+          </span>
+        </p>
+      </div>
 
+      <div className={`${styles.container} ${isOpen && styles.active}`}>
         <div className={styles.workList}>
           <div className={styles.workTitleContainer}>
             <DynamicLink

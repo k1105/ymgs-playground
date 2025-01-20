@@ -1,8 +1,33 @@
 .container {
   margin-top: 10rem;
 }
+
+.name {
+  margin-bottom: 2rem;
+}
+
+.year {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+}
+
+.workIndexContainer {
+  width: 50vw;
+}
+
+.workTitleWrapper {
+  padding: 0.5rem 0 1rem;
+  border-bottom: 1px solid #ccc;
+  background-color: black;
+}
+
+.workTitleWrapper:hover {
+  background-color: white;
+  color: black;
+}
+
 .textContainer {
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
