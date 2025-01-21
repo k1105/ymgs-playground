@@ -28,7 +28,7 @@
 
 .textContainer {
   width: 90vw;
-  margin: 0 auto;
+  margin: 200px auto;
   display: flex;
   justify-content: space-between;
 }
@@ -82,5 +82,9 @@
   .profileContainer,
   .carrierContainer {
     width: auto;
+  }
+
+  .workIndexContainer {
+    width: 100%;
   }
 }
