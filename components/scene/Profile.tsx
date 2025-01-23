@@ -4,15 +4,28 @@ import styles from "./Profile.module.css";
 import { InkFilter } from "../InkFilter";
 import { OpacityFilter } from "../OpacityFilter";
 import { Fragment } from "react";
+import Link from "next/link";
+
+// MicroCMSの「work」から取得した型を仮定
+type Work = {
+  slug: string;
+  title: {
+    text_ja: string;
+    text_en: string;
+  };
+  year: number;
+};
 
 export const Profile = ({
   bio,
   transitionProgress = 0,
   locale = "ja",
+  works = [], // ここで作品の配列を受け取る
 }: {
   bio: string;
   transitionProgress?: number;
   locale: string;
+  works?: Work[]; // 作品データの配列をオプションで受け取れるように
 }) => {
   const paragraphs = bio.split("\n").map((line, index) => (
     <Fragment key={index}>
@@ -28,7 +41,7 @@ export const Profile = ({
           <InkFilter blurIntensity={transitionProgress}>
             <div>
               <p className={styles.name}>
-                {locale == "ja"
+                {locale === "ja"
                   ? `森田 明日香 (もりた・あすか)`
                   : `Asuka Morita`}
               </p>
@@ -45,74 +58,30 @@ export const Profile = ({
               </div>
             </div>
           </InkFilter>
+
+          {/* ▼ ここから作品一覧を表示する部分 ▼ */}
           <InkFilter blurIntensity={transitionProgress}>
             <div className={styles.workIndexContainer}>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  Observing Variations: in Sliced Loin Hams
-                  <span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
-              <div className={styles.workTitleWrapper}>
-                <h2>
-                  きりもちの所在<span className={styles.year}>(2024)</span>
-                </h2>
-              </div>
+              {works.length > 0 &&
+                works.map((work) => (
+                  <Link
+                    key={`link-to-${work.slug}`}
+                    href={`/works/${work.slug}`}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    <div className={styles.workTitleWrapper} key={work.slug}>
+                      <h2>
+                        {/* 詳細ページへのリンク */}
+
+                        {locale == "en"
+                          ? work.title.text_en
+                          : work.title.text_ja}
+                        {/* 年度表示がある場合はこんな感じで */}
+                        <span className={styles.year}>({work.year})</span>
+                      </h2>
+                    </div>
+                  </Link>
+                ))}
             </div>
           </InkFilter>
         </div>

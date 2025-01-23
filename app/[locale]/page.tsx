@@ -2,6 +2,7 @@ import { Profile } from "@/components/scene/Profile";
 import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "@/components/Layout";
+import { fetchAllWorks } from "@/lib/microCMS";
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;
@@ -49,12 +50,18 @@ export default async function Home({ params }: Props) {
   const bio = await getBio(locale);
   const grantsAwards = await getCarrierData(locale, "grants_and_awards");
   const soloExhibition = await getCarrierData(locale, "solo_exhibition");
+  const works = await fetchAllWorks();
 
   return (
     <Layout>
       <SceneManager
         scenes={[
-          <Profile key="scene-profile" bio={bio.content} locale={locale} />,
+          <Profile
+            key="scene-profile"
+            bio={bio.content}
+            locale={locale}
+            works={works}
+          />,
           <Carrier
             key="scene-awards"
             items={grantsAwards}
