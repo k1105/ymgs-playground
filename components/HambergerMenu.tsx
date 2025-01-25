@@ -80,7 +80,7 @@ export const HambergerMenu = ({
           <div className={styles.inlineContainer}>
             <h3 className={styles.title}>Language</h3>
             <p>
-              {currentLocale == "ja" ? (
+              {currentLocale !== "en" ? (
                 <s>JA</s>
               ) : (
                 <span
