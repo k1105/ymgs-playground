@@ -1,11 +1,3 @@
-.container {
-  margin-top: 10rem;
-}
-
-.name {
-  margin-bottom: 2rem;
-}
-
 .year {
   margin-left: 1rem;
   font-size: 0.8rem;
@@ -21,45 +13,13 @@
   background-color: black;
 }
 
+.tableName {
+  margin-bottom: 2rem;
+}
+
 .workTitleWrapper:hover {
   background-color: white;
   color: black;
-}
-
-.textContainer {
-  width: 90vw;
-  margin: 200px auto;
-  display: flex;
-  justify-content: space-between;
-}
-.carrierContainer {
-  width: 400px;
-}
-.carrierItem {
-  font-size: 0.9rem;
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.profileImageWrapper {
-  height: 10rem;
-  width: 13rem;
-  text-align: center;
-  margin: 0 10vw 3rem;
-  transition: all 1s ease;
-}
-
-.profileImage {
-  height: 100%;
-}
-
-.profileImageWrapper.active {
-  opacity: 1;
-}
-
-.profileContainer {
-  width: 500px;
 }
 
 @media screen and (max-width: 600px) {

@@ -16,11 +16,12 @@ export const Carrier = ({
     <>
       <InkFilter blurIntensity={transitionProgress}>
         <div className={styles.container}>
-          <h2 style={{ marginBottom: "3rem" }}>{title}</h2>
+          <h2 className={styles.carrierName}>{title}</h2>
+          <div className={styles.border} />
           <div className={styles.carrierContainer}>
             {items.map((elem, i) => (
               <div className={styles.carrierItem} key={`carrier-item-${i}`}>
-                <p className={styles.year}>{elem.year}</p>
+                {elem.year && <p className={styles.year}>{elem.year}</p>}
                 <div className={styles.item}>
                   {elem.content.map((text, itemId) => (
                     <p key={`item-${i}-${itemId}`}>{text}</p>

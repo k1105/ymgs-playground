@@ -3,6 +3,8 @@ import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "@/components/Layout";
 import { fetchAllWorks } from "@/lib/microCMS";
+import styles from "./styles/Home.module.css";
+import { Fragment } from "react";
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;
@@ -50,31 +52,82 @@ export default async function Home({ params }: Props) {
   const bio = await getBio(locale);
   const grantsAwards = await getCarrierData(locale, "grants_and_awards");
   const soloExhibition = await getCarrierData(locale, "solo_exhibition");
+  const groupExhibition = await getCarrierData(locale, "group_exhibition");
+  const performance = await getCarrierData(locale, "performance");
+  const carrier = await getCarrierData(locale, "carrier");
+  const lecturesAndTalks = await getCarrierData(locale, "lectures_talks");
   const works = await fetchAllWorks();
+
+  console.log(bio.content);
+
+  const paragraphs = bio.content.split("\n").map((line, index) => (
+    <Fragment key={index}>
+      {line}
+      <br />
+    </Fragment>
+  ));
 
   return (
     <Layout>
-      <SceneManager
-        scenes={[
-          <Profile
-            key="scene-profile"
-            bio={bio.content}
-            locale={locale}
-            works={works}
-          />,
-          <Carrier
-            key="scene-awards"
-            items={grantsAwards}
-            title="Grants and Awards"
-          />,
-          <Carrier
-            key="scene-exhibitions"
-            items={soloExhibition}
-            title="Solo Exhibitions"
-          />,
-        ]}
-        languageMode={locale}
-      />
+      <div className={styles.container}>
+        <div className={styles.textContainer}>
+          <div>
+            <p className={styles.name}>
+              {locale === "ja"
+                ? `森田 明日香 (もりた・あすか)`
+                : `Asuka Morita`}
+            </p>
+            <div className={styles.profileContainer}>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  marginBottom: "2rem",
+                  lineHeight: "1.8rem",
+                }}
+              >
+                {paragraphs}
+              </p>
+            </div>
+          </div>
+          <SceneManager
+            scenes={[
+              <Profile
+                key="scene-profile"
+                bio={bio.content}
+                locale={locale}
+                works={works}
+              />,
+              <Carrier
+                key="scene-awards"
+                items={grantsAwards}
+                title="Grants and Awards"
+              />,
+              <Carrier
+                key="scene-exhibitions"
+                items={soloExhibition}
+                title="Solo Exhibitions (Selection)"
+              />,
+              <Carrier
+                key="group-exhibitions"
+                items={groupExhibition}
+                title="Group Exhibition (Selection)"
+              />,
+              <Carrier
+                key="performance"
+                items={performance}
+                title="Performance"
+              />,
+              <Carrier
+                key="lectures-and-talks"
+                items={lecturesAndTalks}
+                title="Lectures and Talks"
+              />,
+              <Carrier key="carrier" items={carrier} title="経歴 / Carrier" />,
+            ]}
+            languageMode={locale}
+          />
+        </div>
+      </div>
     </Layout>
   );
 }

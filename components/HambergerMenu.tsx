@@ -22,15 +22,16 @@ export const HambergerMenu = ({
   const currentLocale = getCurrentLocale(pathname);
   return (
     <>
-      <div className={styles.headerContainer}>
+      <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
         <DynamicLink
           href={`/`}
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: "none", color: "white" }}
         >
-          <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
-            <p className={styles.ja}>morita asuka</p>
-          </div>
+          <p className={styles.ja}>morita asuka</p>
         </DynamicLink>
+      </div>
+
+      <div className={styles.headerContainer}>
         <p
           className={`${styles.toggleButton} ${isOpen && styles.open}`}
           onClick={() => {
@@ -45,42 +46,6 @@ export const HambergerMenu = ({
       </div>
 
       <div className={`${styles.container} ${isOpen && styles.active}`}>
-        <div className={styles.workList}>
-          <div className={styles.workTitleContainer}>
-            <DynamicLink
-              href={"/where-is-kirimochi"}
-              className={styles.link}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              きりもちの所在<span className={styles.year}>(2024)</span>
-            </DynamicLink>
-          </div>
-          <div className={styles.workTitleContainer}>
-            <p>
-              <s>Observing Variation: in Sliced Loin Hams</s>
-              <span className={styles.year}>(2023)</span>
-            </p>
-          </div>
-          <div className={styles.workTitleContainer}>
-            <p>
-              <s>Lag</s>
-              <span className={styles.year}>(2022)</span>
-            </p>
-          </div>
-          <div className={styles.workTitleContainer}>
-            <p>
-              <s>Gap</s>
-              <span className={styles.year}>(2021)</span>
-            </p>
-          </div>
-          <div className={styles.workTitleContainer}>
-            <p>
-              <s>minim</s>
-              <span className={styles.year}>(2020)</span>
-            </p>
-          </div>
-        </div>
-
         <div className={styles.styleTester}>
           <div className={styles.fontTester}>
             <h3 className={styles.title}>Font</h3>

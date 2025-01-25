@@ -1,8 +1,11 @@
 .styleTester {
   position: fixed;
   width: 20rem;
-  bottom: 2rem;
-  right: 2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  top: 6rem;
+  right: 2.5vw;
+  background: white;
   font-family: Noto_Sans_JP serif;
 }
 .workList {
@@ -45,7 +48,6 @@
   opacity: 0;
   pointer-events: none;
   transition: all 300ms ease;
-  background: white;
 }
 
 .container.active {
@@ -56,27 +58,26 @@
 .headerContainer {
   position: fixed;
   top: 2rem;
-  width: 100vw;
-  padding: 0 2.5vw;
+  right: 2.5vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   z-index: 999;
 }
 
 .nameContainer {
   display: flex;
+  position: fixed;
+  width: 100vw;
+  z-index: 990;
+  text-align: center;
+  top: 2rem;
   flex-direction: column;
   font-size: 1.5rem;
   font-weight: 300;
   color: white;
-  transition: all 0.3s ease;
   .ja {
     font-size: 1.5rem;
   }
-}
-
-.nameContainer.open {
-  color: black;
 }
 
 .toggleButton {
@@ -84,19 +85,15 @@
   padding: 0.5rem;
   border-radius: 5px;
   text-align: center;
-  transition: all 0.5s ease;
   display: flex;
   flex-direction: column;
   text-align: center;
   .smallCaption {
+    user-select: none;
     width: 1.5rem;
     font-size: 0.5rem;
     font-weight: 700;
   }
-}
-
-.toggleButton.open {
-  color: black;
 }
 
 .title {
