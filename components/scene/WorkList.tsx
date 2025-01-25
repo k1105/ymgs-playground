@@ -1,8 +1,7 @@
 "use client";
 
-import styles from "./Profile.module.css";
+import styles from "./WorkList.module.css";
 import { InkFilter } from "../InkFilter";
-import { Fragment } from "react";
 import Link from "next/link";
 
 // MicroCMSの「work」から取得した型を仮定
@@ -15,13 +14,11 @@ type Work = {
   year: number;
 };
 
-export const Profile = ({
-  bio,
+export const WorkList = ({
   transitionProgress = 0,
   locale = "ja",
   works = [],
 }: {
-  bio: string;
   transitionProgress?: number;
   locale: string;
   works?: Work[];
@@ -41,11 +38,8 @@ export const Profile = ({
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className={styles.workTitleWrapper} key={work.slug}>
-                  <h2>
-                    {/* 詳細ページへのリンク */}
-
+                  <h2 className={styles.workTitle}>
                     {locale == "en" ? work.title.text_en : work.title.text_ja}
-                    {/* 年度表示がある場合はこんな感じで */}
                     <span className={styles.year}>({work.year})</span>
                   </h2>
                 </div>

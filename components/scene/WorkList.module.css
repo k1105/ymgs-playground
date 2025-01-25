@@ -13,6 +13,10 @@
   background-color: black;
 }
 
+.workTitle {
+  font-weight: normal;
+}
+
 .tableName {
   margin-bottom: 2rem;
 }

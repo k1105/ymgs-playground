@@ -1,4 +1,4 @@
-import { Profile } from "@/components/scene/Profile";
+import { WorkList } from "@/components/scene/WorkList";
 import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import Layout from "@/components/Layout";
@@ -91,12 +91,7 @@ export default async function Home({ params }: Props) {
           </div>
           <SceneManager
             scenes={[
-              <Profile
-                key="scene-profile"
-                bio={bio.content}
-                locale={locale}
-                works={works}
-              />,
+              <WorkList key="scene-profile" locale={locale} works={works} />,
               <Carrier
                 key="scene-awards"
                 items={grantsAwards}
