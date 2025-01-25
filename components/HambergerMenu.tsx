@@ -5,6 +5,7 @@ import { RoundAutorenew } from "./icones/RoundAutoRenew";
 import styles from "./HambergerMenu.module.scss";
 import DynamicLink from "./DynamicLink";
 import { ListBulleted } from "./icones/ListBulleted";
+import { useTheme } from "./ThemeProvider";
 
 export const HambergerMenu = ({
   setJaIndex,
@@ -20,6 +21,19 @@ export const HambergerMenu = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathname = usePathname();
   const currentLocale = getCurrentLocale(pathname);
+  const { setTheme } = useTheme();
+
+  const handleColorTipClick = (color: "black" | "white") => {
+    if (color === "black") {
+      document.body.style.backgroundColor = "black";
+      document.body.style.color = "white";
+      setTheme("dark");
+    } else {
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black";
+      setTheme("light");
+    }
+  };
   return (
     <>
       <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
@@ -73,8 +87,14 @@ export const HambergerMenu = ({
               <s>Color Theme</s>
             </h3>
             <div className={styles.colorTipsContainer}>
-              <div className={`${styles.colorTip} ${styles.black}`} />
-              <div className={`${styles.colorTip} ${styles.white}`} />
+              <div
+                className={`${styles.colorTip} ${styles.black}`}
+                onClick={() => handleColorTipClick("black")}
+              />
+              <div
+                className={`${styles.colorTip} ${styles.white}`}
+                onClick={() => handleColorTipClick("white")}
+              />
             </div>
           </div>
           <div className={styles.inlineContainer}>
