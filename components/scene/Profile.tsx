@@ -66,7 +66,7 @@ export const Profile = ({
                 works.map((work) => (
                   <Link
                     key={`link-to-${work.slug}`}
-                    href={`/works/${work.slug}`}
+                    href={`/${locale}/works/${work.slug}`}
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     <div className={styles.workTitleWrapper} key={work.slug}>

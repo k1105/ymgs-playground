@@ -51,17 +51,12 @@ export default async function WorkPage({ params }: Props) {
     <TitlePage
       key="title-page"
       title={work.title[`text_${locale}`]}
+      year={work.year.toString()}
       credit={work.credit[`content_${locale}`]}
     />
   );
 
   scenes.push(
-    <FullPageText
-      key="work-text"
-      textJa={information.content[0].ja}
-      textEn={information.content[0].en}
-      locale={locale}
-    />,
     <FullPageMultiImage key="multi-image" />,
     <FullPageSingleImage key="single-image" />,
     <FullPageMovie key="movie" />

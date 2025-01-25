@@ -6,10 +6,12 @@ import { InkFilter } from "./InkFilter";
 const TitlePage = ({
   transitionProgress = 0,
   title,
+  year,
   credit,
 }: {
   transitionProgress?: number;
   title: string;
+  year: string;
   credit: string;
 }) => {
   return (
@@ -18,7 +20,7 @@ const TitlePage = ({
         <>
           <div className={styles.titleContainer}>
             <h1>{title}</h1>
-            <p className={styles.year}>(2024)</p>
+            <p className={styles.year}>({year})</p>
 
             <p className={styles.credit}>{credit}</p>
           </div>
