@@ -79,9 +79,7 @@ export const HambergerMenu = ({
             </div>
           </div>
           <div className={styles.inlineContainer}>
-            <h3 className={styles.title}>
-              <s>Color Theme</s>
-            </h3>
+            <h3 className={styles.title}>Color Theme</h3>
             <div className={styles.colorTipsContainer}>
               <div
                 className={`${styles.colorTip} ${styles.black}`}
