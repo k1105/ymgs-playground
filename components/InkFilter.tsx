@@ -43,7 +43,6 @@ export const InkFilter = ({
         </div>
       </div>
 
-      {/* 🎯 `useId()` で一意な ID を生成し、SSR と CSR で一致させる */}
       <svg width="0" height="0" style={{ position: "absolute" }}>
         <filter id={filterId}>
           <feGaussianBlur

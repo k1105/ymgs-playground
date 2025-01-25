@@ -9,8 +9,7 @@
 
 .workTitleWrapper {
   padding: 0.5rem 0.5rem 1rem;
-  border-bottom: 1px solid #ccc;
-  background-color: black;
+  border-bottom: 1px solid var(--text-color);
 }
 
 .workTitle {
@@ -22,8 +21,8 @@
 }
 
 .workTitleWrapper:hover {
-  background-color: white;
-  color: black;
+  background-color: var(--text-color);
+  color: var(--background-color);
 }
 
 @media screen and (max-width: 600px) {

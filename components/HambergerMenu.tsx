@@ -25,12 +25,8 @@ export const HambergerMenu = ({
 
   const handleColorTipClick = (color: "black" | "white") => {
     if (color === "black") {
-      document.body.style.backgroundColor = "black";
-      document.body.style.color = "white";
       setTheme("dark");
     } else {
-      document.body.style.backgroundColor = "white";
-      document.body.style.color = "black";
       setTheme("light");
     }
   };
@@ -39,7 +35,7 @@ export const HambergerMenu = ({
       <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
         <DynamicLink
           href={`/`}
-          style={{ textDecoration: "none", color: "white" }}
+          style={{ textDecoration: "none", color: "var(--text-color)" }}
         >
           <p className={styles.ja}>morita asuka</p>
         </DynamicLink>

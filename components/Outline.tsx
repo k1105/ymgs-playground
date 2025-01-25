@@ -109,7 +109,10 @@ const TextContainer = ({
 }) => {
   return (
     <>
-      <h3 className="title" style={{ marginBottom: "3rem", color: "white" }}>
+      <h3
+        className="title"
+        style={{ marginBottom: "3rem", color: "var(--text-color)" }}
+      >
         {languageMode == "ja" ? "作品概要" : "Outline"}
       </h3>
       <div className="container">

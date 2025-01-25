@@ -35,7 +35,7 @@ export const WorkList = ({
               <Link
                 key={`link-to-${work.slug}`}
                 href={`/${locale}/works/${work.slug}`}
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ textDecoration: "none", color: "var(--text-color)" }}
               >
                 <div className={styles.workTitleWrapper} key={work.slug}>
                   <h2 className={styles.workTitle}>

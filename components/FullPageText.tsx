@@ -74,7 +74,7 @@ export const FullPageText = ({
           position: fixed;
           top: 1rem;
           left: 1rem;
-          color: white;
+          color: var(--text-color);
           a {
             text-decoration: none;
             font-size: 1rem;

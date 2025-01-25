@@ -1,7 +1,9 @@
 .componentWrapper {
-  mix-blend-mode: screen;
+  mix-blend-mode: var(--inkfilter-blend-mode);
 }
 
 .effect {
-  background: #333;
+  background: var(--inkfilter-background-color);
+  // background: var(--background-color);
+  color: var(--text-color);
 }

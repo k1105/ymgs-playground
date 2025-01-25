@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 
 interface ThemeContextProps {
@@ -10,7 +10,38 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.style.setProperty(
+        "--background-color",
+        "#191919"
+      );
+      document.documentElement.style.setProperty("--text-color", "white");
+      document.documentElement.style.setProperty(
+        "--inkfilter-background-color",
+        "#333"
+      );
+      document.documentElement.style.setProperty(
+        "--inkfilter-blend-mode",
+        "screen"
+      );
+    } else {
+      document.documentElement.style.setProperty(
+        "--background-color",
+        "#f3f3f3"
+      );
+      document.documentElement.style.setProperty("--text-color", "black");
+      document.documentElement.style.setProperty(
+        "--inkfilter-background-color",
+        "#f3f3f3"
+      );
+      document.documentElement.style.setProperty(
+        "--inkfilter-blend-mode",
+        "multiply"
+      );
+    }
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

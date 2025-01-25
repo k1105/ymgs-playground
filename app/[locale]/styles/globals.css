@@ -4,8 +4,18 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background-color: #191919;
+  --text-color: white;
+  --selection-background-color: white;
+  --selection-text-color: black;
+  --inkfilter-blend-mode: screen;
+  --inkfilter-background-color: #333;
+}
+
 body {
-  background-color: #191919;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 html,
@@ -21,6 +31,6 @@ body {
 }
 
 ::selection {
-  background: white;
-  color: black;
+  background: var(--selection-background-color);
+  color: var(--selection-text-color);
 }
