@@ -9,10 +9,7 @@ import { FullPageText } from "@/components/FullPageText";
 import { ReactElement } from "react";
 
 interface Props {
-  params: {
-    slug: string;
-    locale: string;
-  };
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 interface Work {
@@ -63,7 +60,7 @@ interface Page {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug, locale } = params;
+  const { slug, locale } = await params;
   const work = await fetchWorkBySlug(slug);
   return {
     title: `${work.title[`text_${locale}`]} | 森田 明日香`,
@@ -72,7 +69,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function WorkPage({ params }: Props) {
-  const { slug, locale } = params;
+  const { slug, locale } = await params;
   const work = await fetchWorkBySlug(slug);
   const scenes: ReactElement[] = [];
 
