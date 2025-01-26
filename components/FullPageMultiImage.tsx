@@ -1,54 +1,58 @@
 "use client";
 
-import { useState } from "react";
-
 export const FullPageMultiImage = ({
   transitionProgress = 0,
+  images,
 }: {
   transitionProgress?: number;
+  images: {
+    fieldId: string;
+    image: {
+      url: string;
+      height: number;
+      width: number;
+    }[];
+  }[];
 }) => {
-  const [loadedImageCount, setLoadedImageCount] = useState<number>(0);
   return (
     <>
-      <div className={`image-container ${loadedImageCount >= 2 && "active"}`}>
-        <img
-          src="/img/lag/lag1.jpg"
-          onLoad={() => {
-            setLoadedImageCount((prev) => prev + 1);
-          }}
-        />
-        <img
-          src="/img/lag/lag2.jpg"
-          onLoad={() => {
-            setLoadedImageCount((prev) => prev + 1);
-          }}
-        />
+      <div className="page-wrapper">
+        <div className={`image-container`}>
+          {images.map((imageRow) =>
+            imageRow.image.map((image, index) => (
+              <img key={`image-${index}`} src={`${image.url}?w=1200`} />
+            ))
+          )}
+        </div>
       </div>
       <style jsx>{`
+        .page-wrapper {
+          height: 100vh;
+          display: flex;
+          vertical-align: middle;
+        }
         .image-container {
           width: 92vw;
-          height: 100vh;
+          max-height: 80vh;
           overflow: hidden;
           display: flex;
-          gap: 2vw;
-          margin: 0 auto;
-          opacity: 0;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2rem;
+          margin: auto;
           transition: all 0.5s;
           img {
             width: 45vw;
             height: 100%;
             object-fit: contain;
           }
-        }
-
-        .image-container.active {
           opacity: ${1 - Math.abs(transitionProgress) / 100};
         }
 
         @media screen and (max-width: 600px) {
           .image-container {
+            width: 100%;
             flex-direction: column;
-            transform: translate(0, 50%);
             height: auto;
             gap: 2rem;
             img {
