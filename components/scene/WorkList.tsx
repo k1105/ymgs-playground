@@ -25,6 +25,8 @@ export const WorkList = ({
   locale: string;
   works?: Work[];
 }) => {
+  const placeHolderImageUrl =
+    "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
   return (
     <>
       <div className={styles.workIndexContainer}>
@@ -40,7 +42,7 @@ export const WorkList = ({
                     src={
                       work.ogpImage
                         ? `${work.ogpImage.url}?w=800`
-                        : "/img/placeHolder.png"
+                        : `${placeHolderImageUrl}?w=800`
                     }
                     alt="work"
                     className={styles.thumbnail}
