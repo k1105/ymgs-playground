@@ -62,16 +62,22 @@
 .nameContainer {
   display: flex;
   position: fixed;
-  width: 100vw;
   z-index: 990;
-  text-align: center;
-  top: 2rem;
+  text-align: left;
+  top: 6rem;
+  left: 3rem;
   flex-direction: column;
-  font-size: 1.5rem;
+  gap: 2rem;
   font-weight: 300;
   color: var(--text-color);
+  .link {
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    letter-spacing: 0.3rem;
+  }
   .ja {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.7rem;
   }
 }
 
@@ -131,5 +137,10 @@
 @media screen and (max-width: 600px) {
   .workList {
     font-size: 1.5rem;
+  }
+
+  .nameContainer {
+    left: 1rem;
+    top: 2rem;
   }
 }

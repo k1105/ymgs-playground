@@ -4,35 +4,31 @@
 }
 
 .workIndexContainer {
-  width: 50vw;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.workTitleWrapper {
-  padding: 0.5rem 0.5rem 1rem;
-  border-bottom: 1px solid var(--text-color);
+.workContainer {
+  width: 25%;
+  padding-right: 3rem;
+  margin-bottom: 3rem;
 }
 
 .workTitle {
   font-weight: normal;
+  font-size: 0.8rem;
 }
 
-.tableName {
-  margin-bottom: 2rem;
-}
-
-.workTitleWrapper:hover {
-  background-color: var(--text-color);
-  color: var(--background-color);
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* アスペクト比を4:3に固定 */
+  margin-bottom: 0.5rem;
 }
 
 @media screen and (max-width: 600px) {
-  .profileImageWrapper {
-    height: 7rem;
-    text-align: left;
-    margin: 0 5vw 2rem;
-  }
   .textContainer {
-    width: 90vw;
+    width: 85vw;
     margin-bottom: 10rem;
     flex-direction: column;
     gap: 3rem;
@@ -40,6 +36,16 @@
 
   .container {
     margin-top: 5rem;
+  }
+
+  .workContainer {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .workTitle {
+    font-size: 0.8rem;
   }
 
   .profileContainer,

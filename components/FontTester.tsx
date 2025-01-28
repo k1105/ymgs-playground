@@ -85,22 +85,22 @@ const wixMadeforText = localFont({
 
 // 書体リスト
 const jaFonts = [
+  { name: "Zen Kaku Gothic New", variable: "--font-zenKakuGothicNew" },
   { name: "Hina Mincho", variable: "--font-hinaMincho" },
   { name: "Noto Serif JP", variable: "--font-notoSerif" },
   { name: "BIZ UDMincho", variable: "--font-bizUdMincho" },
   { name: "Zen Old Mincho", variable: "--font-zenOldMincho" },
   { name: "Shippori Mincho B1", variable: "--font-shipporiMincho" },
-  { name: "Zen Kaku Gothic New", variable: "--font-zenKakuGothicNew" },
   { name: "Sawarabi Gothic", variable: "--font-sawarabiGothic" },
 ];
 
 const enFonts = [
+  { name: "Poppins", variable: "--font-poppins" },
   { name: "Radley", variable: "--font-radley" },
   { name: "Crimson Text", variable: "--font-crimsonText" },
   { name: "EB Garamond", variable: "--font-ebGaramond" },
   { name: "Sorts Mill Goudy", variable: "--font-sortsMillGoudy" },
   { name: "Goudy Bookletter 1911", variable: "--font-goudyBookletter1911" },
-  { name: "Poppins", variable: "--font-poppins" },
   { name: "Nunito Sans", variable: "--font-nunitoSans" },
   { name: "Outfit", variable: "--font-outfit" },
   { name: "Montserrat Alternates", variable: "--font-montserratAlternates" },

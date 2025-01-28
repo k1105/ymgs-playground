@@ -37,8 +37,10 @@ export const HambergerMenu = ({
           href={`/`}
           style={{ textDecoration: "none", color: "var(--text-color)" }}
         >
-          <p className={styles.ja}>morita asuka</p>
+          <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
         </DynamicLink>
+        <p className={styles.link}>works</p>
+        <p className={styles.link}>cv</p>
       </div>
 
       <div className={styles.headerContainer}>
