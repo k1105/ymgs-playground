@@ -10,7 +10,7 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.style.setProperty(

@@ -5,12 +5,12 @@
 }
 
 :root {
-  --background-color: #191919;
-  --text-color: white;
-  --selection-background-color: white;
-  --selection-text-color: black;
-  --inkfilter-blend-mode: screen;
-  --inkfilter-background-color: #333;
+  --background-color: #f3f3f3;
+  --text-color: black;
+  --selection-background-color: black;
+  --selection-text-color: white;
+  --inkfilter-blend-mode: multiply;
+  --inkfilter-background-color: #f3f3f3;
 }
 
 body {
