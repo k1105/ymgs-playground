@@ -32,7 +32,7 @@ export const Outline = ({
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
-        h: convertCssUnitToPx(outline.ja.length > 0 ? "15rem" : "0"),
+        h: convertCssUnitToPx("15rem"),
       });
 
     setLineHeight(convertCssUnitToPx("2rem"));
@@ -113,7 +113,7 @@ const TextContainer = ({
         {`
           .container {
             width: ${size.w}px;
-            height: ${size.h}px;
+            max-height: ${size.h}px;
             line-height: ${lineHeight}px;
             font-size: ${fontSize}px;
             white-space: pre-wrap;
