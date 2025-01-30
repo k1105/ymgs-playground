@@ -6,15 +6,17 @@ import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
 
 export const Outline = ({
-  textJa,
-  textEn,
+  title,
+  outline,
+  credit,
   currentSegmentIndex = 0,
   setSegmentsLength,
   languageMode = "ja",
   transitionProgress = 0,
 }: {
-  textJa: string;
-  textEn: string;
+  title: string;
+  outline: { ja: string; en: string };
+  credit: string;
   currentSegmentIndex?: number;
   setSegmentsLength?: Dispatch<SetStateAction<number>>;
   languageMode?: "ja" | "en";
@@ -29,8 +31,8 @@ export const Outline = ({
   useEffect(() => {
     if (document)
       setSize({
-        w: convertCssUnitToPx(window.innerWidth > 600 ? "50vw" : "90vw"),
-        h: convertCssUnitToPx("70vh"),
+        w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
+        h: convertCssUnitToPx(outline.ja.length > 0 ? "15rem" : "0"),
       });
 
     setLineHeight(convertCssUnitToPx("2rem"));
@@ -38,14 +40,12 @@ export const Outline = ({
   }, []);
 
   useEffect(() => {
-    console.log("size.w: " + size.w);
-    console.log("size.h: " + size.h);
     if (size.w > 0) {
       setJaSegments(
-        paginateByBinarySearch(textJa, size.w, size.h, lineHeight, fontSize)
+        paginateByBinarySearch(outline.ja, size.w, size.h, lineHeight, fontSize)
       );
       setEnSegments(
-        paginateByBinarySearch(textEn, size.w, size.h, lineHeight, fontSize)
+        paginateByBinarySearch(outline.en, size.w, size.h, lineHeight, fontSize)
       );
     }
   }, [size]);
@@ -60,32 +60,33 @@ export const Outline = ({
 
   return (
     <>
-      <TextContainer
-        text={
-          languageMode == "ja"
-            ? jaSegments[currentSegmentIndex]
-            : enSegments[currentSegmentIndex]
-        }
-        languageMode={languageMode}
-        size={size}
-        lineHeight={lineHeight}
-        fontSize={fontSize}
-        transitionProgress={transitionProgress}
-      />
-      <style jsx>{`
-        .language-switcher {
-          position: fixed;
-          top: 1rem;
-          left: 1rem;
-          color: white;
-          a {
-            text-decoration: none;
-            font-size: 1rem;
-          }
+      <div className="container">
+        <InkFilter blurIntensity={transitionProgress}>
+          <h3 style={{ marginBottom: "3rem", color: "var(--text-color)" }}>
+            {title}
+          </h3>
+          <TextContainer
+            text={
+              languageMode == "ja"
+                ? jaSegments[currentSegmentIndex]
+                : enSegments[currentSegmentIndex]
+            }
+            size={size}
+            lineHeight={lineHeight}
+            fontSize={fontSize}
+          />
+          <p className="credit">{credit}</p>
+        </InkFilter>
+      </div>
 
-          a.active {
-            opacity: 0.5;
-          }
+      <style jsx>{`
+        .container {
+          width: ${size.w}px;
+          margin: 20vh 17vw;
+        }
+
+        .credit {
+          font-size: 0.8rem;
         }
       `}</style>
     </>
@@ -97,57 +98,35 @@ const TextContainer = ({
   size,
   lineHeight,
   fontSize,
-  transitionProgress = 0,
-  languageMode,
 }: {
-  transitionProgress?: number;
   text: string;
   size: { w: number; h: number };
   lineHeight: number;
   fontSize: number;
-  languageMode: string;
 }) => {
   return (
     <>
-      <h3
-        className="title"
-        style={{ marginBottom: "3rem", color: "var(--text-color)" }}
-      >
-        {languageMode == "ja" ? "作品概要" : "Outline"}
-      </h3>
       <div className="container">
-        <InkFilter blurIntensity={transitionProgress}>
-          <p>{text}</p>
-        </InkFilter>
+        <p>{text}</p>
       </div>
       <style jsx>
         {`
-          .title {
-            margin: 20vh 20vw;
-          }
           .container {
             width: ${size.w}px;
             height: ${size.h}px;
-            margin: 0 auto;
-            position: absolute;
-            left: 20vw;
-            bottom: 0rem;
             line-height: ${lineHeight}px;
             font-size: ${fontSize}px;
             white-space: pre-wrap;
             word-break: break-word;
             box-sizing: border-box;
             line-break: strict;
-            // overflow: hidden;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid black;
           }
 
           @media screen and (max-width: 600px) {
             .title {
               margin: 10vh 5vw;
-            }
-            .container {
-              left: 5vw;
-              bottom: 3rem;
             }
           }
         `}

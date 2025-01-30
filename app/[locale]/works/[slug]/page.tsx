@@ -1,5 +1,4 @@
 import { fetchWorkBySlug } from "@/lib/microCMS";
-import Layout from "@/components/Layout";
 import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
 import { FullPageMultiImage } from "@/components/FullPageMultiImage";
@@ -105,15 +104,17 @@ export default async function WorkPage({ params }: Props) {
       }
     });
 
-  if (work.outline.content_ja && work.outline.content_en) {
-    scenes.push(
-      <Outline
-        key="outline"
-        textJa={work.outline.content_ja}
-        textEn={work.outline.content_en}
-      />
-    );
-  }
+  scenes.push(
+    <Outline
+      key="outline"
+      title={work.title[`text_${locale}`]}
+      outline={{
+        ja: work.outline.content_ja ? work.outline.content_ja : "",
+        en: work.outline.content_en ? work.outline.content_en : "",
+      }}
+      credit={work.credit[`content_${locale}`]}
+    />
+  );
 
   if (!work) {
     return <p>作品が見つかりませんでした。</p>;
@@ -121,9 +122,7 @@ export default async function WorkPage({ params }: Props) {
 
   return (
     <>
-      <Layout>
-        <SceneManager scenes={scenes} languageMode={locale} />
-      </Layout>
+      <SceneManager scenes={scenes} languageMode={locale} />
     </>
   );
 }

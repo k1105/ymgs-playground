@@ -1,7 +1,6 @@
 import { WorkList } from "@/components/scene/WorkList";
 import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
-import Layout from "@/components/Layout";
 import { fetchAllWorks } from "@/lib/microCMS";
 import styles from "./styles/Home.module.css";
 
@@ -57,44 +56,42 @@ export default async function Home({ params }: Props) {
   const works = await fetchAllWorks();
 
   return (
-    <Layout>
-      <div className={styles.container}>
-        <div className={styles.textContainer}>
-          <SceneManager
-            scenes={[
-              <WorkList key="scene-profile" locale={locale} works={works} />,
-              <Carrier
-                key="scene-awards"
-                items={grantsAwards}
-                title="Grants and Awards"
-              />,
-              <Carrier
-                key="scene-exhibitions"
-                items={soloExhibition}
-                title="Solo Exhibitions (Selection)"
-              />,
-              <Carrier
-                key="group-exhibitions"
-                items={groupExhibition}
-                title="Group Exhibition (Selection)"
-              />,
-              <Carrier
-                key="performance"
-                items={performance}
-                title="Performance"
-              />,
-              <Carrier
-                key="lectures-and-talks"
-                items={lecturesAndTalks}
-                title="Lectures and Talks"
-              />,
-              <Carrier key="carrier" items={carrier} title="経歴 / Carrier" />,
-            ]}
-            languageMode={locale}
-          />
-        </div>
+    <div className={styles.container}>
+      <div className={styles.textContainer}>
+        <SceneManager
+          scenes={[
+            <WorkList key="scene-profile" locale={locale} works={works} />,
+            <Carrier
+              key="scene-awards"
+              items={grantsAwards}
+              title="Grants and Awards"
+            />,
+            <Carrier
+              key="scene-exhibitions"
+              items={soloExhibition}
+              title="Solo Exhibitions (Selection)"
+            />,
+            <Carrier
+              key="group-exhibitions"
+              items={groupExhibition}
+              title="Group Exhibition (Selection)"
+            />,
+            <Carrier
+              key="performance"
+              items={performance}
+              title="Performance"
+            />,
+            <Carrier
+              key="lectures-and-talks"
+              items={lecturesAndTalks}
+              title="Lectures and Talks"
+            />,
+            <Carrier key="carrier" items={carrier} title="経歴 / Carrier" />,
+          ]}
+          languageMode={locale}
+        />
       </div>
-    </Layout>
+    </div>
   );
 }
 

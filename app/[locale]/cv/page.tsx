@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import styles from "../styles/CV.module.scss";
 import { Fragment } from "react";
 
@@ -27,24 +26,22 @@ const CV = async ({ params }: Props) => {
     </Fragment>
   ));
   return (
-    <Layout>
-      <div className={styles.container}>
-        <p className={styles.name}>
-          {locale === "ja" ? `森田 明日香 (もりた・あすか)` : `Asuka Morita`}
+    <div className={styles.container}>
+      <p className={styles.name}>
+        {locale === "ja" ? `森田 明日香 (もりた・あすか)` : `Asuka Morita`}
+      </p>
+      <div className={styles.profileContainer}>
+        <p
+          style={{
+            fontSize: "0.9rem",
+            marginBottom: "2rem",
+            lineHeight: "1.8rem",
+          }}
+        >
+          {paragraphs}
         </p>
-        <div className={styles.profileContainer}>
-          <p
-            style={{
-              fontSize: "0.9rem",
-              marginBottom: "2rem",
-              lineHeight: "1.8rem",
-            }}
-          >
-            {paragraphs}
-          </p>
-        </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
