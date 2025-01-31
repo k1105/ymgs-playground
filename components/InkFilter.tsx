@@ -35,9 +35,9 @@ export const InkFilter = ({
     <>
       <div className={styles.componentWrapper}>
         <div
-          className={styles.effect}
+          className={blurIntensity !== 0 ? styles.effect : ""}
           ref={filterRef}
-          style={{ filter: `url(#${filterId})` }}
+          style={{ filter: blurIntensity !== 0 ? `url(#${filterId})` : "none" }}
         >
           {children}
         </div>
