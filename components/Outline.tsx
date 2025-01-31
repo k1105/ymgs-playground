@@ -29,16 +29,26 @@ export const Outline = ({
   const [jaSegments, setJaSegments] = useState<string[]>([]);
   const [enSegments, setEnSegments] = useState<string[]>([]);
   const { setIsHidden } = useNameContainer();
+  const placeHolderImageUrl =
+    "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
 
   useEffect(() => {
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
-        h: convertCssUnitToPx("15rem"),
+        h: outline.ja.length > 0 ? convertCssUnitToPx("15rem") : "0",
       });
 
-    setLineHeight(convertCssUnitToPx("2rem"));
-    setFontSize(convertCssUnitToPx("0.9rem"));
+    setLineHeight(
+      window.innerWidth > 600
+        ? convertCssUnitToPx("2rem")
+        : convertCssUnitToPx("1.5rem")
+    );
+    setFontSize(
+      window.innerWidth > 600
+        ? convertCssUnitToPx("0.9rem")
+        : convertCssUnitToPx("0.8rem")
+    );
     setIsHidden(false);
   }, []);
 
@@ -64,32 +74,100 @@ export const Outline = ({
   return (
     <>
       <div className="container">
-        <InkFilter blurIntensity={transitionProgress}>
-          <h3 style={{ marginBottom: "3rem", color: "var(--text-color)" }}>
-            {title}
-          </h3>
-          <TextContainer
-            text={
-              languageMode == "ja"
-                ? jaSegments[currentSegmentIndex]
-                : enSegments[currentSegmentIndex]
-            }
-            size={size}
-            lineHeight={lineHeight}
-            fontSize={fontSize}
+        <div className="imageContainer">
+          <img
+            className="image"
+            style={{ objectFit: "cover" }}
+            src={placeHolderImageUrl}
+            alt=""
           />
-          <p className="credit">{credit}</p>
-        </InkFilter>
+          <div className="image"></div>
+        </div>
+        <div className="textContainer">
+          <div className="textWrapper">
+            <InkFilter blurIntensity={transitionProgress}>
+              <h3 style={{ marginBottom: "3rem", color: "var(--text-color)" }}>
+                {title}
+              </h3>
+              <TextContainer
+                text={
+                  languageMode == "ja"
+                    ? jaSegments[currentSegmentIndex]
+                    : enSegments[currentSegmentIndex]
+                }
+                size={size}
+                lineHeight={lineHeight}
+                fontSize={fontSize}
+              />
+              <p className="credit">{credit}</p>
+            </InkFilter>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p className="nextButton">つぎは</p>
+        <div className="nextLinkTitle">
+          <p>ゆらぎの翻訳</p>
+          <p>→</p>
+        </div>
       </div>
 
       <style jsx>{`
         .container {
+          margin-left: 7rem;
+          display: flex;
+          gap: 3rem;
+        }
+        .textContainer {
+        }
+        .textWrapper {
           width: ${size.w}px;
-          margin: 20vh 17vw;
+          margin-top: 20vh;
+        }
+
+        .imageContainer {
+          display: flex;
+          height: 100vh;
+          width: 41vw;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .image {
+          aspect-ratio: 4 / 3;
+          background-color: black;
+        }
+
+        .nextButton {
+          background-color: black;
+          font-size: 0.8rem;
+          width: 3.5rem;
+          border-radius: 2rem;
+          text-align: center;
+          color: white;
+        }
+        .nextLinkTitle {
+          display: flex;
+          gap: 1rem;
         }
 
         .credit {
           font-size: 0.8rem;
+        }
+
+        @media screen and (max-width: 600px) {
+          .container {
+            margin-left: 4rem;
+            flex-direction: column-reverse;
+          }
+          .imageContainer {
+            width: 100%;
+            height: 60vh;
+          }
+
+          .credit {
+            font-size: 0.6rem;
+          }
         }
       `}</style>
     </>
@@ -116,7 +194,7 @@ const TextContainer = ({
         {`
           .container {
             width: ${size.w}px;
-            max-height: ${size.h}px;
+            height: ${size.h}px;
             line-height: ${lineHeight}px;
             font-size: ${fontSize}px;
             white-space: pre-wrap;

@@ -47,7 +47,7 @@ export const FullPageMultiImage = ({
           justify-content: center;
           gap: 2rem;
           margin: auto;
-          transition: all 0.5s;
+          transition: all 300ms;
           img {
             width: 45vw;
             height: 100%;
