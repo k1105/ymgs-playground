@@ -1,0 +1,57 @@
+.container {
+  margin-top: 17rem;
+}
+
+.textContainer {
+  width: 92vw;
+  margin: 200px 0 0 7vw;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+}
+
+.nameContainer {
+  display: flex;
+  position: fixed;
+  z-index: 990;
+  text-align: left;
+  top: 6rem;
+  left: 3rem;
+  flex-direction: column;
+  gap: 2rem;
+  font-weight: 300;
+  color: var(--text-color);
+  transition: all 1s ease;
+  .link {
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    letter-spacing: 0.3rem;
+  }
+  .ja {
+    font-size: 1.2rem;
+    letter-spacing: 0.7rem;
+  }
+}
+
+.nameContainer.hidden {
+  left: -3rem;
+}
+
+@media screen and (max-width: 600px) {
+  .textContainer {
+    width: 83vw;
+    margin: 0px 0 0 17vw;
+    margin-bottom: 10rem;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .nameContainer {
+    left: 1rem;
+    top: 2rem;
+  }
+
+  .container {
+    margin-top: 5rem;
+  }
+}

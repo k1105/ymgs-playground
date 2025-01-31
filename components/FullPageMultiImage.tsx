@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from "react";
+import { useNameContainer } from "./context/NameContainerContext";
 
 export const FullPageMultiImage = ({
   transitionProgress = 0,
@@ -14,6 +16,11 @@ export const FullPageMultiImage = ({
     }[];
   }[];
 }) => {
+  const { setIsHidden } = useNameContainer();
+  useEffect(() => {
+    setIsHidden(true);
+  });
+
   return (
     <>
       <div className="page-wrapper">

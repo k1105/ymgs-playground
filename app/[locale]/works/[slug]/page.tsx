@@ -77,7 +77,7 @@ export default async function WorkPage({ params }: Props) {
       key="title-page"
       title={work.title[`text_${locale}`]}
       year={work.year.toString()}
-      credit={work.credit[`content_${locale}`]}
+      backgroundImage={work.ogpImage ? work.ogpImage.url : ""}
     />
   );
 

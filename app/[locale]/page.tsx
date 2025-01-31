@@ -2,7 +2,7 @@ import { WorkList } from "@/components/scene/WorkList";
 import { Carrier } from "@/components/scene/Carrier";
 import { SceneManager } from "@/components/SceneManager";
 import { fetchAllWorks } from "@/lib/microCMS";
-import styles from "./styles/Home.module.css";
+import styles from "./styles/Home.module.scss";
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;

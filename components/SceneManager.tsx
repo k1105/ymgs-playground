@@ -35,7 +35,6 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
     const threshold = 80;
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
-        console.log(currentSegmentIndex);
         if (currentSegmentIndex >= segmentsLength - 1) {
           // 次のシーンへ
           setSceneIndex((prev) => (prev + 1) % scenes.length);

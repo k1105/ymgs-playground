@@ -17,8 +17,6 @@ export async function fetchWorkBySlug(slug: string) {
     }
   );
 
-  console.log(response);
-
   const data = await response.json();
   return data.contents[0]; // 必要な作品データを返す
 }

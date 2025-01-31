@@ -32,20 +32,9 @@ export const HambergerMenu = ({
   };
   return (
     <>
-      <div className={`${styles.nameContainer} ${isOpen && styles.open}`}>
-        <DynamicLink
-          href={`/`}
-          style={{ textDecoration: "none", color: "var(--text-color)" }}
-        >
-          <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
-        </DynamicLink>
-        <p className={styles.link}>works</p>
-        <p className={styles.link}>cv</p>
-      </div>
-
       <div className={styles.headerContainer}>
         <p
-          className={`${styles.toggleButton} ${isOpen && styles.open}`}
+          className={`${styles.toggleButton}`}
           onClick={() => {
             setIsOpen((prev) => !prev);
           }}

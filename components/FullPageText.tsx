@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
+import { useNameContainer } from "@/components/context/NameContainerContext";
 
 export const FullPageText = ({
   textJa,
@@ -25,6 +26,7 @@ export const FullPageText = ({
   const [fontSize, setFontSize] = useState<number>(0);
   const [jaSegments, setJaSegments] = useState<string[]>([]);
   const [enSegments, setEnSegments] = useState<string[]>([]);
+  const { setIsHidden } = useNameContainer();
 
   useEffect(() => {
     if (document)
@@ -35,11 +37,10 @@ export const FullPageText = ({
 
     setLineHeight(convertCssUnitToPx("3rem"));
     setFontSize(convertCssUnitToPx("1rem"));
+    setIsHidden(true);
   }, []);
 
   useEffect(() => {
-    console.log("size.w: " + size.w);
-    console.log("size.h: " + size.h);
     if (size.w > 0) {
       setJaSegments(
         paginateByBinarySearch(textJa, size.w, size.h, lineHeight, fontSize)

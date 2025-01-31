@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
+import { useNameContainer } from "./context/NameContainerContext";
 
 export const Outline = ({
   title,
@@ -27,6 +28,7 @@ export const Outline = ({
   const [fontSize, setFontSize] = useState<number>(0);
   const [jaSegments, setJaSegments] = useState<string[]>([]);
   const [enSegments, setEnSegments] = useState<string[]>([]);
+  const { setIsHidden } = useNameContainer();
 
   useEffect(() => {
     if (document)
@@ -37,6 +39,7 @@ export const Outline = ({
 
     setLineHeight(convertCssUnitToPx("2rem"));
     setFontSize(convertCssUnitToPx("0.9rem"));
+    setIsHidden(false);
   }, []);
 
   useEffect(() => {
