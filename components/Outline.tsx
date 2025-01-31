@@ -36,7 +36,7 @@ export const Outline = ({
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
-        h: outline.ja.length > 0 ? convertCssUnitToPx("15rem") : "0",
+        h: outline.ja.length > 0 ? convertCssUnitToPx("15rem") : 0,
       });
 
     setLineHeight(
