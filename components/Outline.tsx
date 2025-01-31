@@ -5,6 +5,7 @@ import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
 import { useNameContainer } from "./context/NameContainerContext";
+import { OpacityFilter } from "./OpacityFilter";
 
 export const Outline = ({
   title,
@@ -74,17 +75,24 @@ export const Outline = ({
   return (
     <>
       <div className="container">
-        <div className="imageContainer">
-          <img
-            className="image"
-            style={{ objectFit: "cover" }}
-            src={placeHolderImageUrl}
-            alt=""
-          />
-          <div className="image"></div>
-        </div>
+        <OpacityFilter transitionProgress={transitionProgress}>
+          <div className="imageContainer">
+            <img
+              className="image"
+              style={{ objectFit: "cover" }}
+              src={placeHolderImageUrl}
+              alt=""
+            />
+            <img
+              className="image"
+              style={{ objectFit: "cover" }}
+              src={placeHolderImageUrl}
+              alt=""
+            />
+          </div>
+        </OpacityFilter>
         <div className="textContainer">
-          <div className="textWrapper">
+          <div className="textWrapper" style={{ width: `${size.w}px` }}>
             <InkFilter blurIntensity={transitionProgress}>
               <h3 style={{ marginBottom: "3rem", color: "var(--text-color)" }}>
                 {title}
@@ -121,7 +129,6 @@ export const Outline = ({
         .textContainer {
         }
         .textWrapper {
-          width: ${size.w}px;
           margin-top: 20vh;
         }
 
