@@ -1,26 +1,21 @@
 interface TextPagerProps {
   text: string;
-  pageIndex: number;
-  width: number;
-  height: number;
+  size: { w: number; h: number };
   fontSize: number;
   lineHeight: number;
 }
 
 export const TextPager: React.FC<TextPagerProps> = ({
   text,
-  pageIndex,
-  width,
-  height,
+  size,
   fontSize,
   lineHeight,
 }) => {
   return (
     <div
-      key={pageIndex}
       style={{
-        width: width + "px",
-        height: height + "px",
+        width: size.w + "px",
+        height: size.h + "px",
         fontSize: fontSize + "px",
         lineHeight: lineHeight + "px",
         whiteSpace: "pre-wrap",

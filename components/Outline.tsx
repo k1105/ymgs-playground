@@ -6,6 +6,8 @@ import { paginateByBinarySearch } from "../lib/paginateText";
 import { InkFilter } from "./InkFilter";
 import { useNameContainer } from "./context/NameContainerContext";
 import { OpacityFilter } from "./OpacityFilter";
+import styles from "./Outline.module.scss";
+import { TextPager } from "./TextPager";
 
 export const Outline = ({
   title,
@@ -40,7 +42,7 @@ export const Outline = ({
         h:
           outline.ja.length > 0
             ? window.innerWidth > 600
-              ? convertCssUnitToPx("60vh")
+              ? convertCssUnitToPx("50vh")
               : convertCssUnitToPx("15rem")
             : 0,
       });
@@ -79,30 +81,30 @@ export const Outline = ({
 
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <OpacityFilter transitionProgress={transitionProgress}>
-          <div className="imageContainer">
+          <div className={styles.imageContainer}>
             <img
-              className="image"
+              className={styles.image}
               style={{ objectFit: "cover" }}
               src={placeHolderImageUrl}
               alt=""
             />
             <img
-              className="image"
+              className={styles.image}
               style={{ objectFit: "cover" }}
               src={placeHolderImageUrl}
               alt=""
             />
           </div>
         </OpacityFilter>
-        <div className="textContainer">
-          <div className="textWrapper" style={{ width: `${size.w}px` }}>
+        <div className={styles.textContainer}>
+          <div className={styles.textWrapper} style={{ width: `${size.w}px` }}>
             <InkFilter blurIntensity={transitionProgress}>
-              <h3 style={{ marginBottom: "3rem", color: "var(--text-color)" }}>
+              <h3 style={{ marginBottom: "2rem", color: "var(--text-color)" }}>
                 {title}
               </h3>
-              <TextContainer
+              <TextPager
                 text={
                   languageMode == "ja"
                     ? jaSegments[currentSegmentIndex]
@@ -112,125 +114,18 @@ export const Outline = ({
                 lineHeight={lineHeight}
                 fontSize={fontSize}
               />
-              <p className="credit">{credit}</p>
+              <p className={styles.credit}>{credit}</p>
             </InkFilter>
           </div>
         </div>
       </div>
-      <div className="nextLink">
-        <p className="nextButton">つぎは</p>
-        <div className="nextLinkTitle">
+      <div className={styles.nextLink}>
+        <p className={styles.nextButton}>つぎは</p>
+        <div className={styles.nextLinkTitle}>
           <p>ゆらぎの翻訳</p>
           <p>→</p>
         </div>
       </div>
-
-      <style jsx>{`
-        .container {
-          margin-left: 7rem;
-          display: flex;
-          gap: 3rem;
-        }
-        .textContainer {
-        }
-        .textWrapper {
-          margin-top: 20vh;
-        }
-
-        .imageContainer {
-          display: flex;
-          height: 100vh;
-          width: 41vw;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-
-        .image {
-          aspect-ratio: 4 / 3;
-          background-color: black;
-        }
-
-        .nextLink {
-          position: fixed;
-          right: 2.5vw;
-          bottom: 3rem;
-        }
-
-        .nextButton {
-          background-color: black;
-          font-size: 0.8rem;
-          width: 3.5rem;
-          border-radius: 2rem;
-          text-align: center;
-          color: white;
-          margin-bottom: 0.5rem;
-        }
-        .nextLinkTitle {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .credit {
-          font-size: 0.8rem;
-        }
-
-        @media screen and (max-width: 600px) {
-          .container {
-            margin-left: 4rem;
-            flex-direction: column-reverse;
-          }
-          .imageContainer {
-            width: 100%;
-            height: 60vh;
-          }
-
-          .credit {
-            font-size: 0.6rem;
-          }
-        }
-      `}</style>
-    </>
-  );
-};
-
-const TextContainer = ({
-  text,
-  size,
-  lineHeight,
-  fontSize,
-}: {
-  text: string;
-  size: { w: number; h: number };
-  lineHeight: number;
-  fontSize: number;
-}) => {
-  return (
-    <>
-      <div className="container">
-        <p>{text}</p>
-      </div>
-      <style jsx>
-        {`
-          .container {
-            width: ${size.w}px;
-            height: ${size.h}px;
-            line-height: ${lineHeight}px;
-            font-size: ${fontSize}px;
-            white-space: pre-wrap;
-            word-break: break-word;
-            box-sizing: border-box;
-            line-break: strict;
-            margin-bottom: 0.6rem;
-            border-bottom: 1px solid black;
-          }
-
-          @media screen and (max-width: 600px) {
-            .title {
-              margin: 10vh 5vw;
-            }
-          }
-        `}
-      </style>
     </>
   );
 };
