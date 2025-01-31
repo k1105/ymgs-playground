@@ -37,7 +37,12 @@ export const Outline = ({
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
-        h: outline.ja.length > 0 ? convertCssUnitToPx("15rem") : 0,
+        h:
+          outline.ja.length > 0
+            ? window.innerWidth > 600
+              ? convertCssUnitToPx("60vh")
+              : convertCssUnitToPx("15rem")
+            : 0,
       });
 
     setLineHeight(
@@ -112,7 +117,7 @@ export const Outline = ({
           </div>
         </div>
       </div>
-      <div>
+      <div className="nextLink">
         <p className="nextButton">つぎは</p>
         <div className="nextLinkTitle">
           <p>ゆらぎの翻訳</p>
@@ -145,6 +150,12 @@ export const Outline = ({
           background-color: black;
         }
 
+        .nextLink {
+          position: fixed;
+          right: 2.5vw;
+          bottom: 3rem;
+        }
+
         .nextButton {
           background-color: black;
           font-size: 0.8rem;
@@ -152,6 +163,7 @@ export const Outline = ({
           border-radius: 2rem;
           text-align: center;
           color: white;
+          margin-bottom: 0.5rem;
         }
         .nextLinkTitle {
           display: flex;
