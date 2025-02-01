@@ -1,10 +1,10 @@
 import { fetchWorkBySlug, fetchAllWorks } from "@/lib/microCMS";
-import { SceneManager } from "@/components/SceneManager";
-import TitlePage from "@/components/TitlePage";
-import { FullPageMultiImage } from "@/components/FullPageMultiImage";
-import { FullPageMovie } from "@/components/FullPageMovie";
-import { Outline } from "@/components/Outline";
-import { FullPageText } from "@/components/FullPageText";
+import { SceneManager } from "@/components/common/SceneManager";
+import TitlePage from "@/components/scene/work/TitlePage";
+import { FullPageMultiImage } from "@/components/scene/work/FullPageMultiImage";
+import { FullPageMovie } from "@/components/scene/work/FullPageMovie";
+import { Outline } from "@/components/scene/work/Outline";
+import { FullPageText } from "@/components/scene/work/FullPageText";
 import { ReactElement } from "react";
 
 interface Props {

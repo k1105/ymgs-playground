@@ -1,9 +1,9 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
-import { paginateByBinarySearch } from "../lib/paginateText";
-import { InkFilter } from "./InkFilter";
+import { convertCssUnitToPx } from "@/lib/convertCssUnitToPx";
+import { paginateByBinarySearch } from "@/lib/paginateText";
+import { InkFilter } from "@/components/common/filter/InkFilter";
 import { useNameContainer } from "@/components/context/NameContainerContext";
 
 export const FullPageText = ({

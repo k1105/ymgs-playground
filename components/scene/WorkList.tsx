@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "./WorkList.module.css";
-import { InkFilter } from "../InkFilter";
+import { InkFilter } from "../common/filter/InkFilter";
 import Link from "next/link";
-import { OpacityFilter } from "../OpacityFilter";
+import { OpacityFilter } from "../common/filter/OpacityFilter";
 export const WorkList = ({
   transitionProgress = 0,
   locale = "ja",

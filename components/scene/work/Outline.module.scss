@@ -30,12 +30,12 @@
 }
 
 .nextButton {
-  background-color: black;
+  background-color: var(--text-color);
   font-size: 0.8rem;
   width: 3.5rem;
   border-radius: 2rem;
   text-align: center;
-  color: white;
+  color: var(--background-color);
   margin-bottom: 0.5rem;
 }
 .nextLinkTitle {

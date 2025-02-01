@@ -1,16 +1,16 @@
 "use client";
 
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/common/ThemeProvider";
 import {
   NameContainerProvider,
   useNameContainer,
 } from "@/components/context/NameContainerContext";
 import "./styles/globals.css";
 import { useRef, useState } from "react";
-import { FontTester } from "@/components/FontTester";
-import { HambergerMenu } from "@/components/HambergerMenu";
-import DynamicLink from "@/components/DynamicLink";
-import styles from "./styles/Home.module.scss";
+import { FontTester } from "@/components/common/FontTester";
+import { HambergerMenu } from "@/components/common/HambergerMenu";
+import DynamicLink from "@/components/common/DynamicLink";
+import styles from "./Home.module.scss";
 
 export default function RootLayout({
   children,

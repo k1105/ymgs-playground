@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./TitlePage.module.scss";
-import { InkFilter } from "./InkFilter";
-import { useNameContainer } from "./context/NameContainerContext";
+import { InkFilter } from "@/components/common/filter/InkFilter";
+import { useNameContainer } from "@/components/context/NameContainerContext";
 import { useEffect } from "react";
 
 const TitlePage = ({

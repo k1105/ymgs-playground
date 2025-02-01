@@ -1,8 +1,7 @@
-import styles from "../styles/CV.module.scss";
-import { Fragment } from "react";
-import { Carrier } from "@/components/scene/Carrier";
-import { SceneManager } from "@/components/SceneManager";
-import { Bio } from "@/components/scene/Bio";
+import styles from "./CV.module.scss";
+import { Carrier } from "@/components/scene/bio/Carrier";
+import { SceneManager } from "@/components/common/SceneManager";
+import { Bio } from "@/components/scene/bio/Bio";
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
 const apiKey = process.env.MICROCMS_API_KEY!;

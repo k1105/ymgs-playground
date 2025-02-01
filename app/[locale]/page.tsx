@@ -1,6 +1,6 @@
 import { WorkList } from "@/components/scene/WorkList";
-import { SceneManager } from "@/components/SceneManager";
-import styles from "./styles/Home.module.scss";
+import { SceneManager } from "@/components/common/SceneManager";
+import styles from "./Home.module.scss";
 import { fetchAllWorks } from "@/lib/microCMS";
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;

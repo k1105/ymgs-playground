@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./Carrier.module.css";
-import { InkFilter } from "../InkFilter";
+import { InkFilter } from "@/components/common/filter/InkFilter";
 
 export const Carrier = ({
   transitionProgress = 0,

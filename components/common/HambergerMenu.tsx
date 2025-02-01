@@ -1,10 +1,9 @@
 import { SetStateAction, useState, Dispatch, RefObject } from "react";
 import { usePathname } from "next/navigation";
 import { getCurrentLocale, switchLocale } from "@/lib/i18n";
-import { RoundAutorenew } from "./icones/RoundAutoRenew";
+import { RoundAutorenew } from "../icones/RoundAutoRenew";
 import styles from "./HambergerMenu.module.scss";
-import DynamicLink from "./DynamicLink";
-import { ListBulleted } from "./icones/ListBulleted";
+import { ListBulleted } from "../icones/ListBulleted";
 import { useTheme } from "./ThemeProvider";
 
 export const HambergerMenu = ({

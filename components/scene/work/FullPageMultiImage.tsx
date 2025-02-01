@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useNameContainer } from "./context/NameContainerContext";
+import { useNameContainer } from "@/components/context/NameContainerContext";
 
 export const FullPageMultiImage = ({
   transitionProgress = 0,

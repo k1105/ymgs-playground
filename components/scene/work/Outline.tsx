@@ -1,14 +1,14 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { convertCssUnitToPx } from "../lib/convertCssUnitToPx";
-import { paginateByBinarySearch } from "../lib/paginateText";
-import { InkFilter } from "./InkFilter";
-import { useNameContainer } from "./context/NameContainerContext";
-import { OpacityFilter } from "./OpacityFilter";
+import { convertCssUnitToPx } from "../../../lib/convertCssUnitToPx";
+import { paginateByBinarySearch } from "../../../lib/paginateText";
+import { InkFilter } from "../../common/filter/InkFilter";
+import { useNameContainer } from "../../context/NameContainerContext";
+import { OpacityFilter } from "../../common/filter/OpacityFilter";
 import styles from "./Outline.module.scss";
-import { TextPager } from "./TextPager";
-import DynamicLink from "./DynamicLink";
+import { TextPager } from "../../common/TextPager";
+import DynamicLink from "../../common/DynamicLink";
 
 export const Outline = ({
   title,

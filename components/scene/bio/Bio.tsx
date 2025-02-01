@@ -2,7 +2,7 @@
 
 import styles from "./Bio.module.scss";
 import { Fragment } from "react";
-import { InkFilter } from "../InkFilter";
+import { InkFilter } from "../../common/filter/InkFilter";
 
 export const Bio = ({
   transitionProgress = 0,
