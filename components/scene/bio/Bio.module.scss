@@ -3,6 +3,7 @@
 }
 
 .name {
+  font-weight: 700;
   margin-bottom: 2rem;
 }
 
@@ -11,6 +12,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .container {
+    margin-top: 10rem;
+  }
   .profileContainer {
     width: auto;
   }

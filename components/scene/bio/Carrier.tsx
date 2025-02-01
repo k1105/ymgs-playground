@@ -19,7 +19,6 @@ export const Carrier = ({
       <InkFilter blurIntensity={transitionProgress}>
         <div className={styles.container}>
           <h2 className={styles.carrierName}>{title}</h2>
-          <div className={styles.border} />
           <div className={styles.carrierContainer}>
             {sortedItems.map((elem, i) => (
               <div className={styles.carrierItem} key={`carrier-item-${i}`}>

@@ -1,3 +1,10 @@
 .container {
   margin-left: 15rem;
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin-left: 5rem;
+    margin-right: 1rem;
+  }
+}

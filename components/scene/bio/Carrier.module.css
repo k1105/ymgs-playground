@@ -19,23 +19,19 @@
   font-size: 1.2rem;
 }
 
-.border {
-  width: 5rem;
-  border-bottom: 1px solid white;
-  margin-bottom: 3rem;
-}
-
 .carrierItem {
   width: 100%;
   display: flex;
   gap: 1.5rem;
 }
 .year {
+  font-size: 0.7rem;
+  color: gray;
   font-weight: 700;
 }
 .item {
-  line-height: 1.8rem;
-  font-size: 0.9rem;
+  line-height: 1.4rem;
+  font-size: 0.75rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -45,7 +41,7 @@
   }
 
   .container {
-    width: 90vw;
+    width: 100%;
     margin-top: 5rem;
     margin-bottom: 10rem;
     flex-direction: column;
@@ -56,5 +52,10 @@
     flex-direction: column;
     gap: 0.5rem;
     width: auto;
+  }
+
+  .item {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
   }
 }
