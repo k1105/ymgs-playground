@@ -1,4 +1,4 @@
-import { fetchWorkBySlug } from "@/lib/microCMS";
+import { fetchWorkBySlug, fetchAllWorks } from "@/lib/microCMS";
 import { SceneManager } from "@/components/SceneManager";
 import TitlePage from "@/components/TitlePage";
 import { FullPageMultiImage } from "@/components/FullPageMultiImage";
@@ -9,39 +9,6 @@ import { ReactElement } from "react";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
-}
-
-interface Work {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  revisedAt: string;
-  title: {
-    fieldId: string;
-    text_ja: string;
-    text_en: string;
-  };
-  slug: string;
-  ogpImage: {
-    url: string;
-    height: number;
-    width: number;
-  };
-  category: string[];
-  year: number;
-  appendix: any;
-  page: Page[];
-  credit: {
-    fieldId: string;
-    content_ja: string;
-    content_en: string;
-  };
-  outline: {
-    fieldId: string;
-    content_ja?: string;
-    content_en?: string;
-  };
 }
 
 interface Page {
@@ -70,6 +37,13 @@ export async function generateMetadata({ params }: Props) {
 export default async function WorkPage({ params }: Props) {
   const { slug, locale } = await params;
   const work = await fetchWorkBySlug(slug);
+  const allWorks = await fetchAllWorks();
+  const currentIndex = allWorks.findIndex((w: any) => w.slug === slug);
+  const nextWork =
+    currentIndex >= 0 && currentIndex < allWorks.length - 1
+      ? allWorks[currentIndex + 1]
+      : null;
+
   const scenes: ReactElement[] = [];
 
   scenes.push(
@@ -113,6 +87,8 @@ export default async function WorkPage({ params }: Props) {
         en: work.outline.content_en ? work.outline.content_en : "",
       }}
       credit={work.credit[`content_${locale}`]}
+      nextWorkTitle={nextWork ? nextWork.title[`text_${locale}`] : ""}
+      nextWorkSlug={nextWork ? nextWork.slug : ""}
     />
   );
 

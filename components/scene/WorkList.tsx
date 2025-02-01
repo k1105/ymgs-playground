@@ -4,18 +4,6 @@ import styles from "./WorkList.module.css";
 import { InkFilter } from "../InkFilter";
 import Link from "next/link";
 import { OpacityFilter } from "../OpacityFilter";
-
-// MicroCMSの「work」から取得した型を仮定
-type Work = {
-  slug: string;
-  title: {
-    text_ja: string;
-    text_en: string;
-  };
-  ogpImage: { url: string; width: number; height: number };
-  year: number;
-};
-
 export const WorkList = ({
   transitionProgress = 0,
   locale = "ja",

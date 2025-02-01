@@ -8,6 +8,7 @@ import { useNameContainer } from "./context/NameContainerContext";
 import { OpacityFilter } from "./OpacityFilter";
 import styles from "./Outline.module.scss";
 import { TextPager } from "./TextPager";
+import DynamicLink from "./DynamicLink";
 
 export const Outline = ({
   title,
@@ -17,6 +18,8 @@ export const Outline = ({
   setSegmentsLength,
   languageMode = "ja",
   transitionProgress = 0,
+  nextWorkSlug = "",
+  nextWorkTitle = "",
 }: {
   title: string;
   outline: { ja: string; en: string };
@@ -25,6 +28,8 @@ export const Outline = ({
   setSegmentsLength?: Dispatch<SetStateAction<number>>;
   languageMode?: "ja" | "en";
   transitionProgress?: number;
+  nextWorkSlug?: string;
+  nextWorkTitle?: string;
 }) => {
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [lineHeight, setLineHeight] = useState<number>(0);
@@ -119,13 +124,18 @@ export const Outline = ({
           </div>
         </div>
       </div>
-      <div className={styles.nextLink}>
-        <p className={styles.nextButton}>つぎは</p>
-        <div className={styles.nextLinkTitle}>
-          <p>ゆらぎの翻訳</p>
-          <p>→</p>
-        </div>
-      </div>
+      {nextWorkSlug.length > 0 && nextWorkTitle.length > 0 && (
+        <DynamicLink
+          href={`/works/${nextWorkSlug}`}
+          className={styles.nextLink}
+        >
+          <p className={styles.nextButton}>つぎは</p>
+          <div className={styles.nextLinkTitle}>
+            <p>{nextWorkTitle}</p>
+            <p>→</p>
+          </div>
+        </DynamicLink>
+      )}
     </>
   );
 };
