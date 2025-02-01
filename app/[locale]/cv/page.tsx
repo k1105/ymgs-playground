@@ -53,6 +53,10 @@ const CV = async ({ params }: Props) => {
           languageMode={locale}
         />
       </div>
+      <div className={styles.footer}>
+        <p>CV / 作家経歴</p>
+        <p>← 1 / 5 →</p>
+      </div>
     </>
   );
 };

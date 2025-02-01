@@ -172,11 +172,11 @@ export const SceneManager = ({ scenes, languageMode }: SceneManagerProps) => {
   };
   return (
     <>
-      <div className={styles.sceneStatus}>
+      {/* <div className={styles.sceneStatus}>
         <p>
           {sceneIndex + 1} / {scenes.length}
         </p>
-      </div>
+      </div> */}
 
       {/* いま表示すべきシーンだけ描画する */}
       {scenes.map((scene, i) => {

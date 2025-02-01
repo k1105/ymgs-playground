@@ -18,19 +18,28 @@ export const Carrier = ({
     <>
       <InkFilter blurIntensity={transitionProgress}>
         <div className={styles.container}>
-          <h2 className={styles.carrierName}>{title}</h2>
-          <div className={styles.carrierContainer}>
-            {sortedItems.map((elem, i) => (
-              <div className={styles.carrierItem} key={`carrier-item-${i}`}>
-                {elem.year && <p className={styles.year}>{elem.year}</p>}
-                <div className={styles.item}>
-                  {elem.content.map((text, itemId) => (
-                    <p key={`item-${i}-${itemId}`}>{text}</p>
+          {[0, 1, 2].map((_, i) => {
+            return (
+              <div className={styles.columnContainer} key={"carrier-" + i}>
+                <h2 className={styles.carrierName}>{title}</h2>
+                <div className={styles.carrierContainer}>
+                  {sortedItems.map((elem, i) => (
+                    <div
+                      className={styles.carrierItem}
+                      key={`carrier-item-${i}`}
+                    >
+                      {elem.year && <p className={styles.year}>{elem.year}</p>}
+                      <div className={styles.item}>
+                        {elem.content.map((text, itemId) => (
+                          <p key={`item-${i}-${itemId}`}>{text}</p>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </InkFilter>
     </>
