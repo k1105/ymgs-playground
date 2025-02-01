@@ -60,8 +60,12 @@ const NameContainer = () => {
       >
         <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
       </DynamicLink>
-      <p className={styles.link}>works</p>
-      <p className={styles.link}>cv</p>
+      <DynamicLink href="/" className={styles.link}>
+        works
+      </DynamicLink>
+      <DynamicLink href="/cv" className={styles.link}>
+        cv
+      </DynamicLink>
     </div>
   );
 };

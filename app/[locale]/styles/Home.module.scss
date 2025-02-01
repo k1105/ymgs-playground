@@ -23,6 +23,8 @@
   color: var(--text-color);
   transition: all 1s ease;
   .link {
+    text-decoration: none;
+    color: var(--text-color);
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
     letter-spacing: 0.3rem;

@@ -30,3 +30,27 @@ interface Work {
     content_en?: string;
   };
 }
+
+type BioContent = {
+  id: string;
+  content_ja: string;
+  content_en: string;
+};
+
+type BioResponse = {
+  content: BioContent;
+};
+
+type CarrierContent = {
+  id: string;
+  year: number;
+  group: string[];
+  content: { fieldId: string; text_ja: string; text_en: string }[];
+};
+
+type CarrierResponse = {
+  contents: CarrierContent[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+};

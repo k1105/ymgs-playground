@@ -1,0 +1,17 @@
+.container {
+  margin-top: 17rem;
+}
+
+.name {
+  margin-bottom: 2rem;
+}
+
+.profileContainer {
+  width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+  .profileContainer {
+    width: auto;
+  }
+}
