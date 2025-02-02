@@ -36,13 +36,16 @@ export const FullPageImage = ({
               <div className={styles.imageRow}>
                 {imageRow.image.length > 1 ? (
                   imageRow.image.map((image, index) => (
-                    <img key={`image-${index}`} src={`${image.url}?w=1200`} />
+                    <img
+                      key={`image-${index}`}
+                      src={`${image.url}?w=1200&fm=webp`}
+                    />
                   ))
                 ) : (
                   <img
                     className={styles.singleImage}
                     key={`single-image`}
-                    src={`${imageRow.image[0].url}?w=1600`}
+                    src={`${imageRow.image[0].url}?w=1600&fm=webp`}
                   />
                 )}
               </div>
