@@ -1,12 +1,11 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNameContainer } from "@/components/context/NameContainerContext";
+import { SceneContext } from "@/components/common/SceneManager";
 
-export const FullPageMultiImage = ({
-  transitionProgress = 0,
+export const FullPageImage = ({
   images,
 }: {
-  transitionProgress?: number;
   images: {
     fieldId: string;
     image: {
@@ -20,6 +19,11 @@ export const FullPageMultiImage = ({
   useEffect(() => {
     setIsHidden(true);
   });
+  const sceneContext = useContext(SceneContext);
+  if (!sceneContext) {
+    return null;
+  }
+  const { transitionProgress } = sceneContext;
 
   return (
     <>

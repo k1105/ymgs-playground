@@ -1,18 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { SceneContext, useSceneProps } from "@/components/common/SceneManager";
+import { useEffect, useRef, useState, useContext } from "react";
 import Player from "@vimeo/player";
 
-export const FullPageMovie = ({
-  transitionProgress = 0,
-}: {
-  transitionProgress?: number;
-}) => {
+export const FullPageMovie = () => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [duration, setDuration] = useState(0);
+  const { transitionProgress } = useSceneProps();
 
   useEffect(() => {
     if (iframeRef.current) {

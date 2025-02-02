@@ -1,7 +1,7 @@
 import { fetchWorkBySlug, fetchAllWorks } from "@/lib/microCMS";
 import { SceneManager } from "@/components/common/SceneManager";
 import TitlePage from "@/components/scene/work/TitlePage";
-import { FullPageMultiImage } from "@/components/scene/work/FullPageMultiImage";
+import { FullPageImage } from "@/components/scene/work/FullPageImage";
 import { FullPageMovie } from "@/components/scene/work/FullPageMovie";
 import { Outline } from "@/components/scene/work/Outline";
 import { FullPageText } from "@/components/scene/work/FullPageText";
@@ -68,7 +68,7 @@ export default async function WorkPage({ params }: Props) {
         );
       } else if (page.fieldId === "image_page") {
         scenes.push(
-          <FullPageMultiImage
+          <FullPageImage
             key={`image-page-${index}`}
             images={page.image_row ? page.image_row : []}
           />

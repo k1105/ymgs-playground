@@ -2,20 +2,20 @@
 
 import styles from "./TitlePage.module.scss";
 import { InkFilter } from "@/components/common/filter/InkFilter";
+import { useSceneProps } from "@/components/common/SceneManager";
 import { useNameContainer } from "@/components/context/NameContainerContext";
 import { useEffect } from "react";
 
 const TitlePage = ({
-  transitionProgress = 0,
   title,
   year,
   backgroundImage,
 }: {
-  transitionProgress?: number;
   title: string;
   year: string;
   backgroundImage: string;
 }) => {
+  const { transitionProgress } = useSceneProps();
   const { setIsHidden } = useNameContainer();
   useEffect(() => {
     setIsHidden(false);

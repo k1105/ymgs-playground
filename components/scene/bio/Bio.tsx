@@ -3,22 +3,17 @@
 import styles from "./Bio.module.scss";
 import { Fragment } from "react";
 import { InkFilter } from "../../common/filter/InkFilter";
+import { useSceneProps } from "@/components/common/SceneManager";
 
-export const Bio = ({
-  transitionProgress = 0,
-  locale,
-  bio,
-}: {
-  transitionProgress?: number;
-  locale: string;
-  bio: string;
-}) => {
+export const Bio = ({ locale, bio }: { locale: string; bio: string }) => {
   const paragraphs = bio.split("\n").map((line, index) => (
     <Fragment key={index}>
       {line}
       <br />
     </Fragment>
   ));
+
+  const { transitionProgress } = useSceneProps();
 
   return (
     <div className={styles.container}>

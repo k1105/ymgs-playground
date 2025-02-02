@@ -1,25 +1,20 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { convertCssUnitToPx } from "@/lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "@/lib/paginateText";
 import { InkFilter } from "@/components/common/filter/InkFilter";
 import { useNameContainer } from "@/components/context/NameContainerContext";
+import { useSceneProps } from "@/components/common/SceneManager";
 
 export const FullPageText = ({
   textJa,
   textEn,
-  currentSegmentIndex = 0,
-  setSegmentsLength,
   locale,
-  transitionProgress = 0,
 }: {
   textJa: string;
   textEn: string;
-  currentSegmentIndex?: number;
-  setSegmentsLength?: Dispatch<SetStateAction<number>>;
   locale: string;
-  transitionProgress?: number;
 }) => {
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [lineHeight, setLineHeight] = useState<number>(0);
@@ -27,6 +22,9 @@ export const FullPageText = ({
   const [jaSegments, setJaSegments] = useState<string[]>([]);
   const [enSegments, setEnSegments] = useState<string[]>([]);
   const { setIsHidden } = useNameContainer();
+
+  const { transitionProgress, setSegmentsLength, currentSegmentIndex } =
+    useSceneProps();
 
   useEffect(() => {
     if (document)
@@ -70,22 +68,6 @@ export const FullPageText = ({
         fontSize={fontSize}
         transitionProgress={transitionProgress}
       />
-      <style jsx>{`
-        .language-switcher {
-          position: fixed;
-          top: 1rem;
-          left: 1rem;
-          color: var(--text-color);
-          a {
-            text-decoration: none;
-            font-size: 1rem;
-          }
-
-          a.active {
-            opacity: 0.5;
-          }
-        }
-      `}</style>
     </>
   );
 };

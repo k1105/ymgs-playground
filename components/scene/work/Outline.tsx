@@ -9,15 +9,13 @@ import { OpacityFilter } from "../../common/filter/OpacityFilter";
 import styles from "./Outline.module.scss";
 import { TextPager } from "../../common/TextPager";
 import DynamicLink from "../../common/DynamicLink";
+import { useSceneProps } from "@/components/common/SceneManager";
 
 export const Outline = ({
   title,
   outline,
   credit,
-  currentSegmentIndex = 0,
-  setSegmentsLength,
   languageMode = "ja",
-  transitionProgress = 0,
   nextWorkSlug = "",
   nextWorkTitle = "",
 }: {
@@ -25,12 +23,12 @@ export const Outline = ({
   outline: { ja: string; en: string };
   credit: string;
   currentSegmentIndex?: number;
-  setSegmentsLength?: Dispatch<SetStateAction<number>>;
   languageMode?: "ja" | "en";
-  transitionProgress?: number;
   nextWorkSlug?: string;
   nextWorkTitle?: string;
 }) => {
+  const { transitionProgress, setSegmentsLength, currentSegmentIndex } =
+    useSceneProps();
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [lineHeight, setLineHeight] = useState<number>(0);
   const [fontSize, setFontSize] = useState<number>(0);

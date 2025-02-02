@@ -4,15 +4,15 @@ import styles from "./WorkList.module.css";
 import { InkFilter } from "../common/filter/InkFilter";
 import Link from "next/link";
 import { OpacityFilter } from "../common/filter/OpacityFilter";
+import { useSceneProps } from "../common/SceneManager";
 export const WorkList = ({
-  transitionProgress = 0,
   locale = "ja",
   works = [],
 }: {
-  transitionProgress?: number;
   locale: string;
   works?: Work[];
 }) => {
+  const { transitionProgress } = useSceneProps();
   const placeHolderImageUrl =
     "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
   return (

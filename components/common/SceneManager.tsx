@@ -1,7 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState, cloneElement, ReactElement } from "react";
+import { useEffect, useRef, useState, useContext, ReactElement } from "react";
 import { useRouter } from "next/navigation";
+import { createContext, Dispatch, SetStateAction } from "react";
+
+export type SceneContextValue = {
+  transitionProgress: number;
+  currentSegmentIndex: number;
+  setSegmentsLength: Dispatch<SetStateAction<number>>;
+  languageMode: string;
+  // 必要に応じて他の値も追加
+};
+
+export const SceneContext = createContext<SceneContextValue | null>(null);
 
 type SceneManagerProps = {
   scenes: ReactElement<any>[];
@@ -17,8 +28,6 @@ export const SceneManager = ({
   redirectPrevTo,
 }: SceneManagerProps) => {
   const router = useRouter();
-
-  // シーンのインデックスやセグメント管理など
   const [sceneIndex, setSceneIndex] = useState<number>(0);
   const [transitionProgress, setTransitionProgress] = useState<number>(0);
   const [isEasing, setIsEasing] = useState<boolean>(false);
@@ -26,45 +35,36 @@ export const SceneManager = ({
   const [isTouching, setIsTouching] = useState<boolean>(false);
   const [currentSegmentIndex, setCurrentSegmentIndex] = useState<number>(0);
   const [segmentsLength, setSegmentsLength] = useState<number>(0);
-
   const [lastWheelTime, setLastWheelTime] = useState<number>(0);
   const touchStartYRef = useRef<number>(0);
-
-  /**
-   * ここがポイント
-   *  - リダイレクトが必要な場合は、即座に `router.push()` を呼ばず
-   *    まずは「次にリダイレクトすべきURL」を state に保存する。
-   */
   const [pendingRedirect, setPendingRedirect] = useState<string | null>(null);
 
-  /**
-   * リダイレクト実行専用の useEffect
-   * - pendingRedirect に何か入っていたら push して、再度 null に戻す
-   * - こうすることで「レンダリング中に Router を更新してしまう」問題を回避
-   */
   useEffect(() => {
     if (pendingRedirect) {
       router.push(pendingRedirect);
-      setPendingRedirect(null); // 再度リダイレクトしないようにクリア
+      setPendingRedirect(null);
     }
   }, [pendingRedirect, router]);
 
+  /**
+   * シーンorセグメント切り替え判定
+   */
   useEffect(() => {
-    // シーン切り替え判定
     const threshold = 80;
     if (!isAutoTransition && !isTouching) {
       if (transitionProgress > threshold) {
-        // ▼ 最終セグメントにいる場合はシーン自体を切り替え
+        // ▼ 最終セグメントならシーン切り替え
         if (currentSegmentIndex >= segmentsLength - 1) {
-          // 最終シーンならさらにその次へ行こうとする → redirectNextTo or 一周
+          // 最終シーンかどうかチェック
           if (sceneIndex === scenes.length - 1) {
+            // redirectNextToがあればリダイレクト、なければ一周
             if (redirectNextTo) {
               setPendingRedirect(redirectNextTo);
             } else {
-              setSceneIndex(0); // リダイレクトがない場合は一周
+              setSceneIndex(0);
             }
           } else {
-            setSceneIndex(sceneIndex + 1);
+            setSceneIndex((prev) => prev + 1);
           }
           setCurrentSegmentIndex(0);
           setSegmentsLength(0);
@@ -75,17 +75,17 @@ export const SceneManager = ({
           resetTransition();
         }
       } else if (transitionProgress < -threshold) {
-        // ▼ 先頭セグメントにいる場合はシーン自体を切り替え
+        // ▼ 先頭セグメントならシーン切り替え
         if (currentSegmentIndex <= 0) {
-          // 先頭シーンからさらに前に行こうとする → redirectPrevTo or 一周
           if (sceneIndex === 0) {
+            // redirectPrevToがあればリダイレクト、なければ一周
             if (redirectPrevTo) {
               setPendingRedirect(redirectPrevTo);
             } else {
               setSceneIndex(scenes.length - 1);
             }
           } else {
-            setSceneIndex(sceneIndex - 1);
+            setSceneIndex((prev) => prev - 1);
           }
           setSegmentsLength(0);
           resetTransition();
@@ -95,7 +95,7 @@ export const SceneManager = ({
           resetTransition();
         }
       } else {
-        // スクロール微小量のとき：一定時間後にイージングで 0 に戻す
+        // 微小量スクロール: 50ms後にイージングで0へ戻す
         const timer = setTimeout(() => {
           const elapsed = performance.now() - lastWheelTime;
           if (elapsed >= 50 || isTouching) {
@@ -120,33 +120,45 @@ export const SceneManager = ({
     scenes.length,
   ]);
 
+  /**
+   * タッチ終了時刻を随時更新
+   */
   useEffect(() => {
     if (!isTouching) {
       setLastWheelTime(performance.now());
     }
   }, [isTouching]);
 
+  /**
+   * wheel/touchmoveイベント登録
+   * 注意: wheelは passive: false でないと preventDefault() が使えない
+   */
   useEffect(() => {
-    // wheelイベント
     const handleWheel = (e: WheelEvent) => {
-      if (isAutoTransition || isEasing) return;
+      // 自動トランジション中やイージング中であれば慣性イベントを抑止
+      if (isAutoTransition || isEasing) {
+        e.preventDefault();
+        return;
+      }
       setTransitionProgress((prev) =>
         Math.max(-110, Math.min(110, prev + e.deltaY))
       );
       setLastWheelTime(performance.now());
     };
 
-    // touchイベント
     const handleTouchStart = (e: TouchEvent) => {
       touchStartYRef.current = e.touches[0].clientY;
       setIsTouching(true);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (isAutoTransition || isEasing) return;
+      if (isAutoTransition || isEasing) {
+        // ページ切り替えアニメ発火中はタッチ操作も防ぐ
+        e.preventDefault();
+        return;
+      }
       const endY = e.changedTouches[0].clientY;
       const diff = endY - touchStartYRef.current;
-      // 上スワイプ => diff < 0, 下スワイプ => diff > 0
       setTransitionProgress(Math.max(-110, Math.min(110, -diff)));
       setLastWheelTime(performance.now());
     };
@@ -155,9 +167,10 @@ export const SceneManager = ({
       setIsTouching(false);
     };
 
+    // ▼ ここで passive: false を指定しないと preventDefault() できない
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
@@ -168,12 +181,17 @@ export const SceneManager = ({
     };
   }, [isAutoTransition, isEasing]);
 
-  // 言語切り替え時にセグメント初期化
+  /**
+   * 言語切り替え時にセグメントを初期化
+   */
   useEffect(() => {
     setCurrentSegmentIndex(0);
   }, [languageMode]);
 
-  // シーン切り替え等の際に呼ぶ関数
+  /**
+   * シーン切り替えなどの際に呼ぶ処理
+   * → 「一定時間は isAutoTransition = true にして、余計なスクロールイベントを無視」
+   */
   const resetTransition = () => {
     setIsAutoTransition(true);
     startEasingToZero({ duration: 400 });
@@ -182,7 +200,9 @@ export const SceneManager = ({
     }, 500);
   };
 
-  // イージングで transitionProgress を 0 に戻す
+  /**
+   * イージングで transitionProgress を 0 に戻す
+   */
   const startEasingToZero = ({ duration = 200 }: { duration?: number }) => {
     setIsEasing(true);
 
@@ -206,19 +226,32 @@ export const SceneManager = ({
     requestAnimationFrame(animate);
   };
 
-  // 現在のシーンだけ描画
+  // (A) ここで Context に渡す「値のオブジェクト」を作る
+  const sceneContextValue = {
+    transitionProgress,
+    currentSegmentIndex,
+    setSegmentsLength,
+    languageMode,
+    // 他にもシーンが直接参照したい値があれば追加
+  };
+
   return (
-    <>
+    <SceneContext.Provider value={sceneContextValue}>
+      {/* シーンの切替ロジック: i===sceneIndexだけ描画 */}
       {scenes.map((scene, i) => {
         if (i !== sceneIndex) return null;
-        return cloneElement(scene, {
-          transitionProgress,
-          currentSegmentIndex,
-          setSegmentsLength,
-          languageMode,
-          key: `scene-${i}`,
-        });
+        // もう cloneElement はせず、そのままシーンを表示
+        // これにより、"Propsがどこから来ているのか"という煩雑さを減らせる
+        return <div key={i}>{scene}</div>;
       })}
-    </>
+    </SceneContext.Provider>
   );
+};
+
+export const useSceneProps = () => {
+  const context = useContext(SceneContext);
+  if (!context) {
+    throw new Error("useSceneProps must be used within a SceneContextProvider");
+  }
+  return context;
 };

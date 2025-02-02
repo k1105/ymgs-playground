@@ -5,12 +5,11 @@ import { InkFilter } from "@/components/common/filter/InkFilter";
 import { CarrierItem } from "./CarrierItem";
 import { convertCssUnitToPx } from "@/lib/convertCssUnitToPx";
 import { measureTextHeight } from "@/lib/measureTextHeight";
+import { useSceneProps } from "@/components/common/SceneManager";
 
 export const Carrier = ({
-  transitionProgress = 0,
   dataGroups,
 }: {
-  transitionProgress?: number;
   dataGroups: { title: string; items: { year: number; content: string[] }[] }[];
 }) => {
   // 30rem幅, 40vh高さの領域(px換算)
@@ -18,6 +17,8 @@ export const Carrier = ({
     w: convertCssUnitToPx("20rem"),
     h: convertCssUnitToPx("80vh"),
   };
+
+  const { transitionProgress } = useSceneProps();
 
   // ページネーション処理
   const paginatedDataGroups = paginateDataGroups(dataGroups, size);
