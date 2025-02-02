@@ -5,6 +5,7 @@ import { InkFilter } from "../common/filter/InkFilter";
 import Link from "next/link";
 import { OpacityFilter } from "../common/filter/OpacityFilter";
 import { useSceneProps } from "../common/SceneManager";
+import { useEffect, useState } from "react";
 export const WorkList = ({
   locale = "ja",
   works = [],
@@ -12,14 +13,30 @@ export const WorkList = ({
   locale: string;
   works?: Work[];
 }) => {
-  const { transitionProgress } = useSceneProps();
+  const { transitionProgress, setSegmentsLength, currentSegmentIndex } =
+    useSceneProps();
+  const [workSegments, setWorkSegments] = useState<Work[][]>([]);
   const placeHolderImageUrl =
     "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
+
+  useEffect(() => {
+    setSegmentsLength(Math.ceil(works.length / 8));
+    const tempList: Work[][] = [];
+    let currentIndex = 0;
+
+    while (currentIndex < works.length) {
+      if (currentIndex % 8 == 0) tempList.push([]);
+      tempList[tempList.length - 1].push(works[currentIndex]);
+      currentIndex++;
+    }
+    setWorkSegments(tempList);
+    console.log("hoge");
+  }, []);
   return (
     <>
       <div className={styles.workIndexContainer}>
-        {works.length > 0 &&
-          works.map((work) => (
+        {workSegments.length > 0 &&
+          workSegments[currentSegmentIndex].map((work) => (
             <div className={styles.workContainer} key={work.slug}>
               <Link
                 href={`/${locale}/works/${work.slug}`}

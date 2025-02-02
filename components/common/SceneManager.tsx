@@ -67,7 +67,7 @@ export const SceneManager = ({
             setSceneIndex((prev) => prev + 1);
           }
           setCurrentSegmentIndex(0);
-          setSegmentsLength(0);
+          if (scenes.length > 1) setSegmentsLength(0);
           resetTransition();
         } else {
           // セグメントをひとつ進める
@@ -87,7 +87,7 @@ export const SceneManager = ({
           } else {
             setSceneIndex((prev) => prev - 1);
           }
-          setSegmentsLength(0);
+          if (scenes.length > 1) setSegmentsLength(0);
           resetTransition();
         } else {
           // セグメントをひとつ戻す
