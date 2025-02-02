@@ -18,8 +18,6 @@ export const HambergerMenu = ({
   enFontRef: RefObject<HTMLParagraphElement | null>;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const pathname = usePathname();
-  const currentLocale = getCurrentLocale(pathname);
   const { setTheme } = useTheme();
 
   const handleColorTipClick = (color: "black" | "white") => {
@@ -80,34 +78,6 @@ export const HambergerMenu = ({
                 onClick={() => handleColorTipClick("white")}
               />
             </div>
-          </div>
-          <div className={styles.inlineContainer}>
-            <h3 className={styles.title}>Language</h3>
-            <p>
-              {currentLocale !== "en" ? (
-                <s>JA</s>
-              ) : (
-                <span
-                  onClick={() => {
-                    switchLocale(pathname);
-                  }}
-                >
-                  JA
-                </span>
-              )}{" "}
-              |{" "}
-              {currentLocale == "en" ? (
-                <s>EN</s>
-              ) : (
-                <span
-                  onClick={() => {
-                    switchLocale(pathname);
-                  }}
-                >
-                  EN
-                </span>
-              )}
-            </p>
           </div>
         </div>
       </div>

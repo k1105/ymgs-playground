@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { getCurrentLocale, switchLocale } from "@/lib/i18n";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import {
   NameContainerProvider,
@@ -51,6 +53,8 @@ export default function RootLayout({
 
 const NameContainer = () => {
   const { isHidden } = useNameContainer();
+  const pathname = usePathname();
+  const currentLocale = getCurrentLocale(pathname);
 
   return (
     <div className={`${styles.nameContainer} ${isHidden ? styles.hidden : ""}`}>
@@ -66,6 +70,28 @@ const NameContainer = () => {
       <DynamicLink href="/cv" className={styles.link}>
         cv
       </DynamicLink>
+      <div className={styles.languageSwitcherContainer}>
+        <div
+          onClick={() => {
+            switchLocale(pathname);
+          }}
+          className={`${styles.button} ${
+            currentLocale !== "en" && styles.active
+          }`}
+        >
+          Ja
+        </div>
+        <div
+          onClick={() => {
+            switchLocale(pathname);
+          }}
+          className={`${styles.button} ${
+            currentLocale == "en" && styles.active
+          }`}
+        >
+          En
+        </div>
+      </div>
     </div>
   );
 };
