@@ -172,7 +172,11 @@ const paginateDataGroups = (
         targetItemIndex++;
       } else {
         addPage();
-        // 新規ページへ移ったので、このアイテムは後で再追加
+        if (targetItemIndex == 0) {
+          paginatedDataGroups[pageIndex - 1].pop();
+          paginatedDataGroups[pageIndex][groupIndex].title =
+            dataGroups[targetGroupIndex].title;
+        }
       }
     }
 
