@@ -18,7 +18,7 @@ export async function fetchWorkBySlug(slug: string) {
   );
 
   const data = await response.json();
-  return data.contents[0]; // 必要な作品データを返す
+  return data.contents[0] as Work; // 必要な作品データを返す
 }
 
 export async function fetchAllWorks() {

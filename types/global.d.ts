@@ -29,6 +29,7 @@ interface Work {
     content_ja?: string;
     content_en?: string;
   };
+  outlineImages: Image[];
 }
 
 type BioContent = {

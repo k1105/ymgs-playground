@@ -18,6 +18,7 @@ export const Outline = ({
   languageMode = "ja",
   nextWorkSlug = "",
   nextWorkTitle = "",
+  images,
 }: {
   title: string;
   outline: { ja: string; en: string };
@@ -26,6 +27,7 @@ export const Outline = ({
   languageMode?: "ja" | "en";
   nextWorkSlug?: string;
   nextWorkTitle?: string;
+  images: Image[];
 }) => {
   const { transitionProgress, setSegmentsLength, currentSegmentIndex } =
     useSceneProps();
@@ -90,13 +92,13 @@ export const Outline = ({
             <img
               className={styles.image}
               style={{ objectFit: "cover" }}
-              src={placeHolderImageUrl}
+              src={images.length > 0 ? images[0].url : placeHolderImageUrl}
               alt=""
             />
             <img
               className={styles.image}
               style={{ objectFit: "cover" }}
-              src={placeHolderImageUrl}
+              src={images.length > 1 ? images[1].url : placeHolderImageUrl}
               alt=""
             />
           </div>

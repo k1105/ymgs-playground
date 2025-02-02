@@ -27,8 +27,11 @@ export async function generateMetadata({ params }: Props) {
   const { slug, locale } = await params;
   const work = await fetchWorkBySlug(slug);
   return {
-    title: `${work.title[`text_${locale}`]} | 森田 明日香`,
-    description: work.outline[`content_${locale}`],
+    title: `${
+      locale == "en" ? work.title.text_en : work.title.text_ja
+    } | 森田 明日香`,
+    description:
+      locale == "en" ? work.outline.content_en : work.outline.content_ja,
   };
 }
 
@@ -47,7 +50,7 @@ export default async function WorkPage({ params }: Props) {
   scenes.push(
     <TitlePage
       key="title-page"
-      title={work.title[`text_${locale}`]}
+      title={locale == "en" ? work.title.text_en : work.title.text_ja}
       year={work.year.toString()}
       backgroundImage={work.ogpImage ? work.ogpImage.url : ""}
     />
@@ -79,14 +82,15 @@ export default async function WorkPage({ params }: Props) {
   scenes.push(
     <Outline
       key="outline"
-      title={work.title[`text_${locale}`]}
+      title={locale == "en" ? work.title.text_en : work.title.text_ja}
       outline={{
         ja: work.outline.content_ja ? work.outline.content_ja : "",
         en: work.outline.content_en ? work.outline.content_en : "",
       }}
-      credit={work.credit[`content_${locale}`]}
+      credit={locale == "en" ? work.credit.content_en : work.credit.content_ja}
       nextWorkTitle={nextWork ? nextWork.title[`text_${locale}`] : ""}
       nextWorkSlug={nextWork ? nextWork.slug : ""}
+      images={work.outlineImages}
     />
   );
 
