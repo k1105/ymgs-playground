@@ -1,63 +1,27 @@
 .container {
-  margin-top: 10rem;
+  margin-top: 15vh;
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 }
 .carrierContainer {
-  width: 20rem;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   column-gap: 1rem;
   row-gap: 1rem;
 }
 
 .carrierName {
-  margin-bottom: 3rem;
-  font-size: 1.2rem;
-}
-
-.carrierItem {
-  width: 100%;
-  display: flex;
-  gap: 1.5rem;
-}
-.year {
-  font-size: 0.7rem;
-  color: gray;
-  font-weight: 700;
-}
-.item {
-  line-height: 1.4rem;
-  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 600px) {
-  .profileContainer,
-  .carrierContainer {
-    width: auto;
-  }
-
   .container {
-    width: 100%;
-    margin-top: 5rem;
+    margin-top: 15vh;
     margin-bottom: 10rem;
     flex-direction: column;
-    gap: 5rem;
-  }
-
-  .carrierName {
-    margin-bottom: 1rem;
-  }
-
-  .carrierItem {
-    flex-direction: column;
-    gap: 0.5rem;
-    width: auto;
-  }
-
-  .item {
-    font-size: 0.8rem;
-    line-height: 1.5rem;
+    gap: 3rem;
   }
 }

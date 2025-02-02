@@ -25,30 +25,21 @@ const CV = async ({ params }: Props) => {
             <Bio key="scene-bio" locale={locale} bio={bio.content} />,
             <Carrier
               key="scene-awards"
-              items={grantsAwards}
-              title="Grants and Awards"
+              dataGroups={[
+                { title: "経歴 / Carrier", items: carrier },
+                {
+                  title: "Solo Exhibitions (Selection)",
+                  items: soloExhibition,
+                },
+                {
+                  title: "Group Exhibition (Selection)",
+                  items: groupExhibition,
+                },
+                { title: "Grants and Awards", items: grantsAwards },
+                { title: "Performance", items: performance },
+                { title: "Lectures and Talks", items: lecturesAndTalks },
+              ]}
             />,
-            <Carrier
-              key="scene-exhibitions"
-              items={soloExhibition}
-              title="Solo Exhibitions (Selection)"
-            />,
-            <Carrier
-              key="group-exhibitions"
-              items={groupExhibition}
-              title="Group Exhibition (Selection)"
-            />,
-            <Carrier
-              key="performance"
-              items={performance}
-              title="Performance"
-            />,
-            <Carrier
-              key="lectures-and-talks"
-              items={lecturesAndTalks}
-              title="Lectures and Talks"
-            />,
-            <Carrier key="carrier" items={carrier} title="経歴 / Carrier" />,
           ]}
           languageMode={locale}
         />
