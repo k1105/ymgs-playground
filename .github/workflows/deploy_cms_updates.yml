@@ -1,6 +1,5 @@
-name: Deploy CMS Updates
+name: Deploy with Yarn Berry
 
-# 「手動実行」をトリガーとする
 on:
   workflow_dispatch:
 
@@ -12,23 +11,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Use Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Yarn 2/3系なら --immutable が対応コマンド
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable
 
-      # CMSの最新データをビルド時にフェッチし、SSGで静的ファイルに反映させる
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           token: ${{ secrets.VERCEL_TOKEN }}
           production: true
-          # 必要なら project-id: や org-id: の指定も
-          # project-id: <YOUR_VERCEL_PROJECT_ID>
-          # org-id: <YOUR_VERCEL_ORG_ID>
