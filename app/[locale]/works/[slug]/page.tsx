@@ -98,7 +98,11 @@ export default async function WorkPage({ params }: Props) {
 
   return (
     <>
-      <SceneManager scenes={scenes} languageMode={locale} />
+      <SceneManager
+        scenes={scenes}
+        languageMode={locale}
+        redirectNextTo={nextWork && `/works/${nextWork.slug}`}
+      />
     </>
   );
 }
