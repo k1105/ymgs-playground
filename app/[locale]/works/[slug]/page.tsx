@@ -17,11 +17,9 @@ interface Page {
   text_en?: string;
   image_row?: {
     fieldId: string;
-    image: {
-      url: string;
-      height: number;
-      width: number;
-    }[];
+    image: Image[];
+    caption_ja: string;
+    caption_en: string;
   }[];
 }
 

@@ -54,3 +54,9 @@ type CarrierResponse = {
   offset: number;
   limit: number;
 };
+
+interface Image {
+  url: string;
+  height: number;
+  width: number;
+}

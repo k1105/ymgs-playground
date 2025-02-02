@@ -2,17 +2,16 @@
 import { useEffect, useContext } from "react";
 import { useNameContainer } from "@/components/context/NameContainerContext";
 import { SceneContext } from "@/components/common/SceneManager";
+import styles from "./FullPageImage.module.scss";
 
 export const FullPageImage = ({
   images,
 }: {
   images: {
     fieldId: string;
-    image: {
-      url: string;
-      height: number;
-      width: number;
-    }[];
+    image: Image[];
+    caption_ja: string;
+    caption_en: string;
   }[];
 }) => {
   const { setIsHidden } = useNameContainer();
@@ -27,51 +26,31 @@ export const FullPageImage = ({
 
   return (
     <>
-      <div className="page-wrapper">
-        <div className={`image-container`}>
-          {images.map((imageRow) =>
-            imageRow.image.map((image, index) => (
-              <img key={`image-${index}`} src={`${image.url}?w=1200`} />
-            ))
-          )}
+      <div className={styles.pageWrapper}>
+        <div
+          className={styles.imageContainer}
+          style={{ opacity: `${1 - Math.abs(transitionProgress) / 100}` }}
+        >
+          {images.map((imageRow, rowIndex) => (
+            <div key={`image-row-${rowIndex}`}>
+              <div className={styles.imageRow}>
+                {imageRow.image.length > 1 ? (
+                  imageRow.image.map((image, index) => (
+                    <img key={`image-${index}`} src={`${image.url}?w=1200`} />
+                  ))
+                ) : (
+                  <img
+                    className={styles.singleImage}
+                    key={`single-image`}
+                    src={`${imageRow.image[0].url}?w=1600`}
+                  />
+                )}
+              </div>
+              <p className={styles.caption}>{imageRow.caption_ja}</p>
+            </div>
+          ))}
         </div>
       </div>
-      <style jsx>{`
-        .page-wrapper {
-          height: 100vh;
-          display: flex;
-          vertical-align: middle;
-        }
-        .image-container {
-          width: 92vw;
-          max-height: 80vh;
-          overflow: hidden;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 2rem;
-          margin: auto;
-          transition: all 300ms;
-          img {
-            width: 45vw;
-            height: 100%;
-            object-fit: contain;
-          }
-          opacity: ${1 - Math.abs(transitionProgress) / 100};
-        }
-
-        @media screen and (max-width: 600px) {
-          .image-container {
-            width: 100%;
-            flex-direction: column;
-            height: auto;
-            gap: 2rem;
-            img {
-              width: 100%;
-            }
-          }
-        }
-      `}</style>
     </>
   );
 };
