@@ -104,9 +104,7 @@ export const Outline = ({
         <div className={styles.textContainer}>
           <div className={styles.textWrapper} style={{ width: `${size.w}px` }}>
             <InkFilter blurIntensity={transitionProgress}>
-              <h3 style={{ marginBottom: "2rem", color: "var(--text-color)" }}>
-                {title}
-              </h3>
+              <h3 style={{ marginBottom: "2rem" }}>{title}</h3>
               <TextPager
                 text={
                   languageMode == "ja"

@@ -14,7 +14,7 @@ export const InkFilter = ({
   to?: number;
   blurIntensity: number;
 }) => {
-  const filterId = useId(); // ✅ `useId()` でサーバーとクライアントの ID を一致させる
+  const filterId = useId();
   const filterRef = useRef<HTMLDivElement>(null);
 
   // blurValue の初期値を計算
@@ -33,13 +33,17 @@ export const InkFilter = ({
 
   return (
     <>
-      <div className={styles.componentWrapper}>
-        <div
-          className={blurIntensity !== 0 ? styles.effect : ""}
-          ref={filterRef}
-          style={{ filter: blurIntensity !== 0 ? `url(#${filterId})` : "none" }}
-        >
-          {children}
+      <div className={styles.container}>
+        <div className={styles.componentWrapper}>
+          <div
+            className={blurIntensity !== 0 ? styles.effect : styles.noEffect}
+            ref={filterRef}
+            style={{
+              filter: blurIntensity !== 0 ? `url(#${filterId})` : "none",
+            }}
+          >
+            {children}
+          </div>
         </div>
       </div>
 

@@ -11,6 +11,7 @@
 }
 
 .nameContainer {
+  mix-blend-mode: exclusion;
   display: flex;
   position: fixed;
   z-index: 990;
@@ -20,11 +21,11 @@
   flex-direction: column;
   gap: 2rem;
   font-weight: 300;
-  color: var(--text-color);
+  color: white;
   transition: all 1s ease;
   .link {
     text-decoration: none;
-    color: var(--text-color);
+    color: white;
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
     letter-spacing: 0.3rem;
@@ -56,11 +57,12 @@
   }
 
   .active {
-    background-color: var(--text-color);
-    color: var(--background-color);
+    background-color: white;
+    color: black;
   }
   .active:hover {
-    background-color: var(--text-color);
+    background-color: white;
+    color: black;
   }
 }
 

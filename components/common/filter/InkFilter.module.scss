@@ -1,9 +1,15 @@
+.container {
+  mix-blend-mode: exclusion;
+}
 .componentWrapper {
-  mix-blend-mode: var(--inkfilter-blend-mode);
+  mix-blend-mode: screen;
 }
 
 .effect {
-  background: var(--inkfilter-background-color);
-  // background: var(--background-color);
-  color: var(--text-color);
+  background: #333;
+  color: white;
+}
+
+.noEffect {
+  color: white;
 }

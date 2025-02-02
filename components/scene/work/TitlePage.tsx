@@ -30,14 +30,12 @@ const TitlePage = ({
           opacity: 1 - Math.abs(transitionProgress) / 100,
         }}
       />
-      <InkFilter blurIntensity={transitionProgress}>
-        <>
-          <div className={styles.titleContainer}>
-            <h1>{title}</h1>
-            <p className={styles.year}>({year})</p>
-          </div>
-        </>
-      </InkFilter>
+      <div className={styles.titleContainer}>
+        <InkFilter blurIntensity={transitionProgress}>
+          <h1>{title}</h1>
+          <p className={styles.year}>({year})</p>
+        </InkFilter>
+      </div>
     </>
   );
 };
