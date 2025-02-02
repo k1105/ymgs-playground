@@ -1,0 +1,13 @@
+.footer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  width: 15rem;
+  justify-content: space-between;
+}
+
+.small {
+  margin-left: -0.2rem;
+  font-size: 0.8rem;
+}

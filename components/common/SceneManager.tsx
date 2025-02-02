@@ -3,10 +3,14 @@
 import { useEffect, useRef, useState, useContext, ReactElement } from "react";
 import { useRouter } from "next/navigation";
 import { createContext, Dispatch, SetStateAction } from "react";
+import { Footer } from "./Footer";
 
 export type SceneContextValue = {
   transitionProgress: number;
   currentSegmentIndex: number;
+  sceneIndex: number;
+  sceneLength: number;
+  segmentsLength: number;
   setSegmentsLength: Dispatch<SetStateAction<number>>;
   languageMode: string;
   // 必要に応じて他の値も追加
@@ -19,6 +23,7 @@ type SceneManagerProps = {
   languageMode: string;
   redirectNextTo?: string;
   redirectPrevTo?: string;
+  pageTitle?: string;
 };
 
 export const SceneManager = ({
@@ -26,6 +31,7 @@ export const SceneManager = ({
   languageMode,
   redirectNextTo,
   redirectPrevTo,
+  pageTitle,
 }: SceneManagerProps) => {
   const router = useRouter();
   const [sceneIndex, setSceneIndex] = useState<number>(0);
@@ -232,7 +238,9 @@ export const SceneManager = ({
     currentSegmentIndex,
     setSegmentsLength,
     languageMode,
-    // 他にもシーンが直接参照したい値があれば追加
+    segmentsLength,
+    sceneIndex,
+    sceneLength: scenes.length,
   };
 
   return (
@@ -244,6 +252,7 @@ export const SceneManager = ({
         // これにより、"Propsがどこから来ているのか"という煩雑さを減らせる
         return <div key={i}>{scene}</div>;
       })}
+      <Footer pageTitle={pageTitle ? pageTitle : ""} />
     </SceneContext.Provider>
   );
 };

@@ -13,6 +13,7 @@ import { FontTester } from "@/components/common/FontTester";
 import { HambergerMenu } from "@/components/common/HambergerMenu";
 import DynamicLink from "@/components/common/DynamicLink";
 import styles from "./Home.module.scss";
+import { Footer } from "@/components/common/Footer";
 
 export default function RootLayout({
   children,
@@ -35,6 +36,12 @@ export default function RootLayout({
               jaFontRef={jaFontRef}
               enFontRef={enFontRef}
             >
+              <HambergerMenu
+                setJaIndex={setJaIndex}
+                setEnIndex={setEnIndex}
+                jaFontRef={jaFontRef}
+                enFontRef={enFontRef}
+              />
               <NameContainer />
               {children}
             </FontTester>

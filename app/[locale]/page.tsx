@@ -20,6 +20,12 @@ export async function generateStaticParams(): Promise<
   return [{ locale: "ja" }, { locale: "en" }];
 }
 
+export async function generateMetadata({ params }: Props) {
+  return {
+    title: `森田 明日香`,
+  };
+}
+
 export default async function Home({ params }: Props) {
   const { locale } = await params; // デフォルトを "ja" に設定
   const works = await fetchAllWorks();
@@ -32,6 +38,7 @@ export default async function Home({ params }: Props) {
             <WorkList key="scene-profile" locale={locale} works={works} />,
           ]}
           languageMode={locale}
+          pageTitle="作品一覧"
         />
       </div>
     </div>

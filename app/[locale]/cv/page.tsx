@@ -8,6 +8,12 @@ const apiKey = process.env.MICROCMS_API_KEY!;
 
 type Props = { params: Promise<{ locale: string }> };
 
+export async function generateMetadata({ params }: Props) {
+  return {
+    title: `CV | 森田 明日香`,
+  };
+}
+
 const CV = async ({ params }: Props) => {
   const { locale } = await params; // デフォルトを "ja" に設定
   const bio = await getBio(locale);
@@ -42,11 +48,8 @@ const CV = async ({ params }: Props) => {
             />,
           ]}
           languageMode={locale}
+          pageTitle="CV / 作家経歴"
         />
-      </div>
-      <div className={styles.footer}>
-        <p>CV / 作家経歴</p>
-        <p>← 1 / 5 →</p>
       </div>
     </>
   );
