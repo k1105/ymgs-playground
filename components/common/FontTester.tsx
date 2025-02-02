@@ -113,8 +113,6 @@ const enFonts = [
 export const FontTester = ({
   jaIndex,
   enIndex,
-  jaFontRef,
-  enFontRef,
   children,
 }: {
   jaIndex: number;
@@ -131,8 +129,8 @@ export const FontTester = ({
   );
 
   useEffect(() => {
-    jaFontRef.current!.innerText = `JP: ${jaFonts[0].name}`;
-    enFontRef.current!.innerText = `EN: ${enFonts[0].name}`;
+    // jaFontRef.current!.innerText = `JP: ${jaFonts[0].name}`;
+    // enFontRef.current!.innerText = `EN: ${enFonts[0].name}`;
   }, []);
 
   useEffect(() => {
@@ -140,11 +138,11 @@ export const FontTester = ({
   }, [jaIndex]);
 
   useEffect(() => {
-    jaFontRef.current!.innerText = `JP: ${jaFonts[jaDisplayIndex].name}`;
+    // jaFontRef.current!.innerText = `JP: ${jaFonts[jaDisplayIndex].name}`;
   }, [jaDisplayIndex]);
 
   useEffect(() => {
-    enFontRef.current!.innerText = `EN: ${enFonts[enDisplayIndex].name}`;
+    // enFontRef.current!.innerText = `EN: ${enFonts[enDisplayIndex].name}`;
   }, [enDisplayIndex]);
   useEffect(() => {
     setEnDisplayIndex(enIndex % enFonts.length);

@@ -2,7 +2,7 @@
   margin-top: 15vh;
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 8rem;
 }
 .carrierContainer {
   overflow-y: auto;

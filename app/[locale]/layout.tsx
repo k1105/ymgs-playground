@@ -36,12 +36,6 @@ export default function RootLayout({
               jaFontRef={jaFontRef}
               enFontRef={enFontRef}
             >
-              <HambergerMenu
-                setJaIndex={setJaIndex}
-                setEnIndex={setEnIndex}
-                jaFontRef={jaFontRef}
-                enFontRef={enFontRef}
-              />
               <NameContainer />
               {children}
             </FontTester>

@@ -30,7 +30,6 @@ export const WorkList = ({
       currentIndex++;
     }
     setWorkSegments(tempList);
-    console.log("hoge");
   }, []);
   return (
     <>

@@ -6,6 +6,7 @@ import { CarrierItem } from "./CarrierItem";
 import { convertCssUnitToPx } from "@/lib/convertCssUnitToPx";
 import { measureTextHeight } from "@/lib/measureTextHeight";
 import { useSceneProps } from "@/components/common/SceneManager";
+import { useEffect, useState } from "react";
 
 export const Carrier = ({
   dataGroups,
@@ -18,7 +19,8 @@ export const Carrier = ({
     h: convertCssUnitToPx("80vh"),
   };
 
-  const { transitionProgress } = useSceneProps();
+  const { setSegmentsLength, currentSegmentIndex, transitionProgress } =
+    useSceneProps();
 
   // ページネーション処理
   const paginatedDataGroups = paginateDataGroups(dataGroups, size);
@@ -30,34 +32,52 @@ export const Carrier = ({
     });
   });
 
+  const [carrierSegments, setCarrierSegments] = useState<
+    PaginatedDataGroup[][][]
+  >([]);
+
+  useEffect(() => {
+    setSegmentsLength(Math.ceil(paginatedDataGroups.length / 3));
+    const tempList: PaginatedDataGroup[][][] = [];
+    let currentIndex = 0;
+
+    while (currentIndex < paginatedDataGroups.length) {
+      if (currentIndex % 3 == 0) tempList.push([]);
+      tempList[tempList.length - 1].push(paginatedDataGroups[currentIndex]);
+      currentIndex++;
+    }
+    setCarrierSegments(tempList);
+  }, []);
+
   return (
     <>
       <InkFilter blurIntensity={transitionProgress}>
         <div className={styles.container}>
-          {paginatedDataGroups.map((page, i) => (
-            <div
-              className={styles.columnContainer}
-              key={`carrier-${i}`}
-              style={{ width: size.w, height: size.h }}
-            >
-              {page.map((group, j) => (
-                <div key={`group-${j}`}>
-                  {group.title.length > 0 && (
-                    <h2 className={styles.carrierName}>{group.title}</h2>
-                  )}
+          {carrierSegments.length > 0 &&
+            carrierSegments[currentSegmentIndex].map((page, i) => (
+              <div
+                className={styles.columnContainer}
+                key={`carrier-${i}`}
+                style={{ width: size.w, height: size.h }}
+              >
+                {page.map((group, j) => (
+                  <div key={`group-${j}`}>
+                    {group.title.length > 0 && (
+                      <h2 className={styles.carrierName}>{group.title}</h2>
+                    )}
 
-                  <div className={styles.carrierContainer}>
-                    {group.items.map((elem, k) => (
-                      <CarrierItem index={k} elem={elem} key={`item-${k}`} />
-                    ))}
+                    <div className={styles.carrierContainer}>
+                      {group.items.map((elem, k) => (
+                        <CarrierItem index={k} elem={elem} key={`item-${k}`} />
+                      ))}
+                    </div>
+                    {group.includeEndSpace && (
+                      <div style={{ marginBottom: "5rem" }} />
+                    )}
                   </div>
-                  {group.includeEndSpace && (
-                    <div style={{ marginBottom: "5rem" }} />
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))}
         </div>
       </InkFilter>
     </>
