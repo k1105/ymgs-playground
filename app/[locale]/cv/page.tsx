@@ -48,7 +48,7 @@ const CV = async ({ params }: Props) => {
             />,
           ]}
           languageMode={locale}
-          pageTitle="CV / 作家経歴"
+          pageTitle="CV・作家経歴"
         />
       </div>
     </>
