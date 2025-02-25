@@ -10,10 +10,8 @@ import {
 import "./styles/globals.css";
 import { useRef, useState } from "react";
 import { FontTester } from "@/components/common/FontTester";
-import { HambergerMenu } from "@/components/common/HambergerMenu";
 import DynamicLink from "@/components/common/DynamicLink";
 import styles from "./Home.module.scss";
-import { Footer } from "@/components/common/Footer";
 
 export default function RootLayout({
   children,
