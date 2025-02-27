@@ -11,3 +11,11 @@
   margin-left: -0.2rem;
   font-size: 0.8rem;
 }
+
+@media screen and (max-width: 600px) {
+  .footer {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.8rem;
+  }
+}

@@ -30,11 +30,15 @@ export const FullPageText = ({
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "50vw" : "90vw"),
-        h: convertCssUnitToPx("70vh"),
+        h: convertCssUnitToPx("75vh"),
       });
 
-    setLineHeight(convertCssUnitToPx("3rem"));
-    setFontSize(convertCssUnitToPx("1rem"));
+    setLineHeight(
+      convertCssUnitToPx(window.innerWidth > 600 ? "3rem" : "2.5rem")
+    );
+    setFontSize(
+      convertCssUnitToPx(window.innerWidth > 600 ? "1rem" : "0.9rem")
+    );
     setIsHidden(true);
   }, []);
 
@@ -111,7 +115,7 @@ const TextContainer = ({
           @media screen and (max-width: 600px) {
             .container {
               left: 5vw;
-              bottom: 3rem;
+              bottom: 15vh;
             }
           }
         `}

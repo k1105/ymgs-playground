@@ -118,8 +118,8 @@ export const Outline = ({
         </OpacityFilter>
         <div className={styles.textContainer}>
           <div className={styles.textWrapper} style={{ width: `${size.w}px` }}>
+            <h3 style={{ marginBottom: "2rem" }}>{title}</h3>
             <InkFilter blurIntensity={transitionProgress}>
-              <h3 style={{ marginBottom: "2rem" }}>{title}</h3>
               <TextPager
                 text={
                   languageMode == "ja"
@@ -130,8 +130,8 @@ export const Outline = ({
                 lineHeight={lineHeight}
                 fontSize={fontSize}
               />
-              <p className={styles.credit}>{credit}</p>
             </InkFilter>
+            <p className={styles.credit}>{credit}</p>
           </div>
         </div>
       </div>

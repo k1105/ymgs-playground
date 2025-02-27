@@ -13,6 +13,8 @@ export type SceneContextValue = {
   segmentsLength: number;
   setSegmentsLength: Dispatch<SetStateAction<number>>;
   languageMode: string;
+  visibility: boolean;
+  setVisibility: Dispatch<SetStateAction<boolean>>;
   // 必要に応じて他の値も追加
 };
 
@@ -44,6 +46,7 @@ export const SceneManager = ({
   const [lastWheelTime, setLastWheelTime] = useState<number>(0);
   const touchStartYRef = useRef<number>(0);
   const [pendingRedirect, setPendingRedirect] = useState<string | null>(null);
+  const [visibility, setVisibility] = useState<boolean>(true);
 
   useEffect(() => {
     if (pendingRedirect) {
@@ -241,6 +244,8 @@ export const SceneManager = ({
     segmentsLength,
     sceneIndex,
     sceneLength: scenes.length,
+    setVisibility,
+    visibility,
   };
 
   return (

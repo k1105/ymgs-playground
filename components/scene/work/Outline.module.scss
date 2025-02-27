@@ -58,13 +58,15 @@
     margin-left: 4rem;
     flex-direction: column-reverse;
   }
+
   .imageContainer {
     position: fixed;
-    bottom: 15vh;
-    margin-left: -4rem;
-    width: auto;
-    height: auto;
+    bottom: 10rem;
+    left: 4rem;
+    width: 200vw;
+    height: 30vh;
     flex-direction: row;
+    gap: 0;
   }
 
   .nextLink {
