@@ -10,6 +10,7 @@ import styles from "./Outline.module.scss";
 import { TextPager } from "../../common/TextPager";
 import DynamicLink from "../../common/DynamicLink";
 import { useSceneProps } from "@/components/common/SceneManager";
+import Image from "next/image";
 
 export const Outline = ({
   title,
@@ -89,18 +90,30 @@ export const Outline = ({
       <div className={styles.container}>
         <OpacityFilter transitionProgress={transitionProgress}>
           <div className={styles.imageContainer}>
-            <img
-              className={styles.image}
-              style={{ objectFit: "cover" }}
-              src={images.length > 0 ? images[0].url : placeHolderImageUrl}
-              alt=""
-            />
-            <img
-              className={styles.image}
-              style={{ objectFit: "cover" }}
-              src={images.length > 1 ? images[1].url : placeHolderImageUrl}
-              alt=""
-            />
+            <div className={styles.imageWrapper}>
+              <Image
+                className={styles.image}
+                fill
+                src={
+                  images.length > 0
+                    ? `${images[0].url}?w=800&fm=webp`
+                    : placeHolderImageUrl
+                }
+                alt=""
+              />
+            </div>
+            <div className={styles.imageWrapper}>
+              <Image
+                className={styles.image}
+                fill
+                src={
+                  images.length > 1
+                    ? `${images[1].url}?w=800&fm=webp`
+                    : placeHolderImageUrl
+                }
+                alt=""
+              />
+            </div>
           </div>
         </OpacityFilter>
         <div className={styles.textContainer}>

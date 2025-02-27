@@ -9,6 +9,7 @@
 }
 
 .imageContainer {
+  position: relative;
   display: flex;
   height: 100vh;
   width: 40vw;
@@ -16,9 +17,11 @@
   gap: 1rem;
 }
 
-.image {
-  aspect-ratio: 4 / 3;
-  background-color: black;
+.imageWrapper {
+  position: relative; /* fillを使うなら必須 */
+  width: 100%;
+  aspect-ratio: 4 / 3; /* 任意: アスペクト比を固定したい場合 */
+  /* heightをpxや%で固定する実装でも問題ありません */
 }
 
 .nextLink {
