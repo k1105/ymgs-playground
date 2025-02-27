@@ -18,16 +18,24 @@ export const FullPageImage = ({
   const { setIsHidden } = useNameContainer();
   useEffect(() => {
     setIsHidden(true);
-  });
+  }, [setIsHidden]);
+
   const sceneContext = useContext(SceneContext);
   if (!sceneContext) {
     return null;
   }
   const { transitionProgress } = sceneContext;
 
+  // 「画像が複数枚ある行が1つでもあるか」を判定
+  const hasMultipleImages = images.some((row) => row.image.length > 1);
+
   return (
     <>
-      <div className={styles.pageWrapper}>
+      <div
+        className={`${styles.pageWrapper} ${
+          hasMultipleImages ? styles.hasMultipleImages : ""
+        }`}
+      >
         <div
           className={styles.imageContainer}
           style={{ opacity: `${1 - Math.abs(transitionProgress) / 100}` }}
