@@ -43,6 +43,7 @@ export const FullPageImage = ({
                       alt={`Image ${index}`}
                       width={image.width}
                       height={image.height}
+                      className={styles.multiImage}
                     />
                   ))
                 ) : (

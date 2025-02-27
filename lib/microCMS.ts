@@ -1,3 +1,4 @@
+// lib/microCMS.ts
 export async function fetchWorkBySlug(slug: string) {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN!;
   const apiKey = process.env.MICROCMS_API_KEY!;
@@ -18,7 +19,26 @@ export async function fetchWorkBySlug(slug: string) {
   );
 
   const data = await response.json();
-  return data.contents[0] as Work; // 必要な作品データを返す
+  const content = data.contents[0] as Work;
+
+  // page配列があれば走査して image_row の各 image に width, height を付与
+  if (content?.page) {
+    content.page.forEach((pageItem) => {
+      if (pageItem.fieldId === "image_page" && pageItem.image_row) {
+        pageItem.images?.forEach((images: Image[]) => {
+          images = images.map((img) => {
+            return {
+              ...img,
+              width: img.width ?? 1600,
+              height: img.height ?? 900,
+            };
+          });
+        });
+      }
+    });
+  }
+
+  return content;
 }
 
 export async function fetchAllWorks() {
