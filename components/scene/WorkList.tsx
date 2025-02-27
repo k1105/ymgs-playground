@@ -13,6 +13,7 @@ export const WorkList = ({
   locale: string;
   works?: Work[];
 }) => {
+  const [contentNum, setContentNum] = useState<number>(0);
   const { transitionProgress, setSegmentsLength, currentSegmentIndex } =
     useSceneProps();
   const [workSegments, setWorkSegments] = useState<Work[][]>([]);
@@ -20,17 +21,27 @@ export const WorkList = ({
     "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
 
   useEffect(() => {
-    setSegmentsLength(Math.ceil(works.length / 8));
+    if (window && window.innerWidth > 600) {
+      setContentNum(8);
+    } else {
+      setContentNum(2);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (contentNum == 0) return;
+
+    setSegmentsLength(Math.ceil(works.length / contentNum));
     const tempList: Work[][] = [];
     let currentIndex = 0;
 
     while (currentIndex < works.length) {
-      if (currentIndex % 8 == 0) tempList.push([]);
+      if (currentIndex % contentNum == 0) tempList.push([]);
       tempList[tempList.length - 1].push(works[currentIndex]);
       currentIndex++;
     }
     setWorkSegments(tempList);
-  }, []);
+  }, [contentNum]);
   return (
     <>
       <div className={styles.workIndexContainer}>
