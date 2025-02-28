@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useContext, ReactElement } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { createContext, Dispatch, SetStateAction } from "react";
 import { Footer } from "./Footer";
 
@@ -35,7 +35,7 @@ export const SceneManager = ({
   redirectPrevTo,
   pageTitle,
 }: SceneManagerProps) => {
-  const router = useRouter();
+  // const router = useRouter();
   const [sceneIndex, setSceneIndex] = useState<number>(0);
   const [transitionProgress, setTransitionProgress] = useState<number>(0);
   const [isEasing, setIsEasing] = useState<boolean>(false);
@@ -45,15 +45,15 @@ export const SceneManager = ({
   const [segmentsLength, setSegmentsLength] = useState<number>(0);
   const [lastWheelTime, setLastWheelTime] = useState<number>(0);
   const touchStartYRef = useRef<number>(0);
-  const [pendingRedirect, setPendingRedirect] = useState<string | null>(null);
+  // const [pendingRedirect, setPendingRedirect] = useState<string | null>(null);
   const [visibility, setVisibility] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (pendingRedirect) {
-      router.push(pendingRedirect);
-      setPendingRedirect(null);
-    }
-  }, [pendingRedirect, router]);
+  // useEffect(() => {
+  //   if (pendingRedirect) {
+  //     router.push(pendingRedirect);
+  //     setPendingRedirect(null);
+  //   }
+  // }, [pendingRedirect, router]);
 
   /**
    * シーンorセグメント切り替え判定
@@ -68,7 +68,7 @@ export const SceneManager = ({
           if (sceneIndex === scenes.length - 1) {
             // redirectNextToがあればリダイレクト、なければ一周
             if (redirectNextTo) {
-              setPendingRedirect(redirectNextTo);
+              // setPendingRedirect(redirectNextTo);
             } else {
               setSceneIndex(0);
             }
@@ -89,9 +89,7 @@ export const SceneManager = ({
           if (sceneIndex === 0) {
             // redirectPrevToがあればリダイレクト、なければ一周
             if (redirectPrevTo) {
-              setPendingRedirect(redirectPrevTo);
-            } else {
-              setSceneIndex(scenes.length - 1);
+              // setPendingRedirect(redirectPrevTo);
             }
           } else {
             setSceneIndex((prev) => prev - 1);
@@ -123,8 +121,6 @@ export const SceneManager = ({
     currentSegmentIndex,
     segmentsLength,
     sceneIndex,
-    redirectNextTo,
-    redirectPrevTo,
     lastWheelTime,
     scenes.length,
   ]);
@@ -253,8 +249,6 @@ export const SceneManager = ({
       {/* シーンの切替ロジック: i===sceneIndexだけ描画 */}
       {scenes.map((scene, i) => {
         if (i !== sceneIndex) return null;
-        // もう cloneElement はせず、そのままシーンを表示
-        // これにより、"Propsがどこから来ているのか"という煩雑さを減らせる
         return <div key={i}>{scene}</div>;
       })}
       <Footer pageTitle={pageTitle ? pageTitle : ""} />
