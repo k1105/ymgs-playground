@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./WorkList.module.css";
+import styles from "./WorkList.module.scss";
 import { InkFilter } from "../common/filter/InkFilter";
 import Link from "next/link";
 import { OpacityFilter } from "../common/filter/OpacityFilter";
@@ -44,10 +44,10 @@ export const WorkList = ({
   }, [contentNum]);
   return (
     <>
-      <div className={styles.workIndexContainer}>
+      <div className={styles.container}>
         {workSegments.length > 0 &&
           workSegments[currentSegmentIndex].map((work) => (
-            <div className={styles.workContainer} key={work.slug}>
+            <div className={styles.workWrapper} key={work.slug}>
               <Link
                 href={`/${locale}/works/${work.slug}`}
                 style={{ textDecoration: "none", color: "var(--text-color)" }}

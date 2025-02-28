@@ -19,6 +19,8 @@ export const Carrier = ({
     h: convertCssUnitToPx("80vh"),
   };
 
+  const [contentNum, setContentNum] = useState<number>(0);
+
   const { setSegmentsLength, currentSegmentIndex, transitionProgress } =
     useSceneProps();
 
@@ -37,17 +39,23 @@ export const Carrier = ({
   >([]);
 
   useEffect(() => {
-    setSegmentsLength(Math.ceil(paginatedDataGroups.length / 3));
-    const tempList: PaginatedDataGroup[][][] = [];
-    let currentIndex = 0;
-
-    while (currentIndex < paginatedDataGroups.length) {
-      if (currentIndex % 3 == 0) tempList.push([]);
-      tempList[tempList.length - 1].push(paginatedDataGroups[currentIndex]);
-      currentIndex++;
-    }
-    setCarrierSegments(tempList);
+    if (window) setContentNum(window.innerWidth > 600 ? 3 : 1);
   }, []);
+
+  useEffect(() => {
+    if (contentNum !== 0) {
+      setSegmentsLength(Math.ceil(paginatedDataGroups.length / contentNum));
+      const tempList: PaginatedDataGroup[][][] = [];
+      let currentIndex = 0;
+
+      while (currentIndex < paginatedDataGroups.length) {
+        if (currentIndex % contentNum == 0) tempList.push([]);
+        tempList[tempList.length - 1].push(paginatedDataGroups[currentIndex]);
+        currentIndex++;
+      }
+      setCarrierSegments(tempList);
+    }
+  }, [contentNum]);
 
   return (
     <>

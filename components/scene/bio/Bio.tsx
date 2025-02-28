@@ -19,7 +19,17 @@ export const Bio = ({ locale, bio }: { locale: string; bio: string }) => {
     <div className={styles.container}>
       <InkFilter blurIntensity={transitionProgress}>
         <p className={styles.name}>
-          {locale === "ja" ? `森田 明日香 (もりた・あすか)` : `Asuka Morita`}
+          {locale === "ja" ? (
+            <>
+              森田 明日香 <wbr />
+              <small className={styles.small}>(もりた・あすか)</small>
+            </>
+          ) : (
+            <>
+              Asuka Morita <wbr />
+              <small className={styles.small}>(もりた・あすか)</small>
+            </>
+          )}
         </p>
         <div className={styles.profileContainer}>
           <p
