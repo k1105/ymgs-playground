@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { getCurrentLocale, switchLocale } from "@/lib/i18n";
+import { switchLocale } from "@/lib/i18n";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import {
   NameContainerProvider,
@@ -10,8 +10,9 @@ import {
 import "./styles/globals.css";
 import { useRef, useState } from "react";
 import { FontTester } from "@/components/common/FontTester";
-import DynamicLink from "@/components/common/DynamicLink";
 import styles from "./Home.module.scss";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -47,42 +48,42 @@ export default function RootLayout({
 const NameContainer = () => {
   const { isHidden } = useNameContainer();
   const pathname = usePathname();
-  const currentLocale = getCurrentLocale(pathname);
+  const params = useParams();
+  const locale = Array.isArray(params.locale)
+    ? params.locale[0]
+    : params.locale || "ja"; // `locale` を取得
+  const customLocale = locale !== "ja" ? locale : "";
 
   return (
     <div className={`${styles.nameContainer} ${isHidden ? styles.hidden : ""}`}>
-      <DynamicLink
-        href={`/`}
+      <Link
+        href={`/${customLocale}`}
         style={{ textDecoration: "none", color: "var(--text-color)" }}
       >
         <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
-      </DynamicLink>
-      <DynamicLink href="/" className={styles.link}>
+      </Link>
+      <Link href={`/${customLocale}`} className={styles.link}>
         works
-      </DynamicLink>
-      <DynamicLink href="/cv" className={styles.link}>
+      </Link>
+      <Link href={`${customLocale}/cv`} className={styles.link}>
         cv
-      </DynamicLink>
+      </Link>
       <div className={styles.languageSwitcherContainer}>
         <div
           onClick={() => {
             switchLocale(pathname);
           }}
-          className={`${styles.button} ${
-            currentLocale !== "en" && styles.active
-          }`}
+          className={`${styles.button} ${locale !== "en" && styles.active}`}
         >
-          Ja
+          <p style={{ userSelect: "none" }}>Ja</p>
         </div>
         <div
           onClick={() => {
             switchLocale(pathname);
           }}
-          className={`${styles.button} ${
-            currentLocale == "en" && styles.active
-          }`}
+          className={`${styles.button} ${locale == "en" && styles.active}`}
         >
-          En
+          <p style={{ userSelect: "none" }}>En</p>
         </div>
       </div>
     </div>

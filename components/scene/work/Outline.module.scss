@@ -6,6 +6,7 @@
 
 .textWrapper {
   margin-top: 20vh;
+  width: 30vw;
 }
 
 .imageContainer {
@@ -53,6 +54,7 @@
 @media screen and (max-width: 600px) {
   .textWrapper {
     margin-top: 10vh;
+    width: 77vw;
   }
   .container {
     margin-left: 4rem;

@@ -8,15 +8,15 @@ import { useNameContainer } from "../../context/NameContainerContext";
 import { OpacityFilter } from "../../common/filter/OpacityFilter";
 import styles from "./Outline.module.scss";
 import { TextPager } from "../../common/TextPager";
-import DynamicLink from "../../common/DynamicLink";
+import Link from "next/link";
 import { useSceneProps } from "@/components/common/SceneManager";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 export const Outline = ({
   title,
   outline,
   credit,
-  languageMode = "ja",
   nextWorkSlug = "",
   nextWorkTitle = "",
   images,
@@ -25,7 +25,6 @@ export const Outline = ({
   outline: { ja: string; en: string };
   credit: string;
   currentSegmentIndex?: number;
-  languageMode?: "ja" | "en";
   nextWorkSlug?: string;
   nextWorkTitle?: string;
   images: Image[];
@@ -40,6 +39,10 @@ export const Outline = ({
   const { setIsHidden } = useNameContainer();
   const placeHolderImageUrl =
     "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
+  const params = useParams();
+  const locale = Array.isArray(params.locale)
+    ? params.locale[0]
+    : params.locale || "ja"; // `locale` を取得
 
   useEffect(() => {
     if (document)
@@ -79,9 +82,7 @@ export const Outline = ({
 
   useEffect(() => {
     if (setSegmentsLength !== undefined && jaSegments.length > 0) {
-      setSegmentsLength(
-        languageMode == "ja" ? jaSegments.length : enSegments.length
-      );
+      setSegmentsLength(locale == "ja" ? jaSegments.length : enSegments.length);
     }
   }, [jaSegments, enSegments]);
 
@@ -116,13 +117,13 @@ export const Outline = ({
             </div>
           </div>
         </OpacityFilter>
-        <div className={styles.textContainer}>
-          <div className={styles.textWrapper} style={{ width: `${size.w}px` }}>
+        <div>
+          <div className={styles.textWrapper}>
             <h3 style={{ marginBottom: "2rem" }}>{title}</h3>
             <InkFilter blurIntensity={transitionProgress}>
               <TextPager
                 text={
-                  languageMode == "ja"
+                  locale == "ja"
                     ? jaSegments[currentSegmentIndex]
                     : enSegments[currentSegmentIndex]
                 }
@@ -136,8 +137,8 @@ export const Outline = ({
         </div>
       </div>
       {nextWorkSlug.length > 0 && nextWorkTitle.length > 0 && (
-        <DynamicLink
-          href={`/works/${nextWorkSlug}`}
+        <Link
+          href={`/${locale}/works/${nextWorkSlug}`}
           className={styles.nextLink}
         >
           <p className={styles.nextButton}>つぎは</p>
@@ -145,7 +146,7 @@ export const Outline = ({
             <p>{nextWorkTitle}</p>
             <p>→</p>
           </div>
-        </DynamicLink>
+        </Link>
       )}
     </>
   );

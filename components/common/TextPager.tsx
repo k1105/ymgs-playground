@@ -15,7 +15,7 @@ export const TextPager: React.FC<TextPagerProps> = ({
     <div
       style={{
         width: size.w + "px",
-        height: size.h + "px",
+        maxHeight: size.h + "px",
         fontSize: fontSize + "px",
         lineHeight: lineHeight + "px",
         whiteSpace: "pre-wrap",
