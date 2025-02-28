@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Poppins"; /* 任意のフォント名 */
+  font-weight: 400; /* ウェイト(Regular等) */
+  font-style: normal; /* スタイル(italic等) */
+  src: url("/fonts/Poppins-Regular.ttf") format("ttf"); /* 実際のパスに合わせる */
+  /* format('woff'), format('truetype')など必要に応じて追加 */
+}
+
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/ZenKakuGothicNew-Regular.ttf") format("ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +31,7 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  font-family: var(--font-poppins), var(--font-zen-kaku-gothic), sans-serif;
 }
 
 html,

@@ -1,5 +1,6 @@
 "use client";
 
+import { poppins, zenKakuGothic } from "../font";
 import { usePathname } from "next/navigation";
 import { switchLocale } from "@/lib/i18n";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
@@ -8,8 +9,6 @@ import {
   useNameContainer,
 } from "@/components/context/NameContainerContext";
 import "./styles/globals.css";
-import { useRef, useState } from "react";
-import { FontTester } from "@/components/common/FontTester";
 import styles from "./Home.module.scss";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -19,25 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [jaIndex, setJaIndex] = useState<number>(0);
-  const [enIndex, setEnIndex] = useState<number>(0);
-  const jaFontRef = useRef<HTMLParagraphElement>(null);
-  const enFontRef = useRef<HTMLParagraphElement>(null);
-
   return (
     <html>
-      <body>
+      <body className={`${poppins.variable} ${zenKakuGothic.variable}`}>
         <ThemeProvider>
           <NameContainerProvider>
-            <FontTester
-              jaIndex={jaIndex}
-              enIndex={enIndex}
-              jaFontRef={jaFontRef}
-              enFontRef={enFontRef}
-            >
-              <NameContainer />
-              {children}
-            </FontTester>
+            <NameContainer />
+            {children}
           </NameContainerProvider>
         </ThemeProvider>
       </body>
