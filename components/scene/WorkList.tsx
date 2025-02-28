@@ -7,7 +7,7 @@ import { OpacityFilter } from "../common/filter/OpacityFilter";
 import { useSceneProps } from "../common/SceneManager";
 import { useEffect, useState } from "react";
 export const WorkList = ({
-  locale = "ja",
+  locale = "",
   works = [],
 }: {
   locale: string;
@@ -49,7 +49,9 @@ export const WorkList = ({
           workSegments[currentSegmentIndex].map((work) => (
             <div className={styles.workWrapper} key={work.slug}>
               <Link
-                href={`/${locale}/works/${work.slug}`}
+                href={`${locale == "ja" ? "" : "/" + locale}/works/${
+                  work.slug
+                }`}
                 style={{ textDecoration: "none", color: "var(--text-color)" }}
               >
                 <OpacityFilter transitionProgress={transitionProgress}>

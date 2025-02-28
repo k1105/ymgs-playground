@@ -22,11 +22,9 @@ export function switchLocale(pathname: string) {
     // ルートパスが "/" の場合 → "/en" にする
     if (pathname === "/") {
       redirect("/en");
-      return;
     }
     // ルート以外("/foo")の場合 → "/en/foo" にする
     redirect("/en" + pathname);
-    return;
   }
 
   // enからjaへ切り替え
@@ -34,10 +32,8 @@ export function switchLocale(pathname: string) {
     // "/en" → "/"
     if (pathname === "/en") {
       redirect("/");
-      return;
     }
     // "/en/foo" → "/foo"
     redirect(pathname.replace(/^\/en/, ""));
-    return;
   }
 }
