@@ -32,15 +32,7 @@ export const Bio = ({ locale, bio }: { locale: string; bio: string }) => {
           )}
         </p>
         <div className={styles.profileContainer}>
-          <p
-            style={{
-              fontSize: "0.9rem",
-              marginBottom: "2rem",
-              lineHeight: "1.8rem",
-            }}
-          >
-            {paragraphs}
-          </p>
+          <p className={`${locale == "en" && styles.en}`}>{paragraphs}</p>
         </div>
       </InkFilter>
     </div>

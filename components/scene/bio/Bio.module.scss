@@ -18,6 +18,11 @@
 
 .profileContainer {
   width: 500px;
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    line-height: 1.8rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -26,5 +31,9 @@
   }
   .profileContainer {
     width: auto;
+    .en {
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+    }
   }
 }
