@@ -37,8 +37,6 @@ export const Outline = ({
   const [jaSegments, setJaSegments] = useState<string[]>([]);
   const [enSegments, setEnSegments] = useState<string[]>([]);
   const { setIsHidden } = useNameContainer();
-  const placeHolderImageUrl =
-    "https://images.microcms-assets.io/assets/e718b308ac2c472db6bcc18df3f70f4e/409d214c21a74689845e5751db63f0a2/placeholder.png";
   const params = useParams();
   const locale = Array.isArray(params.locale)
     ? params.locale[0]
@@ -92,28 +90,26 @@ export const Outline = ({
         <OpacityFilter transitionProgress={transitionProgress}>
           <div className={styles.imageContainer}>
             <div className={styles.imageWrapper}>
-              <Image
-                className={styles.image}
-                fill
-                src={
-                  images.length > 0
-                    ? `${images[0].url}?w=800&fm=webp`
-                    : placeHolderImageUrl
-                }
-                alt=""
-              />
+              {images.length > 0 && (
+                <Image
+                  className={styles.image}
+                  src={`${images[0].url}?w=800&fm=webp`}
+                  fill
+                  alt=""
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              )}
             </div>
             <div className={styles.imageWrapper}>
-              <Image
-                className={styles.image}
-                fill
-                src={
-                  images.length > 1
-                    ? `${images[1].url}?w=800&fm=webp`
-                    : placeHolderImageUrl
-                }
-                alt=""
-              />
+              {images.length > 1 && (
+                <Image
+                  className={styles.image}
+                  fill
+                  src={`${images[1].url}?w=800&fm=webp`}
+                  alt=""
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              )}
             </div>
           </div>
         </OpacityFilter>

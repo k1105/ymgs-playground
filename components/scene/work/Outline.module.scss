@@ -65,10 +65,10 @@
     position: fixed;
     bottom: 10rem;
     left: 4rem;
-    width: 200vw;
-    height: 30vh;
+    width: calc(100vw - 4rem);
+    height: auto;
     flex-direction: row;
-    gap: 0;
+    gap: 0.5rem;
   }
 
   .nextLink {
@@ -76,6 +76,7 @@
     left: 0;
     right: auto;
     width: 100vw;
+    bottom: 2rem;
   }
 
   .nextButton {
@@ -89,7 +90,8 @@
   }
 
   .image {
-    width: 100vw;
+    width: 100%;
+    height: auto;
   }
 
   .credit {
