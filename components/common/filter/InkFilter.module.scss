@@ -1,9 +1,6 @@
 .container {
   mix-blend-mode: exclusion;
 }
-.componentWrapper {
-  mix-blend-mode: screen;
-}
 
 .effect {
   background: #333;
@@ -12,6 +9,16 @@
   will-change: filter;
 }
 
+.effect::selection {
+  background: red;
+  color: white;
+}
+
 .noEffect {
+  color: white;
+}
+
+.noEffect::selection {
+  background: red;
   color: white;
 }

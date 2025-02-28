@@ -22,8 +22,8 @@
 :root {
   --background-color: #f3f3f3;
   --text-color: black;
-  --selection-background-color: black;
-  --selection-text-color: white;
+  --selection-background-color: white;
+  --selection-text-color: black;
   --inkfilter-blend-mode: multiply;
   --inkfilter-background-color: #f3f3f3;
 }
