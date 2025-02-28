@@ -87,32 +87,30 @@ export const Outline = ({
   return (
     <>
       <div className={styles.container}>
-        <OpacityFilter transitionProgress={transitionProgress}>
-          <div className={styles.imageContainer}>
-            <div className={styles.imageWrapper}>
-              {images.length > 0 && (
-                <Image
-                  className={styles.image}
-                  src={`${images[0].url}?w=800&fm=webp`}
-                  fill
-                  alt=""
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              )}
-            </div>
-            <div className={styles.imageWrapper}>
-              {images.length > 1 && (
-                <Image
-                  className={styles.image}
-                  fill
-                  src={`${images[1].url}?w=800&fm=webp`}
-                  alt=""
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              )}
-            </div>
+        <div className={styles.imageContainer}>
+          <div className={styles.imageWrapper}>
+            {images.length > 0 && (
+              <Image
+                className={styles.image}
+                src={`${images[0].url}?w=800&fm=webp`}
+                fill
+                alt=""
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            )}
           </div>
-        </OpacityFilter>
+          <div className={styles.imageWrapper}>
+            {images.length > 1 && (
+              <Image
+                className={styles.image}
+                fill
+                src={`${images[1].url}?w=800&fm=webp`}
+                alt=""
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            )}
+          </div>
+        </div>
         <div>
           <div className={styles.textWrapper}>
             <h3 style={{ marginBottom: "2rem" }}>{title}</h3>

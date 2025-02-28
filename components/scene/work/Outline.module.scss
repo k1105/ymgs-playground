@@ -9,6 +9,13 @@
   width: 30vw;
 }
 
+.outlineContainer {
+  font-size: 0.9rem;
+  line-height: 2rem;
+  height: 10vh;
+  overflow-y: scroll;
+}
+
 .imageContainer {
   position: relative;
   display: flex;
