@@ -3,22 +3,15 @@
 }
 
 .effect {
-  background: #333;
   color: white;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   will-change: filter;
 }
 
-.effect::selection {
-  background: red;
-  color: white;
+.adjusterForFilter {
+  background: #666;
 }
 
 .noEffect {
-  color: white;
-}
-
-.noEffect::selection {
-  background: red;
   color: white;
 }
