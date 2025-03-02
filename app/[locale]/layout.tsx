@@ -39,20 +39,25 @@ const NameContainer = () => {
   const locale = Array.isArray(params.locale)
     ? params.locale[0]
     : params.locale || "ja"; // `locale` を取得
-  const customLocale = locale !== "ja" ? locale : "";
 
   return (
     <div className={`${styles.nameContainer} ${isHidden ? styles.hidden : ""}`}>
       <Link
-        href={`/${customLocale}`}
+        href={`${locale == "ja" ? "" : "/" + locale}`}
         style={{ textDecoration: "none", color: "var(--text-color)" }}
       >
         <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
       </Link>
-      <Link href={`/${customLocale}`} className={styles.link}>
+      <Link
+        href={`${locale == "ja" ? "" : "/" + locale}`}
+        className={styles.link}
+      >
         works
       </Link>
-      <Link href={`${customLocale}/cv`} className={styles.link}>
+      <Link
+        href={`${locale == "ja" ? "" : "/" + locale}/cv`}
+        className={`${styles.link} ${styles.active}`}
+      >
         cv
       </Link>
       <div className={styles.languageSwitcherContainer}>
