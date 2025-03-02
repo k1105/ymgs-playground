@@ -132,7 +132,7 @@ export const Outline = ({
       </div>
       {nextWorkSlug.length > 0 && nextWorkTitle.length > 0 && (
         <Link
-          href={`/${locale}/works/${nextWorkSlug}`}
+          href={`${locale == "ja" ? "" : "/" + locale}/works/${nextWorkSlug}`}
           className={styles.nextLink}
         >
           <p className={styles.nextButton}>つぎは</p>
