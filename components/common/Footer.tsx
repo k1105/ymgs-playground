@@ -10,7 +10,6 @@ export const Footer = ({ pageTitle }: { pageTitle: string }) => {
   useNameContainer(); // 現在のパスを取得
   const pathname = usePathname();
   const isWorkPath = pathname.startsWith("/work");
-  console.log("isWorkPath", isWorkPath);
 
   return (
     <div className={styles.footer}>

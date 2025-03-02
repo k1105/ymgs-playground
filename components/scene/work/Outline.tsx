@@ -5,7 +5,7 @@ import { convertCssUnitToPx } from "../../../lib/convertCssUnitToPx";
 import { paginateByBinarySearch } from "../../../lib/paginateText";
 import { InkFilter } from "../../common/filter/InkFilter";
 import { useNameContainer } from "../../context/NameContainerContext";
-import { OpacityFilter } from "../../common/filter/OpacityFilter";
+// import { OpacityFilter } from "../../common/filter/OpacityFilter";
 import styles from "./Outline.module.scss";
 import { TextPager } from "../../common/TextPager";
 import Link from "next/link";
@@ -43,6 +43,7 @@ export const Outline = ({
     : params.locale || "ja"; // `locale` を取得
 
   useEffect(() => {
+    console.log("credit:", credit);
     if (document)
       setSize({
         w: convertCssUnitToPx(window.innerWidth > 600 ? "30vw" : "77vw"),
