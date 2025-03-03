@@ -29,7 +29,7 @@ export const Header = () => {
       </Link>
       <Link
         href={`${locale == "ja" ? "" : "/" + locale}/cv`}
-        className={`${styles.link} ${styles.active}`}
+        className={`${styles.link}`}
       >
         cv
       </Link>
