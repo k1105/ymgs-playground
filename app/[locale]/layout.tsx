@@ -43,13 +43,13 @@ const NameContainer = () => {
   return (
     <div className={`${styles.nameContainer} ${isHidden ? styles.hidden : ""}`}>
       <Link
-        href={`${locale == "ja" ? "" : "/" + locale}`}
+        href={`${locale == "ja" ? "/" : "/" + locale}`}
         style={{ textDecoration: "none", color: "var(--text-color)" }}
       >
         <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
       </Link>
       <Link
-        href={`${locale == "ja" ? "" : "/" + locale}`}
+        href={`${locale == "ja" ? "/" : "/" + locale}`}
         className={styles.link}
       >
         works
