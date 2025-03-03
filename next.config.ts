@@ -7,12 +7,24 @@ const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV === "development", // 開発時は無効化
   runtimeCaching: [
     {
-      // すべてのページをキャッシュ
+      // すべてのページをキャッシュ（オフライン対応）
       urlPattern: ({ request }: RouteHandlerCallbackOptions) =>
         request.mode === "navigate",
-      handler: "NetworkFirst",
+      handler: "CacheFirst",
       options: {
         cacheName: "pages-cache",
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 7日間保持
+        },
+      },
+    },
+    {
+      // Next.jsのデータ取得用JSONファイルをキャッシュ
+      urlPattern: /^https:\/\/moritaasuka\.vercel\.app\/_next\/data\/.*\.json$/,
+      handler: "StaleWhileRevalidate",
+      options: {
+        cacheName: "next-data-cache",
         expiration: {
           maxEntries: 50,
           maxAgeSeconds: 7 * 24 * 60 * 60, // 7日間保持
@@ -53,6 +65,8 @@ module.exports = withPWA({
   //   defaultLocale: "ja",
   // },
   images: {
-    domains: ["images.microcms-assets.io"],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.microcms-assets.io" },
+    ],
   },
 });
