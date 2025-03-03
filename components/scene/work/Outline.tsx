@@ -93,7 +93,7 @@ export const Outline = ({
             {images.length > 0 && (
               <Image
                 className={styles.image}
-                src={`${images[0].url}?w=800&fm=webp`}
+                src={`${images[0].url}?w=800&fm=avif`}
                 fill
                 alt=""
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -105,7 +105,7 @@ export const Outline = ({
               <Image
                 className={styles.image}
                 fill
-                src={`${images[1].url}?w=800&fm=webp`}
+                src={`${images[1].url}?w=800&fm=avif`}
                 alt=""
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />

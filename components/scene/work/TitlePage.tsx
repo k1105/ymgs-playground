@@ -25,7 +25,7 @@ const TitlePage = ({
       <div
         className={styles.container}
         style={{
-          backgroundImage: `url(${backgroundImage}?w=1600&fm=webp)`,
+          backgroundImage: `url(${backgroundImage}?w=1600&fm=avif)`,
           backgroundSize: "cover",
           opacity: 1 - Math.abs(transitionProgress) / 100,
         }}

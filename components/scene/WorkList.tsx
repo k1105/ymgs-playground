@@ -58,8 +58,8 @@ export const WorkList = ({
                   <img
                     src={
                       work.ogpImage
-                        ? `${work.ogpImage.url}?w=800&fm=webp`
-                        : `${placeHolderImageUrl}?w=800&fm=webp`
+                        ? `${work.ogpImage.url}?w=800&fm=avif`
+                        : `${placeHolderImageUrl}?w=800&fm=avif`
                     }
                     alt="work"
                     className={styles.thumbnail}
