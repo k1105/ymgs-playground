@@ -47,7 +47,7 @@ export const FullPageImage = ({
                   imageRow.image.map((image, index) => (
                     <Image
                       key={`image-${index}`}
-                      src={`${image.url}?w=2000&fm=avif`}
+                      src={`${image.url}?&fm=avif`}
                       alt={`Image ${index}`}
                       width={image.width}
                       height={image.height}
@@ -58,7 +58,7 @@ export const FullPageImage = ({
                   <Image
                     className={styles.singleImage}
                     key={`single-image`}
-                    src={`${imageRow.image[0].url}?w=2000&fm=avif`}
+                    src={`${imageRow.image[0].url}?&fm=avif`}
                     alt="Single Image"
                     width={imageRow.image[0].width}
                     height={imageRow.image[0].height}
