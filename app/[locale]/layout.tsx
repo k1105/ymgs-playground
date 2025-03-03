@@ -1,17 +1,8 @@
-"use client";
-
 import { poppins, zenKakuGothic } from "../font";
-import { usePathname } from "next/navigation";
-import { switchLocale } from "@/lib/i18n";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
-import {
-  NameContainerProvider,
-  useNameContainer,
-} from "@/components/context/NameContainerContext";
+import { NameContainerProvider } from "@/components/context/NameContainerContext";
 import "./styles/globals.css";
-import styles from "./Home.module.scss";
-import { useParams } from "next/navigation";
-import Link from "next/link";
+import { Header } from "@/components/common/Header";
 
 export default function RootLayout({
   children,
@@ -20,10 +11,15 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon512_maskable.png" />
+        <meta name="theme-color" content="#000000" />
+      </head>
       <body className={`${poppins.variable} ${zenKakuGothic.variable}`}>
         <ThemeProvider>
           <NameContainerProvider>
-            <NameContainer />
+            <Header />
             {children}
           </NameContainerProvider>
         </ThemeProvider>
@@ -31,53 +27,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-const NameContainer = () => {
-  const { isHidden } = useNameContainer();
-  const pathname = usePathname();
-  const params = useParams();
-  const locale = Array.isArray(params.locale)
-    ? params.locale[0]
-    : params.locale || "ja"; // `locale` を取得
-
-  return (
-    <div className={`${styles.nameContainer} ${isHidden ? styles.hidden : ""}`}>
-      <Link
-        href={`${locale == "ja" ? "/" : "/" + locale}`}
-        style={{ textDecoration: "none", color: "var(--text-color)" }}
-      >
-        <p className={`${styles.ja} ${styles.link}`}>もりたあすか</p>
-      </Link>
-      <Link
-        href={`${locale == "ja" ? "/" : "/" + locale}`}
-        className={styles.link}
-      >
-        works
-      </Link>
-      <Link
-        href={`${locale == "ja" ? "" : "/" + locale}/cv`}
-        className={`${styles.link} ${styles.active}`}
-      >
-        cv
-      </Link>
-      <div className={styles.languageSwitcherContainer}>
-        <div
-          onClick={() => {
-            switchLocale(pathname);
-          }}
-          className={`${styles.button} ${locale !== "en" && styles.active}`}
-        >
-          <p style={{ userSelect: "none" }}>Ja</p>
-        </div>
-        <div
-          onClick={() => {
-            switchLocale(pathname);
-          }}
-          className={`${styles.button} ${locale == "en" && styles.active}`}
-        >
-          <p style={{ userSelect: "none" }}>En</p>
-        </div>
-      </div>
-    </div>
-  );
-};
